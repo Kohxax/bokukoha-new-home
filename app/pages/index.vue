@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-bg-primary flex justify-center">
-        <h1 class="text-primary">Hello World</h1>
+    <div class="min-h-screen bg-background flex justify-center">
+        <Button>click me</Button>
     </div>
 </template>
