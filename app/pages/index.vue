@@ -4,12 +4,16 @@
 
         <main class="flex flex-1 flex-col items-center justify-center p-4 text-center">
 
-            <Avatar class="mb-3 h-50 w-50 shadow-xl">
+            <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
                 <img src="~/assets/img/icon_glass.png" alt="Koha" />
                 <AvatarFallback>KH</AvatarFallback>
             </Avatar>
 
-            <h1 class="mb-3 text-3xl font-bold tracking-tight">Koha</h1>
+            <NuxtLink to="/about"
+                class="mb-3 text-3xl font-bold tracking-tight hover:opacity-75 hover:scale-99 transition-colors">
+                <h1>Koha</h1>
+            </NuxtLink>
+
 
             <p class="max-w-md text-muted-foreground">
                 素敵なシナリオとお酒が好きです。
@@ -17,21 +21,28 @@
                 技術系の挑戦をするのも好き。
             </p>
 
-            <div class="mt-5 flex gap-x-5 text-muted-foreground">
-                <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-colors">
+            <div class="mt-5 flex gap-x-5 text-foreground">
+                <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer"
+                    class="hover:opacity-75 hover:scale-98 transition-colors">
                     <component :is="link.icon" class="h-6 w-6" />
                 </a>
             </div>
-            
+
         </main>
+
+        <!-- あとで下にいくボタンにする -->
+        <div class="absolute bottom-7 left-1/2 -translate-x-1/2 ">
+            <ChevronDown
+                class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-95 transition-colors" />
+        </div>
 
     </div>
 
 </template>
 
 <script lang="ts" setup>
-import { Github } from "lucide-vue-next"
-import MisskeyIcon  from "~/components/svg/MisskeyIcon.vue"
+import { Github, ChevronDown } from "lucide-vue-next"
+import MisskeyIcon from "~/components/svg/MisskeyIcon.vue"
 import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"
 import Avatar from "~/components/ui/avatar/Avatar.vue";

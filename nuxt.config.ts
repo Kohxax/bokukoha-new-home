@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
 
+  experimental: {
+    viewTransition: true,
+  },
+
   vite: {
     plugins: [
       taillwindcss(),

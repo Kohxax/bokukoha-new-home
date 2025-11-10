@@ -93,3 +93,27 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+::view-transition-new(about-content) {
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+::view-transition-old(about-content) {
+  animation: slide-out 0.1s ease-in forwards;
+}
+
+@keyframes slide-in {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
