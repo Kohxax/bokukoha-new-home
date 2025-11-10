@@ -17,11 +17,9 @@
                 技術系の挑戦をするのも好き。
             </p>
 
-            <div class="mt-4 flex gap-x-3 text-muted-foreground">
-                <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
-                    <Button variant="ghost" size="icon">
-                        <component :is="link.icon" class="" />
-                    </Button>
+            <div class="mt-5 flex gap-x-5 text-muted-foreground">
+                <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-colors">
+                    <component :is="link.icon" class="h-6 w-6" />
                 </a>
             </div>
             
@@ -52,7 +50,7 @@ const links = [
     {
         title: "X",
         icon: XIcon,
-        href: "https://x.com/bokukoha"
+        href: "https://x.com/kohxax"
     },
     {
         title: "Discord",
