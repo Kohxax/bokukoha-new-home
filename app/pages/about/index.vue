@@ -54,6 +54,28 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
         </CardContent>
       </Card>
 
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl font-bold tracking-tight">
+            # 自宅サーバー
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="text-foreground">
+          <p>メルカリとかでパーツ拾って組んだPCにProxmox入れて遊んでます。CPUはi7-6700k, RAMは48GBです。色々とやりたいことはあるんですが、基本的にお金とストレージ不足；；</p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle class="text-xl font-bold tracking-tight">
+            # 適当
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="text-foreground">
+          <p> ここまで読んでくださってありがとうございます。趣味あう人と話すのは楽しくて好きなので、気軽に話しかけてください。Discord含むゲームとかのフレ申請は知り合いなら通します！よろしくお願いします！ </p>
+        </CardContent>
+      </Card>
+
     </main>
 
     <footer class="mt-12">
