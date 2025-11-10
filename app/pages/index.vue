@@ -35,9 +35,9 @@
         </main>
 
         <!-- あとで下にいくボタンにする -->
-        <div class="absolute bottom-7 left-1/2 -translate-x-1/2 ">
+        <div class="absolute bottom-7 left-1/2 -translate-x-1/2 cursor-pointer">
             <ChevronDown
-                class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-95 transition-colors" />
+                class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-90 transition-colors" />
         </div>
 
     </div>
