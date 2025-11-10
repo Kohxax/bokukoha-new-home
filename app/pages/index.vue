@@ -2,16 +2,20 @@
 
     <div class="relative flex min-h-screen flex-col">
 
-        <main class="flex flex-1 flex-col items-center justify-center p-4 text-center">
+        <main class="group flex flex-1 flex-col items-center justify-center p-4 text-center">
 
             <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
                 <img src="~/assets/img/icon_glass.png" alt="Koha" />
                 <AvatarFallback>KH</AvatarFallback>
             </Avatar>
 
-            <NuxtLink to="/about"
-                class="mb-3 text-3xl font-bold tracking-tight hover:opacity-75 hover:scale-99 transition-colors">
-                <h1>Koha</h1>
+            <NuxtLink to="/about" class="mb-3 text-3xl font-bold tracking-tight">
+                <h1
+                    class="relative inline-block text-foreground transition-colors hover:scale-99 hover:opacity-85 duration-300 group-hover:text-foreground">
+                    Koha
+                    <span
+                        class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out group-hover:w-full w-0"></span>
+                </h1>
             </NuxtLink>
 
 
