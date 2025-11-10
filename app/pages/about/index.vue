@@ -35,7 +35,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
           </CardTitle>
         </CardHeader>
         <CardContent class="space-y-2 text-foreground">
-          <p>崩壊スターレイル: 花火, ヘルタ, 景元, アベンチュリン</p>
+          <p>崩壊スターレイル: 銀狼, 花火, ヘルタ, アベンチュリン, キュレネ</p>
           <p>崩壊3rd: ゼーレ, ブローニャ, エリシア</p>
           <p>PCゲー: Minecraft, MHWilds, Rocket League 等</p>
           <p>CS: どう森シリーズ, モンハンシリーズ</p>
