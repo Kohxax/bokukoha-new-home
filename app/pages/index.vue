@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Github, ChevronDown } from "lucide-vue-next"
+import { Github, ChevronDown, ArrowRight } from "lucide-vue-next"
 import MisskeyIcon from "~/components/svg/MisskeyIcon.vue"
 import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"
@@ -34,49 +34,23 @@ const links = [
     }
 ]
 
-const blogPosts = [
-    {
-        id: 1,
-        tag: '技術',
-        date: '2025年11月8日',
-        title: '銀狼',
-        description: 'ここは説明文です',
-        img: '/images/temp/a.png'
-    },
-    {
-        id: 2,
-        tag: '雑記',
-        date: '2025年11月1日',
-        title: 'タイトル',
-        description: 'ああああああああああああ',
-        img: '/images/temp/a.png'
-    },
-    {
-        id: 3,
-        tag: '雑記',
-        date: '2025年10月28日',
-        title: '？',
-        description: '？？？？？？？？？？？',
-        img: '/images/temp/a.png'
-    },
-]
+const { data: blogPosts } = await useAsyncData('blog-list', () => {
+    return queryCollection('blog')
+        .where('draft', '=', '0')
+        .select('title', 'category', 'path', 'description', 'date', 'coverImage')
+        .order('date', 'DESC')
+        .limit(3)
+        .all()
+})
 
-const projects = [
-    {
-        id: 1,
-        tag: 'Web',
-        title: '個人サイト',
-        description: '文字',
-        img: '/images/temp/a.png'
-    },
-    {
-        id: 2,
-        tag: 'Minecraft',
-        title: 'AWS S3活用',
-        description: 'やあ.',
-        img: '/images/temp/a.png'
-    },
-]
+const { data: works } = await useAsyncData('work-list', () => {
+    return queryCollection('work')
+        .where('draft', '=', '0')
+        .select('title', 'category', 'path', 'description', 'date', 'coverImage')
+        .order('date', 'DESC')
+        .limit(2)
+        .all()
+})
 
 const scrollToContent = () => {
     const contentSection = document.getElementById('content');
@@ -90,16 +64,17 @@ const scrollToContent = () => {
 
     <div class="relative">
 
-        <main class="group relative flex flex-1 flex-col items-center justify-center mt-m-5 p-4 text-center min-h-screen">
+        <main
+            class="group relative flex flex-1 flex-col items-center justify-center mt-m-5 p-4 text-center min-h-screen">
 
             <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
                 <img src="~/assets/img/icon_glass.png" alt="Koha" />
                 <AvatarFallback>KH</AvatarFallback>
             </Avatar>
 
-            <NuxtLink to="/about" class="space-y-3 transition-colors hover:opacity-85 duration-300 group-hover:text-foreground">
-                <h1
-                    class="text-3xl font-bold tracking-tight relative inline-block text-foreground">
+            <NuxtLink to="/about"
+                class="space-y-3 transition-colors hover:opacity-85 duration-300 group-hover:text-foreground">
+                <h1 class="text-3xl font-bold tracking-tight relative inline-block text-foreground">
                     Koha
                     <span
                         class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out w-full md:w-0 md:group-hover:w-full"></span>
@@ -117,14 +92,14 @@ const scrollToContent = () => {
 
             <div class="mt-5 flex gap-x-5 text-foreground">
                 <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer"
-                    class="hover:opacity-75 hover:scale-98 transition-colors">
+                    class="hover:opacity-80 hover:scale-98 transition-colors">
                     <component :is="link.icon" class="h-6 w-6" />
                 </a>
             </div>
 
             <div @click="scrollToContent" class="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer">
                 <ChevronDown
-                    class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-90 transition-colors" />
+                    class="h-9 w-9 animate-bounce text-foreground hover:opacity-80 hover:scale-90 transition-colors" />
             </div>
 
         </main>
@@ -142,19 +117,21 @@ const scrollToContent = () => {
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <Card v-for="post in blogPosts" :key="post.id"
-                        class="overflow-hidden transition-all hover:shadow-lg">
-                        <img :src="post.img" :alt="post.title" class="aspect-video w-full object-cover" />
-                        <CardHeader>
-                            <div class="flex items-center justify-between text-xs text-muted-foreground">
-                                <span>{{ post.tag }}</span>
-                                <span>{{ post.date }}</span>
-                            </div>
-                            <CardTitle class="pt-2 text-lg">{{ post.title }}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <CardDescription>{{ post.description }}</CardDescription>
-                        </CardContent>
+                    <Card v-for="post in blogPosts" :key="post.path"
+                        class="overflow-hidden transition-all hover:opacity-80 hover:scale-99">
+                        <NuxtLink :to="post.path">
+                            <img :src="post.coverImage" :alt="post.title" class="aspect-video w-full object-cover" />
+                            <CardHeader>
+                                <div class="flex items-center justify-between text-sm pt-4 text-muted-foreground">
+                                    <span>{{ post.category }}</span>
+                                    <span>{{ post.date }}</span>
+                                </div>
+                                <CardTitle class="pt-1 text-lg line-clamp-2">{{ post.title }}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription class="line-clamp-2 pt-3">{{ post.description }}</CardDescription>
+                            </CardContent>
+                        </NuxtLink>
                     </Card>
                 </div>
             </div>
@@ -170,16 +147,19 @@ const scrollToContent = () => {
                 </div>
 
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <Card v-for="project in projects" :key="project.id"
-                        class="overflow-hidden transition-all hover:shadow-lg">
-                        <img :src="project.img" :alt="project.title" class="aspect-video w-full object-cover" />
-                        <CardHeader>
-                            <span class="text-xs text-muted-foreground">{{ project.tag }}</span>
-                            <CardTitle class="pt-2 text-lg">{{ project.title }}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <CardDescription>{{ project.description }}</CardDescription>
-                        </CardContent>
+                    <Card v-for="work in works" :key="work.path"
+                        class="overflow-hidden transition-all hover:opacity-80 hover:scale-99">
+                        <NuxtLink :to="work.path">
+                            <img :src="work.coverImage" :alt="work.title"
+                                class="aspect-video h-55 w-full object-cover" />
+                            <CardHeader>
+                                <div class="flex items-center justify-between text-sm text-muted-foreground">
+                                    <span>{{ work.category }}</span>
+                                    <span>{{ work.date }}</span>
+                                </div>
+                                <CardTitle class="py-2 text-lg">{{ work.title }}</CardTitle>
+                            </CardHeader>
+                        </NuxtLink>
                     </Card>
                 </div>
             </div>
@@ -194,5 +174,4 @@ const scrollToContent = () => {
 .mt-m-5 {
     margin-top: -5rem;
 }
-
 </style>
