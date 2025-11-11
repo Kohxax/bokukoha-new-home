@@ -32,15 +32,14 @@
                 </a>
             </div>
 
-            <a href="#content" class="absolute bottom-7 left-1/2 -translate-x-1/2 cursor-pointer"
-                aria-label="コンテンツへスクロール">
+            <div @click="scrollToContent" class="absolute bottom-7 left-1/2 -translate-x-1/2 cursor-pointer">
                 <ChevronDown
                     class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-90 transition-colors" />
-            </a>
+            </div>
 
         </main>
 
-        <section id="content" class="container mx-auto max-w-5xl px-6 pb-16 pt-4 sm:pb-24 sm:pt-6 space-y-16">
+        <section id="content" class="container mx-auto max-w-5xl px-6 pb-6 pt-4 sm:pb-6 sm:pt-6 space-y-16">
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
@@ -174,4 +173,11 @@ const projects = [
         img: '/images/temp/a.png'
     },
 ]
+
+const scrollToContent = () => {
+    const contentSection = document.getElementById('content');
+    if (contentSection) {
+        contentSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
 </script>
