@@ -43,7 +43,7 @@ onUnmounted(() => {
   >
     <div class="flex h-14 items-center">
       
-      <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:opacity-75 transition-colors">
+      <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:scale-98 ransition-colors">
         <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.png" alt="Koha" />
         </Avatar>
