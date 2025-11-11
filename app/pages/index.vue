@@ -97,14 +97,14 @@ const scrollToContent = () => {
                 </a>
             </div>
 
-            <div @click="scrollToContent" class="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer">
+            <div @click="scrollToContent" class="absolute bottom-0 left-1/2 -translate-x-1/2 cursor-pointer">
                 <ChevronDown
                     class="h-9 w-9 animate-bounce text-foreground hover:opacity-80 hover:scale-90 transition-colors" />
             </div>
 
         </main>
 
-        <section id="content" class="container mx-auto max-w-5xl px-6 pb-2 pt-4 sm:pt-5 space-y-9">
+        <section id="content" class="h-220 container mx-auto max-w-5xl px-6 pb-2 space-y-9 mt-7">
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
