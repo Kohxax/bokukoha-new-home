@@ -39,7 +39,7 @@
 
         </main>
 
-        <section id="content" class="container mx-auto max-w-5xl px-6 pb-6 pt-4 sm:pb-6 sm:pt-6 space-y-16">
+        <section id="content" class="container mx-auto max-w-5xl px-6 pb-2 pt-4 sm:pt-5 space-y-9">
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
