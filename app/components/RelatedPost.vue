@@ -27,7 +27,7 @@ const { data: related } = await useAsyncData(
       <div class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-none
              mx-auto max-w-full px-1 sm:px-0">
         <Card v-for="post in related" :key="post.path" class="overflow-hidden transition-all hover:opacity-80 hover:scale-[0.99]
-               flex-shrink-0 w-[300px] sm:w-[320px] snap-center">
+               shrink-0 w-[300px] sm:w-[320px] snap-center">
           <NuxtLink :to="post.path">
             <img :src="post.coverImage" :alt="post.title" class="aspect-video w-full object-cover" />
             <CardHeader>
