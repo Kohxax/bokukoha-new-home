@@ -9,21 +9,23 @@
                 <AvatarFallback>KH</AvatarFallback>
             </Avatar>
 
-            <NuxtLink to="/about" class="mb-3 text-3xl font-bold tracking-tight">
+            <NuxtLink to="/about" class="space-y-3 transition-colors hover:opacity-85 duration-300 group-hover:text-foreground">
                 <h1
-                    class="relative inline-block text-foreground transition-colors hover:scale-99 hover:opacity-85 duration-300 group-hover:text-foreground">
+                    class="text-3xl font-bold tracking-tight relative inline-block text-foreground">
                     Koha
                     <span
                         class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out w-full md:w-0 md:group-hover:w-full"></span>
                 </h1>
+
+                <p class="max-w-md text-muted-foreground">
+                    素敵なシナリオとお酒が好きです。
+                    スタレ・崩壊3rd・飲酒・旅行が好きで、そのあたりのオタクをやっています。
+                    技術系の挑戦をするのも好き。
+                </p>
             </NuxtLink>
 
 
-            <p class="max-w-md text-muted-foreground">
-                素敵なシナリオとお酒が好きです。
-                スタレ・崩壊3rd・飲酒・旅行が好きで、そのあたりのオタクをやっています。
-                技術系の挑戦をするのも好き。
-            </p>
+
 
             <div class="mt-5 flex gap-x-5 text-foreground">
                 <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer"
