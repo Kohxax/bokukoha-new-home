@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
       <Card>
         <CardHeader>
-          <CardTitle class="text-xl font-bold tracking-tight">
+          <CardTitle class="title text-xl font-bold tracking-tight">
             # 自己紹介
           </CardTitle>
         </CardHeader>
@@ -30,7 +30,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
       <Card>
         <CardHeader>
-          <CardTitle class="text-xl font-bold tracking-tight">
+          <CardTitle class="title text-xl font-bold tracking-tight">
             # ゲームと好きなキャラ
           </CardTitle>
         </CardHeader>
@@ -44,7 +44,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
       <Card>
         <CardHeader>
-          <CardTitle class="text-xl font-bold tracking-tight">
+          <CardTitle class="title text-xl font-bold tracking-tight">
             # 音楽
           </CardTitle>
         </CardHeader>
@@ -56,7 +56,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
       <Card>
         <CardHeader>
-          <CardTitle class="text-xl font-bold tracking-tight">
+          <CardTitle class="title text-xl font-bold tracking-tight">
             # 自宅サーバー
           </CardTitle>
         </CardHeader>
@@ -67,7 +67,7 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
       <Card>
         <CardHeader>
-          <CardTitle class="text-xl font-bold tracking-tight">
+          <CardTitle class="title text-xl font-bold tracking-tight">
             # 適当
           </CardTitle>
         </CardHeader>
@@ -86,3 +86,11 @@ import { Avatar, AvatarFallback } from '~/components/ui/avatar'
 
   </div>
 </template>
+
+<style scoped>
+.title {
+  margin-top: 1rem;
+  margin-bottom: -0.5rem;
+}
+
+</style>
