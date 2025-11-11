@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback } from '~/components/ui/avatar'
-
+useHead({
+    title: 'About'
+})
 </script>
 
 <template>

@@ -111,6 +111,10 @@ definePageMeta({
     layout: "home"
 })
 
+useHead({
+    title: 'Koha - Home'
+})
+
 const links = [
     {
         title: "GitHub",
