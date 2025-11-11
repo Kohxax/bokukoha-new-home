@@ -107,6 +107,10 @@ import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"
 import Avatar from "~/components/ui/avatar/Avatar.vue";
 
+definePageMeta({
+    layout: "home"
+})
+
 const links = [
     {
         title: "GitHub",
