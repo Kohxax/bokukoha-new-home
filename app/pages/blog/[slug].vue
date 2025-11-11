@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
- 
+
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
@@ -43,6 +43,8 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
         </CardContent>
 
       </Card>
+
+      <RelatedPost :category="page.category" :current-path="page.path" />
     </div>
 
     <NotFound v-else />
