@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     viewTransition: true,
   },
 
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
+    },
+  },
+
   content: {
     renderer: {
       anchorLinks: false

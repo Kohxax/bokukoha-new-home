@@ -109,6 +109,16 @@ html {
   animation: slide-out 0.1s ease-in forwards;
 }
 
+::view-transition-new(blog-content) {
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+::view-transition-old(blog-content) {
+  animation: slide-out 0.1s ease-in forwards;
+}
+
 @keyframes slide-in {
   to {
     transform: translateY(0);
