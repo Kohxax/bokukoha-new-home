@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import { Github, ChevronDown, ArrowRight } from "lucide-vue-next"
+import { Github, ChevronDown, ArrowRight, Layout } from "lucide-vue-next"
 import MisskeyIcon from "~/components/svg/MisskeyIcon.vue"
 import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"
 import Avatar from "~/components/ui/avatar/Avatar.vue";
-
-
+import { ref, onMounted, onUnmounted } from 'vue'
 
 useHead({
     title: 'Koha - Home'
@@ -52,6 +51,19 @@ const { data: works } = await useAsyncData('work-list', () => {
         .all()
 })
 
+const isAtTop = ref(true)
+
+const handleScroll = () => {
+    isAtTop.value = window.scrollY < 50
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+})
+
 const scrollToContent = () => {
     const contentSection = document.getElementById('content');
     if (contentSection) {
@@ -64,47 +76,47 @@ const scrollToContent = () => {
 
     <div class="relative">
 
-        <main
-            class="group relative flex flex-1 flex-col items-center justify-center mt-m-5 p-4 text-center min-h-screen">
+        <main class="relative flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem)] p-4 text-center">
 
-            <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
-                <img src="~/assets/img/icon_glass.png" alt="Koha" />
-                <AvatarFallback>KH</AvatarFallback>
-            </Avatar>
+            <div class="flex flex-col items-center justify-center space-y-4">
+                <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
+                    <img src="~/assets/img/icon_glass.png" alt="Koha" />
+                    <AvatarFallback>KH</AvatarFallback>
+                </Avatar>
 
-            <NuxtLink to="/about"
-                class="space-y-3 transition-colors hover:opacity-85 duration-300 group-hover:text-foreground">
-                <h1 class="text-3xl font-bold tracking-tight relative inline-block text-foreground">
-                    Koha
-                    <span
-                        class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out w-full md:w-0 md:group-hover:w-full"></span>
-                </h1>
+                <NuxtLink to="/about" class="space-y-3 transition-colors hover:opacity-85 duration-300 group">
+                    <h1
+                        class="text-3xl font-bold tracking-tight relative inline-block text-foreground group-hover:text-foreground">
+                        Koha
+                        <span
+                            class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out w-full md:w-0 md:group-hover:w-full"></span>
+                    </h1>
 
-                <p class="max-w-md text-muted-foreground">
-                    素敵なシナリオとお酒が好きです。
-                    スタレ・崩壊3rd・飲酒・旅行が好きで、そのあたりのオタクをやっています。
-                    技術系の挑戦をするのも好き。
-                </p>
-            </NuxtLink>
+                    <p class="max-w-md text-muted-foreground">
+                        素敵なシナリオとお酒が好きです。
+                        スタレ・崩壊3rd・飲酒・旅行が好きで、そのあたりのオタクをやっています。
+                        技術系の挑戦をするのも好き。
+                    </p>
+                </NuxtLink>
 
-
-
-
-            <div class="mt-5 flex gap-x-5 text-foreground">
-                <a v-for="link in links" :key="link.title" :href="link.href" target="_blank" rel="noopener noreferrer"
-                    class="hover:opacity-80 hover:scale-98 transition-colors">
-                    <component :is="link.icon" class="h-6 w-6" />
-                </a>
+                <div class="mt-4 flex gap-x-5 text-foreground">
+                    <a v-for="link in links" :key="link.title" :href="link.href" target="_blank"
+                        rel="noopener noreferrer" class="hover:opacity-80 hover:scale-98 transition">
+                        <component :is="link.icon" class="h-6 w-6" />
+                    </a>
+                </div>
             </div>
 
-            <div @click="scrollToContent" class="absolute bottom-0 left-1/2 -translate-x-1/2 cursor-pointer">
+            <div @click="scrollToContent"
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-opacity duration-300"
+                :class="{ 'opacity-0 pointer-events-none': !isAtTop }">
                 <ChevronDown
-                    class="h-9 w-9 animate-bounce text-foreground hover:opacity-80 hover:scale-90 transition-colors" />
+                    class="h-9 w-9 animate-bounce text-foreground hover:opacity-80 hover:scale-90 transition" />
             </div>
 
         </main>
 
-        <section id="content" class="h-220 container mx-auto max-w-5xl px-6 pb-2 space-y-9 mt-7">
+        <section id="content" class="container mx-auto max-w-5xl px-6 py-12 space-y-12">
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
@@ -169,9 +181,3 @@ const scrollToContent = () => {
     </div>
 
 </template>
-
-<style scoped>
-.mt-m-5 {
-    margin-top: -5rem;
-}
-</style>
