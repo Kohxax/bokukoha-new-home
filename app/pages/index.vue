@@ -1,8 +1,8 @@
 <template>
 
-    <div class="relative flex min-h-screen flex-col">
+    <div class="relative">
 
-        <main class="group flex flex-1 flex-col items-center justify-center p-4 text-center">
+        <main class="group relative flex flex-1 flex-col items-center justify-center p-4 text-center min-h-screen">
 
             <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
                 <img src="~/assets/img/icon_glass.png" alt="Koha" />
@@ -14,7 +14,7 @@
                     class="relative inline-block text-foreground transition-colors hover:scale-99 hover:opacity-85 duration-300 group-hover:text-foreground">
                     Koha
                     <span
-                        class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out group-hover:w-full w-0"></span>
+                        class="absolute bottom-0 left-0 h-0.5 bg-foreground transition-all duration-300 ease-out w-full md:w-0 md:group-hover:w-full"></span>
                 </h1>
             </NuxtLink>
 
@@ -32,13 +32,70 @@
                 </a>
             </div>
 
+            <a href="#content" class="absolute bottom-7 left-1/2 -translate-x-1/2 cursor-pointer"
+                aria-label="コンテンツへスクロール">
+                <ChevronDown
+                    class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-90 transition-colors" />
+            </a>
+
         </main>
 
-        <!-- あとで下にいくボタンにする -->
-        <div class="absolute bottom-7 left-1/2 -translate-x-1/2 cursor-pointer">
-            <ChevronDown
-                class="h-9 w-9 animate-bounce text-foreground hover:opacity-75 hover:scale-90 transition-colors" />
-        </div>
+        <section id="content" class="container mx-auto max-w-5xl px-6 pb-16 pt-4 sm:pb-24 sm:pt-6 space-y-16">
+
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold tracking-tight">Blog</h2>
+                    <NuxtLink to="/blog"
+                        class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        すべて見る
+                        <ArrowRight class="h-4 w-4" />
+                    </NuxtLink>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <Card v-for="post in blogPosts" :key="post.id"
+                        class="overflow-hidden transition-all hover:shadow-lg">
+                        <img :src="post.img" :alt="post.title" class="aspect-video w-full object-cover" />
+                        <CardHeader>
+                            <div class="flex items-center justify-between text-xs text-muted-foreground">
+                                <span>{{ post.tag }}</span>
+                                <span>{{ post.date }}</span>
+                            </div>
+                            <CardTitle class="pt-2 text-lg">{{ post.title }}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription>{{ post.description }}</CardDescription>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold tracking-tight">Work</h2>
+                    <NuxtLink to="/work"
+                        class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        すべて見る
+                        <ArrowRight class="h-4 w-4" />
+                    </NuxtLink>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <Card v-for="project in projects" :key="project.id"
+                        class="overflow-hidden transition-all hover:shadow-lg">
+                        <img :src="project.img" :alt="project.title" class="aspect-video w-full object-cover" />
+                        <CardHeader>
+                            <span class="text-xs text-muted-foreground">{{ project.tag }}</span>
+                            <CardTitle class="pt-2 text-lg">{{ project.title }}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription>{{ project.description }}</CardDescription>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+
+        </section>
 
     </div>
 
@@ -74,4 +131,47 @@ const links = [
     }
 ]
 
+const blogPosts = [
+    {
+        id: 1,
+        tag: '技術',
+        date: '2025年11月8日',
+        title: '銀狼',
+        description: 'ここは説明文です',
+        img: '/images/temp/a.png'
+    },
+    {
+        id: 2,
+        tag: '雑記',
+        date: '2025年11月1日',
+        title: 'タイトル',
+        description: 'ああああああああああああ',
+        img: '/images/temp/a.png'
+    },
+    {
+        id: 3,
+        tag: '雑記',
+        date: '2025年10月28日',
+        title: '？',
+        description: '？？？？？？？？？？？',
+        img: '/images/temp/a.png'
+    },
+]
+
+const projects = [
+    {
+        id: 1,
+        tag: 'Web',
+        title: '個人サイト',
+        description: '文字',
+        img: '/images/temp/a.png'
+    },
+    {
+        id: 2,
+        tag: 'Minecraft',
+        title: 'AWS S3活用',
+        description: 'やあ.',
+        img: '/images/temp/a.png'
+    },
+]
 </script>
