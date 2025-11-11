@@ -41,7 +41,7 @@ onUnmounted(() => {
     "
     :class="{ '-translate-y-full': !isVisible }"
   >
-    <div class="container flex h-14 max-w-5xl items-center">
+    <div class="flex h-14 items-center">
       
       <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:opacity-75 transition-colors">
         <Avatar class="h-8 w-8">
@@ -50,7 +50,7 @@ onUnmounted(() => {
         <span class="font-bold text-lg">Koha</span>
       </NuxtLink>
 
-      <nav class="flex ml-auto space-x-4 pr-3">
+      <nav class="flex ml-auto space-x-4 pr-5">
         <NuxtLink 
           to="/blog" 
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
