@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
-
+ 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
@@ -9,6 +9,8 @@ const { data: page } = await useAsyncData(route.path, () => {
 useHead({
   title: page.value?.title || '記事タイトル',
 })
+
+const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 </script>
 
 <template>
@@ -43,13 +45,7 @@ useHead({
       </Card>
     </div>
 
-    <div v-else class="text-center py-16">
-      <h1 class="text-3xl font-bold">記事が見つかりません。</h1>
-      <p class="text-muted-foreground mt-4">お探しの記事は削除されたか、URLが変更された可能性があります。</p>
-      <NuxtLink to="/blog" class="mt-6 inline-block text-primary hover:underline">
-        ブログトップに戻る
-      </NuxtLink>
-    </div>
+    <NotFound v-else />
   </div>
 </template>
 
