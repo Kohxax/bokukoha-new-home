@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
+import RelatedPost from '~/components/partials/RelatedPost.vue'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
