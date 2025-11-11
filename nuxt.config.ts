@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     viewTransition: true,
   },
 
+  content: {
+    renderer: {
+      anchorLinks: false
+    }
+  },
+
   vite: {
     plugins: [
       taillwindcss(),
