@@ -15,8 +15,8 @@ const archivesByYear = computed(() => {
     if (!map[y]) map[y] = 0
     map[y]++
   })
-  
-  return Object.entries(map).sort((a,b) => Number(b[0]) - Number(a[0])).map(([year, count]) => ({ year, count }))
+
+  return Object.entries(map).sort((a, b) => Number(b[0]) - Number(a[0])).map(([year, count]) => ({ year, count }))
 })
 
 const archivesByCategory = computed(() => {
@@ -32,17 +32,14 @@ const archivesByCategory = computed(() => {
 <template>
   <aside class="space-y-8 text-base">
     <div>
-      <div class="flex items-center gap-2 mb-2">
-        <Archive class="h-4 w-4 text-muted-foreground" />
+      <NuxtLink to="/blog/archives" class="flex flex-row gap-2 mb-2 hover:opacity-80">
+        <Archive class="h-4 w-4 text-muted-foreground mt-1" />
         <h3 class="text-base font-semibold">アーカイブ</h3>
-      </div>
+      </NuxtLink>
 
       <ul class="space-y-2">
-        <li
-          v-for="item in archivesByYear"
-          :key="item.year"
-          class="flex justify-between items-center rounded-md bg-muted/30 px-4 py-2 hover:bg-muted cursor-pointer transition"
-        >
+        <li v-for="item in archivesByYear" :key="item.year"
+          class="flex justify-between items-center rounded-md bg-muted/30 px-4 py-2 hover:bg-muted cursor-pointer transition">
           <NuxtLink :to="`/blog/archives?year=${item.year}`" class="flex justify-between w-full">
             <span class="font-medium">{{ item.year }}</span>
             <span class="text-muted-foreground">{{ item.count }}</span>
@@ -58,12 +55,9 @@ const archivesByCategory = computed(() => {
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <NuxtLink
-          v-for="(count, category) in archivesByCategory"
-          :key="category"
+        <NuxtLink v-for="(count, category) in archivesByCategory" :key="category"
           :to="`/blog/archives?category=${category}`"
-          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md"
-        >
+          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md">
           {{ category }}
         </NuxtLink>
       </div>
