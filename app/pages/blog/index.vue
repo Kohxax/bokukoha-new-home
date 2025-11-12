@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { CalendarDays } from 'lucide-vue-next';
+import { CalendarDays, Archive } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
+import Archives from '~/components/partials/Archives.vue';
 
 const pageSize = 3
 const route = useRoute()
@@ -56,10 +57,10 @@ const displayPages = computed(() => {
 })
 
 watch(
-  () => route.query.page,
-  () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    () => route.query.page,
+    () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
 )
 
 useHead({
@@ -68,41 +69,61 @@ useHead({
 </script>
 
 <template>
-    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen" style="view-transition-name: blog-content">
-        <div class="mx-auto max-w-4xl gap-6">
-            <h1 class="mb-8 text-3xl font-bold tracking-tight">Blog</h1>
-            <div class="space-y-12">
-                <Card v-for="post in paginatedPosts" :key="post.path"
-                    class="overflow-hidden transition-all hover:shadow-lg">
-                    <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
-                        class="h-40 md:h-80 w-full object-cover" />
-                    <CardHeader>
-                        <span
-                            class="inline-block px-3 py-1 text-sm font-semibold bg-muted text-center rounded-full w-18">
-                            {{ post.category }}
-                        </span>
-                        <NuxtLink class="text-2xl mt-4" :to="post.path">
-                            <CardTitle>{{ post.title }}</CardTitle>
+    <div class="container mx-auto px-4 py-8 md:py-12 min-h-screen max-w-7xl" style="view-transition-name: blog-content">
+        <div class="grid justify-center grid-cols-[minmax(0,800px)_0px]">
+            <div class="max-w-[800px] w-full">
+                <div class="flex items-center justify-between mb-5">
+                    <h1 class="text-3xl font-bold tracking-tight">Blog</h1>
+
+                    <Button variant="outline" class="xl:hidden">
+                        <NuxtLink to="/blog/archives"
+                            class="text-sm flex flex-row gap-x-2">
+                            <Archive class="h-6 w-6 mt-0.5" />
+                            <span>
+                                アーカイブ
+                            </span>
                         </NuxtLink>
-                        <div class="flex flex-row items-center gap-x-3 mt-4">
-                            <CalendarDays class="text-muted-foreground scale-80" />
-                            <span class="text-base text-muted-foreground">{{ post.date }}</span>
-                        </div>
-                    </CardHeader>
-                </Card>
-            </div>
-
-            <div class="mt-10 text-center gap-2">
-
-                <template v-for="item in displayPages" :key="item">
-                    <span v-if="item === '…'" class="px-1 text-muted-foreground select-none">…</span>
-
-                    <Button v-else size="lg" :variant="item === currentPage ? 'default' : 'ghost'"
-                        class="transition-none min-w-8" @click="$router.push({ query: { page: item } })">
-                        {{ item }}
                     </Button>
-                </template>
+                </div>
+
+                <div class="space-y-6 md:space-y-12">
+                    <Card v-for="post in paginatedPosts" :key="post.path"
+                        class="overflow-hidden transition-all hover:shadow-lg">
+                        <NuxtLink :to="post.path">
+                            <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
+                                class="h-40 md:h-80 w-full object-cover" />
+                        </NuxtLink>
+                        <CardHeader>
+                            <Button variant="secondary" size="sm" as-child class="w-18">
+                                <NuxtLink :to="`/blog/archives?category=${post.category}`">
+                                {{ post.category }}
+                                </NuxtLink>
+                            </Button>
+                            <NuxtLink class="text-2xl mt-3" :to="post.path">
+                                <CardTitle>{{ post.title }}</CardTitle>
+                            </NuxtLink>
+                            <div class="flex flex-row items-center gap-x-3 mt-4">
+                                <CalendarDays class="text-muted-foreground scale-80" />
+                                <span class="text-base text-muted-foreground">{{ post.date }}</span>
+                            </div>
+                        </CardHeader>
+                    </Card>
+                </div>
+
+                <div class="mt-10 text-center gap-2">
+                    <template v-for="item in displayPages" :key="item">
+                        <span v-if="item === '…'" class="px-1 text-muted-foreground select-none">…</span>
+                        <Button v-else size="lg" :variant="item === currentPage ? 'default' : 'ghost'"
+                            class="transition-none min-w-8" @click="$router.push({ query: { page: item } })">
+                            {{ item }}
+                        </Button>
+                    </template>
+                </div>
             </div>
+
+            <aside class="hidden xl:block mx-12 w-60 shrink-0 self-start sticky top-42">
+                <Archives />
+            </aside>
         </div>
 
         <NotFound v-if="!posts || posts.length === 0" />
