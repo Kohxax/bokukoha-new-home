@@ -18,6 +18,13 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    public: {
+      likeApi: process.env.NUXT_PUBLIC_LIKE_API,
+      likeApiKey: process.env.NUXT_PUBLIC_LIKE_API_KEY,
+    },
+  },
+
   router: {
     options: {
       scrollBehaviorType: 'smooth',
