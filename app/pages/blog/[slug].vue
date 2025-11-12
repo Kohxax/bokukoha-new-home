@@ -20,8 +20,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
       <Card class="overflow-hidden rounded-lg shadow-xl border">
 
         <div v-if="page.coverImage" class="relative">
-          <img :src="page.coverImage" :alt="page.title" class="w-full aspect-video object-cover rounded-t-lg"
-            style="view-transition-name: post-cover-image" />
+          <img :src="page.coverImage" :alt="page.title" class="w-full aspect-video object-cover rounded-t-lg" />
         </div>
 
         <CardHeader class="pt-2 px-10">

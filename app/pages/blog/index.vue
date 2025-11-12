@@ -69,7 +69,7 @@ useHead({
 </script>
 
 <template>
-    <div class="container mx-auto px-4 py-8 md:py-12 min-h-screen max-w-7xl" style="view-transition-name: blog-content">
+    <div class="container mx-auto px-4 py-8 md:py-12 min-h-screen max-w-7xl">
         <div class="grid justify-center grid-cols-[minmax(0,800px)_0px]">
             <div class="max-w-[800px] w-full">
                 <div class="flex items-center justify-between mb-5">

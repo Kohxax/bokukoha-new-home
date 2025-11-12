@@ -7,12 +7,12 @@ useHead({
 <template>
   <div class="flex min-h-screen flex-col items-center bg-background px-4 py-16 text-foreground sm:py-24">
 
-    <Avatar class="mb-12 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
+    <Avatar class="mb-12 h-50 w-50 shadow-xl">
       <img src="~/assets/img/icon_glass.png" alt="Koha" />
       <AvatarFallback>KH</AvatarFallback>
     </Avatar>
 
-    <main class="w-full max-w-2xl space-y-6" style="view-transition-name: about-content">
+    <main class="w-full max-w-2xl space-y-6">
 
       <Card>
         <CardHeader>

@@ -68,7 +68,7 @@ useHead({
 </script>
 
 <template>
-    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen" style="view-transition-name: blog-content">
+    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen">
         <div class="mx-auto max-w-4xl gap-6">
             <h1 class="mb-8 text-3xl font-bold tracking-tight">Work</h1>
             <div class="space-y-12">
