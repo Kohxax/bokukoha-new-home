@@ -165,11 +165,11 @@ const scrollToContent = () => {
                             <img :src="work.coverImage" :alt="work.title"
                                 class="aspect-video h-55 w-full object-cover" />
                             <CardHeader>
-                                <div class="flex items-center justify-between text-sm text-muted-foreground">
+                                <div class="flex items-center justify-between text-sm text-muted-foreground pt-3">
                                     <span>{{ work.category }}</span>
                                     <span>{{ work.date }}</span>
                                 </div>
-                                <CardTitle class="py-2 text-lg">{{ work.title }}</CardTitle>
+                                <CardTitle class="text-lg pb-2">{{ work.title }}</CardTitle>
                             </CardHeader>
                         </NuxtLink>
                     </Card>
