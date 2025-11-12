@@ -47,7 +47,7 @@ onUnmounted(() => {
         <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.png" alt="Koha" />
         </Avatar>
-        <span class="font-bold text-lg">Koha</span>
+        <span class="font-bold text-lg">ぼくこは.dev</span>
       </NuxtLink>
 
       <nav class="flex ml-auto space-x-4 pr-5">

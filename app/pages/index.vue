@@ -7,7 +7,7 @@ import Avatar from "~/components/ui/avatar/Avatar.vue";
 import { ref, onMounted, onUnmounted } from 'vue'
 
 useHead({
-    title: 'Koha - Home'
+    title: 'ぼくこは.dev'
 })
 
 const links = [
