@@ -61,6 +61,10 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
   padding-left: 2rem;
 }
 
+.prose :deep(h1) {
+  font-size: 2.0rem;
+}
+
 .prose :deep(h2) {
   font-size: 1.8rem;
   margin-top: 0;
