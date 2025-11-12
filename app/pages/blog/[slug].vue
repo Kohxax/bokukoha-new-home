@@ -24,10 +24,12 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
             style="view-transition-name: post-cover-image" />
         </div>
 
-        <CardHeader class="pt-6 px-10">
-          <span class="inline-block px-3 py-1 text-sm font-semibold bg-muted text-center rounded-full mb-2 w-18">
-            {{ page.category }}
-          </span>
+        <CardHeader class="pt-2 px-10">
+          <Button variant="secondary" class="mb-2 w-18">
+            <NuxtLink :to="`/blog/archives?category=${page.category}`">
+              {{ page.category }}
+            </NuxtLink>
+          </Button>
           <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
             {{ page.title }}
           </CardTitle>
