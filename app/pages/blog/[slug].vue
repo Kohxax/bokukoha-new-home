@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
+import SocialShare from '~/components/partials/SocialShare.vue'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
@@ -43,7 +44,10 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
         <CardContent class="prose prose-invert max-w-none px-10 py-4">
           <ContentRenderer :value="page" />
         </CardContent>
+      </Card>
 
+      <Card class="mt-6 flex items-center justify-center pb-8">
+          <SocialShare />
       </Card>
 
       <RelatedPost :category="page.category" :current-path="page.path" />
