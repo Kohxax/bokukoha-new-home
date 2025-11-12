@@ -34,7 +34,7 @@ const shareToMisskey = () => {
 </script>
 
 <template>
-  <div class="mt-10">
+  <div>
     <div class="flex items-center gap-2 mb-4">
       <Share2 class="h-5 w-5 text-muted-foreground" />
       <h3 class="font-semibold text-base">{{ title }}</h3>

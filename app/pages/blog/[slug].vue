@@ -2,6 +2,7 @@
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
 import SocialShare from '~/components/partials/SocialShare.vue'
+import LikeButton from '~/components/partials/LikeButton.vue'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
@@ -44,10 +45,11 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
         <CardContent class="prose prose-invert max-w-none px-10 py-4">
           <ContentRenderer :value="page" />
         </CardContent>
-      </Card>
 
-      <Card class="mt-6 flex items-center justify-center pb-8">
-          <SocialShare />
+        <div class="flex flex-col items-center justify-center my-3">
+          <LikeButton class="pl-5" :article-id="page.path" />
+          <SocialShare class="mt-3" />
+        </div>
       </Card>
 
       <RelatedPost :category="page.category" :current-path="page.path" />
