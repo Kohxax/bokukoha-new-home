@@ -51,7 +51,6 @@ const archivesByCategory = computed(() => {
       </ul>
     </div>
 
-    <!-- カテゴリ -->
     <div>
       <div class="flex items-center gap-2 mb-2">
         <LucideHash class="h-4 w-4 text-muted-foreground" />
@@ -63,7 +62,7 @@ const archivesByCategory = computed(() => {
           v-for="(count, category) in archivesByCategory"
           :key="category"
           :to="`/blog/archives?category=${category}`"
-          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition"
+          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md"
         >
           {{ category }}
         </NuxtLink>
