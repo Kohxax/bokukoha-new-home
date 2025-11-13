@@ -92,6 +92,7 @@ useHead({
                 </Card>
             </div>
 
+            <!--  
             <div class="mt-10 text-center gap-2">
 
                 <template v-for="item in displayPages" :key="item">
@@ -103,6 +104,7 @@ useHead({
                     </Button>
                 </template>
             </div>
+            -->
         </div>
 
         <NotFound v-if="!posts || posts.length === 0" />
