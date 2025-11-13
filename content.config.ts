@@ -44,4 +44,8 @@ export default defineContentConfig({
             }),      
         ),
     },
+
+    components: {
+        img: 'ProseImg',
+    },
 })
