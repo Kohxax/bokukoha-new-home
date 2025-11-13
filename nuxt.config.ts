@@ -47,7 +47,7 @@ export default defineNuxtConfig({
     preset:'cloudflare-pages'
   },
 
-  modules: ['shadcn-nuxt', '@nuxt/content'],
+  modules: ['@nuxtjs/seo','shadcn-nuxt', '@nuxt/content'],
 
   shadcn: {
     prefix: '',
