@@ -82,7 +82,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 .prose :deep(h6) {
   margin-left: -1.2rem;
   border-left: 4px solid var(--color-foreground);
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -117,7 +117,6 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 }
 
 .prose :deep(p) {
-  font-size: 1.1rem;
-  letter-spacing: 0.04rem;
+  font-size: 1.15rem;
 }
 </style>
