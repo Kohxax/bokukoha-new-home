@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
-  modules: ['@nuxtjs/seo','shadcn-nuxt', '@nuxt/content'],
+  modules: ['@nuxtjs/seo', 'shadcn-nuxt', '@nuxt/content'],
 
   site: {
     url: 'https://www.bokukoha.dev',
@@ -14,10 +14,14 @@ export default defineNuxtConfig({
     description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
   },
 
+  ogImage: {
+    enabled: false
+  },
+
   seo: {
     meta: {
       description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
-      themeColor: { 
+      themeColor: {
         content: '#18181b',
       },
       twitterCreator: '@kohxax',
@@ -79,7 +83,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset:'cloudflare-pages'
+    preset: 'cloudflare-pages'
   },
 
   shadcn: {

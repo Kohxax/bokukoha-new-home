@@ -31,6 +31,10 @@ useSchemaOrg([
   })
 ])
 
+useSeoMeta({
+  ogImage: '/og/icon_glass.png'
+})
+
 </script>
 
 <template>
