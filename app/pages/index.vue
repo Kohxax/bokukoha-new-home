@@ -6,10 +6,6 @@ import DiscordIcon from "~/components/svg/DiscordIcon.vue"
 import Avatar from "~/components/ui/avatar/Avatar.vue";
 import { ref, onMounted, onUnmounted } from 'vue'
 
-useHead({
-    title: 'ぼくこは.dev'
-})
-
 const links = [
     {
         title: "GitHub",

@@ -62,10 +62,6 @@ watch(
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 )
-
-useHead({
-    title: 'Blog'
-})
 </script>
 
 <template>
