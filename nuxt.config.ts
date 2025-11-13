@@ -14,13 +14,32 @@ export default defineNuxtConfig({
     description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
   },
 
+  seo: {
+    meta: {
+      description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
+      themeColor: { 
+        content: '#18181b',
+      },
+      twitterCreator: '@kohxax',
+      author: 'Koha',
+      colorScheme: 'dark',
+      applicationName: 'ぼくこは.dev',
+
+      ogSiteName: 'ぼくこは.dev',
+      ogLocale: 'ja_JA',
+      ogType: 'website',
+      ogUrl: 'https://www.bokukoha.dev',
+      ogTitle: 'ぼくこは.dev',
+      ogDescription: 'test',
+
+      ogImage: 'https://www.bokukoha.dev/images/og/icon_glass.png',
+      robots: 'index, follow'
+    },
+  },
+
   sitemap: {
     xsl: false,
     credits: false,
-  },
-
-  ogImage: {
-    fonts: ['Noto+Sans+JP:700'],
   },
 
   experimental: {

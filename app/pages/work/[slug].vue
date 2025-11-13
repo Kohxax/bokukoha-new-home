@@ -11,9 +11,17 @@ const { data: page } = await useAsyncData(route.path, () => {
 useSchemaOrg([
   defineArticle({
     datePublised: page.value?.date,
-    image: page.value?.coverImage
+    image: page.value?.coverImage,
   })
 ])
+
+useSeoMeta({
+  description: page.value?.description,
+  ogImage: page.value?.coverImage,
+  twitterTitle: page.value?.description,
+  twitterDescription: page.value?.description,
+  twitterImage: page.value?.coverImage
+})
 
 useHead({
   title: page.value?.title,
