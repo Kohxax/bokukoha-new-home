@@ -77,9 +77,21 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 .prose :deep(h4),
 .prose :deep(h5),
 .prose :deep(h6) {
-  margin-left: -2.5rem;
+  margin-left: -1.2rem;
   border-left: 4px solid var(--color-foreground);
   padding-left: 2rem;
+}
+
+@media (min-width: 768px) {
+  .prose :deep(h1),
+  .prose :deep(h2),
+  .prose :deep(h3),
+  .prose :deep(h4),
+  .prose :deep(h5),
+  .prose :deep(h6) {
+    margin-left: -2.5rem;
+    padding-left: 2rem;
+  }
 }
 
 .prose :deep(h1) {
