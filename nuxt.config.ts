@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     url: 'https://www.bokukoha.dev',
     name: 'ぼくこは.dev',
     description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
+    trailingSlash: true,
   },
 
   ogImage: {
@@ -48,7 +49,13 @@ export default defineNuxtConfig({
 
   experimental: {
     viewTransition: true,
+    defaults: {
+      nuxtLink: {
+        trailingSlash: 'append',
+      }
+    }
   },
+
 
   app: {
     pageTransition: {
