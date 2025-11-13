@@ -6,6 +6,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
+  modules: ['@nuxtjs/seo','shadcn-nuxt', '@nuxt/content'],
+
+  site: {
+    url: 'https://www.bokukoha.dev',
+    name: 'ぼくこは.dev'
+  },
 
   experimental: {
     viewTransition: true,
@@ -46,8 +52,6 @@ export default defineNuxtConfig({
   nitro: {
     preset:'cloudflare-pages'
   },
-
-  modules: ['@nuxtjs/seo','shadcn-nuxt', '@nuxt/content'],
 
   shadcn: {
     prefix: '',
