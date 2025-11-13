@@ -13,6 +13,15 @@ export default defineNuxtConfig({
     name: 'ぼくこは.dev'
   },
 
+  sitemap: {
+    xsl: false,
+    credits: false,
+  },
+
+  ogImage: {
+    fonts: ['Noto+Sans+JP:700'],
+  },
+
   experimental: {
     viewTransition: true,
   },
