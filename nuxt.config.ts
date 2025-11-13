@@ -88,6 +88,11 @@ export default defineNuxtConfig({
     plugins: [
       taillwindcss(),
     ],
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
   },
 
   nitro: {
