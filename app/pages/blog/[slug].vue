@@ -3,14 +3,22 @@ import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
 import SocialShare from '~/components/partials/SocialShare.vue'
 import LikeButton from '~/components/partials/LikeButton.vue'
+import { defineArticle, useSchemaOrg } from '#imports'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
 })
 
+useSchemaOrg([
+  defineArticle({
+    datePublised: page.value?.date,
+    image: page.value?.coverImage
+  })
+])
+
 useHead({
-  title: page.value?.title || '記事タイトル',
+  title: page.value?.title,
 })
 
 const tocLinks = computed(() => page.value?.body?.toc?.links || [])

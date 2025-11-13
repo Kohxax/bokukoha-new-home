@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import SocialShare from '~/components/partials/SocialShare.vue'
+import { defineArticle, useSchemaOrg } from '#imports'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('work').path(route.path).first()
 })
 
+useSchemaOrg([
+  defineArticle({
+    datePublised: page.value?.date,
+    image: page.value?.coverImage
+  })
+])
+
 useHead({
-  title: page.value?.title || '記事タイトル',
+  title: page.value?.title,
 })
 
 const tocLinks = computed(() => page.value?.body?.toc?.links || [])

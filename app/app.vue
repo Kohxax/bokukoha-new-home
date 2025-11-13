@@ -1,3 +1,38 @@
+<script setup>
+import { definePerson, defineWebPage, defineWebSite, useSchemaOrg } from '@unhead/schema-org/vue'
+
+const route = useRoute()
+useHead({
+  templateParams: {
+    schemaOrg: {
+      host: 'https://www.bokukoha.dev',
+      path: route.path,
+      inLanguage: 'ja'
+    }
+  }
+})
+
+useSchemaOrg([
+  defineWebPage(),
+  defineWebSite({
+    name: 'ぼくこは.dev',
+    description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。'
+  }),
+
+  definePerson({
+    name: 'こは',
+    url: 'https://www.bokukoha.dev',
+    image: 'https://www.bokukoha.dev/images/og/icon_glass.png',
+    sameAs: [
+      'https://blog.bokukoha.dev',
+      'https://misskey.io/bokukoha',
+      'https://x.com/kohxax'
+    ]
+  })
+])
+
+</script>
+
 <template>
   <NuxtLayout>
     <NuxtPage />

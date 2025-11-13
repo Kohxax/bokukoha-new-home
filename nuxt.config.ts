@@ -10,7 +10,8 @@ export default defineNuxtConfig({
 
   site: {
     url: 'https://www.bokukoha.dev',
-    name: 'ぼくこは.dev'
+    name: 'ぼくこは.dev',
+    description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
   },
 
   sitemap: {
