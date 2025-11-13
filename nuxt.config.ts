@@ -84,7 +84,10 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'cloudflare-pages'
+    preset: 'static',
+    prerender: {
+      routes: ['/sitemap.xml', '/rss.xml', '/blog/**', '/work/**']
+    }
   },
 
   shadcn: {
