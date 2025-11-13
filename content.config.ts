@@ -1,5 +1,6 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 import { asSitemapCollection } from '@nuxtjs/sitemap/content'
+import { asRobotsCollection } from '@nuxtjs/robots/content'
 
 export default defineContentConfig({
     collections: {
@@ -35,6 +36,12 @@ export default defineContentConfig({
                 type: 'page',
                 source: 'blog/**/'
             }),
+
+            asRobotsCollection({
+                type: 'page',
+                source: '**'
+            })
+        
         ),
     },
 })
