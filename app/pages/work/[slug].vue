@@ -2,6 +2,7 @@
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import SocialShare from '~/components/partials/SocialShare.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
+import LikeButton from '~/components/partials/LikeButton.vue'
 
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
@@ -59,13 +60,12 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
           <ContentRenderer :value="page" />
         </CardContent>
 
-      </Card>
-
-      <Card class="mt-6 flex items-center justify-center pb-8">
-        <SocialShare />
+        <div class="flex flex-col items-center justify-center my-3">
+          <LikeButton class="pl-5" :article-id="page.path" />
+          <SocialShare class="mt-3" />
+        </div>
       </Card>
     </div>
-
     <NotFound v-else />
   </div>
 </template>
