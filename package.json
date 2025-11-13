@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@nuxt/content": "3.8.0",
+    "@nuxtjs/seo": "^3.2.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
+    "@types/rss": "^0.0.32",
     "@vueuse/core": "^14.0.0",
     "better-sqlite3": "^12.4.1",
     "class-variance-authority": "^0.7.1",
@@ -21,6 +23,7 @@
     "nuxt": "^4.2.1",
     "radix-vue": "^1.9.17",
     "reka-ui": "^2.6.0",
+    "rss": "^1.2.2",
     "shadcn-nuxt": "2.3.2",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.17",
