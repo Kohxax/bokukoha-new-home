@@ -17,7 +17,6 @@ useSchemaOrg([
 ])
 
 useSeoMeta({
-  description: page.value?.description,
   ogImage: page.value?.coverImage,
   twitterTitle: page.value?.description,
   twitterDescription: page.value?.description,

@@ -34,8 +34,7 @@ export default defineNuxtConfig({
       ogLocale: 'ja_JA',
       ogType: 'website',
       ogUrl: 'https://www.bokukoha.dev',
-      ogTitle: 'ぼくこは.dev',
-      ogDescription: 'test',
+      ogDescription: 'Description is WIP',
 
       ogImage: 'https://www.bokukoha.dev/images/og/icon_glass.png',
       robots: 'index, follow'

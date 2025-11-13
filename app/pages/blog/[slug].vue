@@ -18,10 +18,8 @@ useSchemaOrg([
 ])
 
 useSeoMeta({
-  description: page.value?.description,
   ogImage: page.value?.coverImage,
   twitterTitle: page.value?.description,
-  twitterDescription: page.value?.description,
   twitterImage: page.value?.coverImage
 })
 
@@ -41,7 +39,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
           <img :src="page.coverImage" :alt="page.title" class="w-full aspect-video object-cover rounded-t-lg" />
         </div>
 
-        <CardHeader class="pt-2 px-10">
+        <CardHeader class="pt-2 px-5 md:px-10">
           <Button variant="secondary" class="mb-2 w-18">
             <NuxtLink :to="`/blog/archives?category=${page.category}`">
               {{ page.category }}
