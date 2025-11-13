@@ -120,6 +120,6 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 
 .prose :deep(p) {
   font-size: 1.1rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.04rem;
 }
 </style>

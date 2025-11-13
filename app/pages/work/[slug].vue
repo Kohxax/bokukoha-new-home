@@ -56,7 +56,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
           </div>
         </CardHeader>
 
-        <CardContent class="prose prose-invert max-w-none px-10 py-4">
+        <CardContent class="prose prose-invert max-w-none px-5 py-4">
           <ContentRenderer :value="page" />
         </CardContent>
 
@@ -115,6 +115,6 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 
 .prose :deep(p) {
   font-size: 1.1rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
 }
 </style>
