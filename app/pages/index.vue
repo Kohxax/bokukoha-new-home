@@ -68,7 +68,6 @@ const scrollToContent = () => {
 }
 
 useSeoMeta({
-    title: 'Home',
     ogDescription: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
     twitterTitle: 'Home',
     twitterDescription: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
