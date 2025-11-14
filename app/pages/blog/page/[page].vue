@@ -121,7 +121,7 @@ useSeoMeta({
                 </div>
                 <div class="flex items-center space-x-1">
                   <ClockIcon class="h-4 w-4" />
-                  <span>{{ post.readingTime }}分</span>
+                  <span>読了時間: {{ post.readingTime }}分</span>
                 </div>
                 <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span v-for="tag in (post.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">

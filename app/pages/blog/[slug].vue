@@ -62,7 +62,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
             </div>
             <div class="flex items-center space-x-1">
               <ClockIcon class="h-4 w-4" />
-              <span>{{ readingMin }}分</span>
+              <span>読了時間: {{ readingMin }}分</span>
             </div>
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span v-for="tag in (page.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">
