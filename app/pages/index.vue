@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Github, ChevronDown, ArrowRight, } from "lucide-vue-next"
+import { Github, ChevronDown, ArrowRight, NotebookPen, BriefcaseBusiness, NotebookPenIcon, BriefcaseBusinessIcon } from "lucide-vue-next"
 import MisskeyIcon from "~/components/svg/MisskeyIcon.vue"
 import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"
@@ -122,7 +122,10 @@ useSeoMeta({
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-bold tracking-tight">Blog</h2>
+                    <div class="flex items-center">
+                        <NotebookPenIcon />
+                        <h2 class="ml-2 text-2xl font-bold tracking-tight">Blog</h2>
+                    </div>
                     <NuxtLink to="/blog/page/1/"
                         class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
                         すべて見る
@@ -152,7 +155,10 @@ useSeoMeta({
 
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-bold tracking-tight">Work</h2>
+                    <div class="flex text-center">
+                        <BriefcaseBusinessIcon class="mt-1.5" />
+                        <h2 class="ml-2 text-2xl font-bold tracking-tight">Work</h2>
+                    </div>
                     <NuxtLink to="/work/"
                         class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
                         すべて見る
