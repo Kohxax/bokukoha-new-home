@@ -5,6 +5,26 @@ useSeoMeta({
   twitterTitle: 'About',
   twitterDescription: 'オタクの自己紹介ページ',
 })
+
+const birthDate = '2004-08-27'
+
+function calculateAge(birthDateString: string): number {
+  const today = new Date()
+  const birthDate = new Date(birthDateString)
+
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const judgeBirthDay = 
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate())
+  
+  if (!judgeBirthDay) {
+    age --;
+  }
+
+  return age
+}
+
+const age = ref<number>(calculateAge(birthDate))
 </script>
 
 <template>
@@ -25,7 +45,8 @@ useSeoMeta({
         </CardHeader>
         <CardContent class="space-y-2 text-foreground">
           <p>名前: こは</p>
-          <p>年齢: 21</p>
+          <p>誕生日: {{ birthDate }}</p>
+          <p>年齢: {{ age }}</p>
           <p>性別: 男</p>
           <p>趣味: PCゲーム, 散歩, 飲酒, 音楽, 旅行</p>
           <p>言語: JPN 〇 ENG △</p>
