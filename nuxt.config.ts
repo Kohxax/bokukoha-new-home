@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import taillwindcss from '@tailwindcss/vite'
-import queryCollection  from '@nuxt/content'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',

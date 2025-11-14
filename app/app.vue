@@ -22,7 +22,7 @@ useSchemaOrg([
   definePerson({
     name: 'こは',
     url: 'https://www.bokukoha.dev',
-    image: 'https://www.bokukoha.dev/images/og/icon_glass.png',
+    image: 'https://www.bokukoha.dev/images/og/coverImage.png',
     sameAs: [
       'https://blog.bokukoha.dev',
       'https://misskey.io/bokukoha',
@@ -32,7 +32,7 @@ useSchemaOrg([
 ])
 
 useSeoMeta({
-  ogImage: '/og/icon_glass.png'
+  ogImage: '/og/coverImage.png'
 })
 
 </script>
