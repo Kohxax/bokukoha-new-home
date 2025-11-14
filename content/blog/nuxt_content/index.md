@@ -10,6 +10,7 @@ tags:
   - Nuxt Content
   - Tailwind CSS
   - Web制作
+description: 作ってみたかったからです。というのはあまりにも味気ないので、理由らしい理由を書こうと思います。
 ---
 
 ## できた

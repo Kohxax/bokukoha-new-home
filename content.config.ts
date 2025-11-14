@@ -41,7 +41,7 @@ export default defineContentConfig({
             asRobotsCollection({
                 type: 'page',
                 source: '**'
-            }),      
+            }),
         ),
     },
 

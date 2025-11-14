@@ -9,6 +9,7 @@ tags:
   - 備忘録
   - Cloudflare
   - Hugo
+description: 以前の記事で書きましたが、このブログサイトはCloudflare Pagesでビルドとデプロイをしています。Cloudflare Pagesくんは、とても便利ではあるのですが、
 ---
 
 ## 概要

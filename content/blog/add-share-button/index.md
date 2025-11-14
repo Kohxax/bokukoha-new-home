@@ -10,6 +10,7 @@ tags:
   - HTML
   - CSS
   - Stack Theme
+description: タイトル通りです。このブログはHugo製で、Stackというテーマを適用して作っています。Stackテーマは改造等割と自由なので、試しにシェアボタンを実装してみるかと思いやってみました。
 ---
 
 ## 概要
@@ -49,7 +50,7 @@ Hugoの公式ドキュメントによれば`./layouts`というディレクト�
 
 `./assets/hoge/hoge.svg`を読み込みたいときは、
 
-```
+```html
 {{ $hoge := resources.Get "hoge/hoge.svg"}}
 {{ $hoge.Content | safeHTML }}
 ```
@@ -61,7 +62,7 @@ CSSで頑張っていい感じに調整します。CSSがわからなくても�
 
 分かりにくいのでいくとアイコンや文字の色の指定ですが、
 
-```
+```css
 var(--card-text-color-main);
 var(--card-text-color-secondary);
 ```
