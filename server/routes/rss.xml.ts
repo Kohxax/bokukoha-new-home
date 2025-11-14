@@ -6,6 +6,7 @@ export default eventHandler(async (event: H3Event) => {
 
   const posts = await queryCollection(event, "blog")
     .order("date", "DESC")
+    .where("draft", "=", "0")
     .select("title", "path", "description", "date")
     .all();
 
