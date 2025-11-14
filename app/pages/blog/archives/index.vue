@@ -10,6 +10,7 @@ const { data: posts } = await useAsyncData(
     () =>
         queryCollection("blog")
             .select("title", "path", "category", "date", "coverImage", "description")
+            .where('draft', '=', '0')
             .order("date", "DESC")
             .all()
 )
@@ -48,7 +49,7 @@ const filteredPosts = computed(() => {
 </script>
 
 <template>
-    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen" style="view-transition-name: blog-content">
+    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen">
         <template v-if="!year && !category">
             <h1 class="mb-8 text-3xl font-bold tracking-tight">アーカイブ</h1>
 
@@ -90,7 +91,7 @@ const filteredPosts = computed(() => {
                     <Button v-if="year || category" variant="outline">
                         <NuxtLink to="/blog/archives" class="text-sm flex flex-row gap-x-2 items-center">
                             <Archive class="h-5 w-5" />
-                            <span>全アーカイブに戻る</span>
+                            <span>アーカイブ一覧に戻る</span>
                         </NuxtLink>
                     </Button>
                 </div>
