@@ -86,6 +86,18 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           theme: 'github-dark',
+          langs: [
+            'java',
+            'kotlin',
+            'json',
+            'js',
+            'ts',
+            'html',
+            'css',
+            'vue',
+            'md',
+            'yaml'
+          ],
         },
       },
     },
