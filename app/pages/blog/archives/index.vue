@@ -46,6 +46,13 @@ const filteredPosts = computed(() => {
     }
     return posts.value
 })
+
+useSeoMeta({
+    title: 'Archives',
+    ogDescription: 'ブログ記事アーカイブ',
+    twitterTitle: 'Archives',
+    twitterDescription: 'ブログ記事アーカイブ',
+})
 </script>
 
 <template>

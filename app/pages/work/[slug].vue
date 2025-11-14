@@ -17,8 +17,10 @@ useSchemaOrg([
 ])
 
 useSeoMeta({
+  title: page.value?.title,
   ogImage: page.value?.coverImage,
-  twitterTitle: page.value?.description,
+  ogDescription: page.value?.description,
+  twitterTitle: page.value?.title,
   twitterDescription: page.value?.description,
   twitterImage: page.value?.coverImage
 })

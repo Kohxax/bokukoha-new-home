@@ -19,6 +19,13 @@ watch(
   }
 )
 
+useSeoMeta({
+    title: 'Work',
+    ogDescription: '制作物一覧',
+    twitterTitle: 'Work',
+    twitterDescription: '制作物一覧',
+})
+
 useHead({
     title: 'Work'
 })

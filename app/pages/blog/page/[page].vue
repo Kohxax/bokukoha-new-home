@@ -56,6 +56,13 @@ const displayPages = computed(() => {
 
   return result
 })
+
+useSeoMeta({
+  title: 'Blog',
+  ogDescription: 'ブログ記事一覧',
+  twitterTitle: 'Blog',
+  twitterDescription: 'ブログ記事一覧',
+})
 </script>
 
 <template>

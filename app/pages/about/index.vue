@@ -1,4 +1,10 @@
 <script setup lang="ts">
+useSeoMeta({
+  title: 'About',
+  ogDescription: 'オタクの自己紹介ページ',
+  twitterTitle: 'About',
+  twitterDescription: 'オタクの自己紹介ページ',
+})
 </script>
 
 <template>

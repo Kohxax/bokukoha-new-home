@@ -12,7 +12,6 @@ export default defineNuxtConfig({
   site: {
     url: 'https://www.bokukoha.dev',
     name: 'ぼくこは.dev',
-    description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
     trailingSlash: true,
   },
 
@@ -32,12 +31,11 @@ export default defineNuxtConfig({
       applicationName: 'ぼくこは.dev',
 
       ogSiteName: 'ぼくこは.dev',
-      ogLocale: 'ja_JA',
+      ogLocale: 'ja',
       ogType: 'website',
       ogUrl: 'https://www.bokukoha.dev',
-      ogDescription: 'Description is WIP',
 
-      ogImage: 'https://www.bokukoha.dev/images/og/icon_glass.png',
+      ogImage: 'https://www.bokukoha.dev/images/og/coverImage.png',
       robots: 'index, follow'
     },
   },
