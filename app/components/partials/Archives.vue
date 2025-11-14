@@ -3,6 +3,7 @@ import { Archive, LucideHash } from "lucide-vue-next"
 
 const { data: posts } = await useAsyncData("all-posts", () =>
   queryCollection("blog")
+    .where('draft', '=', '0')
     .select("title", "category", "date")
     .order("date", "DESC")
     .all()
