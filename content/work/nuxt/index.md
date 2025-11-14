@@ -13,6 +13,6 @@ draft: false
 
 適当にNuxtで色々作ってみたぞって感じです。あとで書きます
 
-```lang=ts
+```ts
 const route = useRoute()
 ```

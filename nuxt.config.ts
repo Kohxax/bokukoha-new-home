@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import taillwindcss from '@tailwindcss/vite'
+import queryCollection  from '@nuxt/content'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -80,7 +81,14 @@ export default defineNuxtConfig({
   content: {
     renderer: {
       anchorLinks: false
-    }
+    },
+    build: {
+      markdown: {
+        highlight: {
+          theme: 'github-dark',
+        },
+      },
+    },
   },
 
   vite: {
@@ -97,7 +105,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static',
     prerender: {
-      routes: ['/sitemap.xml', '/rss.xml', '/blog/**', '/work/**', '/blog', '/work']
+      routes: ['/sitemap.xml', '/rss.xml', '/']
     },
   },
 
