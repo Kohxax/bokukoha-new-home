@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Github, ChevronDown, ArrowRight, Layout } from "lucide-vue-next"
+import { Github, ChevronDown, ArrowRight, } from "lucide-vue-next"
 import MisskeyIcon from "~/components/svg/MisskeyIcon.vue"
 import XIcon from "~/components/svg/XIcon.vue"
 import DiscordIcon from "~/components/svg/DiscordIcon.vue"

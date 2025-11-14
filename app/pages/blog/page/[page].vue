@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarDays, Archive } from "lucide-vue-next";
+import { CalendarDays, Archive, NotebookPen } from "lucide-vue-next";
 import Archives from "~/components/partials/Archives.vue";
 
 const route = useRoute()
@@ -67,13 +67,16 @@ useSeoMeta({
 
 <template>
   <div class="container mx-auto px-4 py-8 md:py-12 min-h-screen max-w-7xl">
-    
+
     <div class="grid justify-center grid-cols-[minmax(0,800px)_0px]">
-      
+
       <div class="max-w-[800px] w-full">
-        
+
         <div class="flex items-center justify-between mb-5">
-          <h1 class="text-3xl font-bold tracking-tight">Blog</h1>
+          <div class="flex flex-row text-center">
+            <NotebookPen class="mt-2 mr-3" />
+            <h1 class="text-3xl font-bold">Blog</h1>
+          </div>
 
           <Button variant="outline" class="xl:hidden">
             <NuxtLink to="/blog/archives" class="text-sm flex flex-row gap-x-2">
@@ -84,18 +87,10 @@ useSeoMeta({
         </div>
 
         <div class="space-y-6 md:space-y-12">
-          <Card
-            v-for="post in paginatedPosts"
-            :key="post.path"
-            class="overflow-hidden transition-all hover:shadow-lg"
-          >
+          <Card v-for="post in paginatedPosts" :key="post.path" class="overflow-hidden transition-all hover:shadow-lg">
             <NuxtLink :to="post.path">
-              <img
-                v-if="post.coverImage"
-                :src="post.coverImage"
-                :alt="post.title"
-                class="h-40 md:h-80 w-full object-cover"
-              />
+              <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
+                class="h-40 md:h-80 w-full object-cover" />
             </NuxtLink>
 
             <CardHeader>
@@ -119,20 +114,12 @@ useSeoMeta({
 
         <div class="mt-10 text-center gap-2">
           <template v-for="item in displayPages" :key="item">
-            <span
-              v-if="item === '…'"
-              class="px-1 text-muted-foreground select-none"
-            >
+            <span v-if="item === '…'" class="px-1 text-muted-foreground select-none">
               …
             </span>
 
-            <Button
-              v-else
-              size="lg"
-              :variant="item === currentPage ? 'default' : 'ghost'"
-              class="transition-none min-w-8"
-              @click="$router.push(`/blog/page/${item}/`)"
-            >
+            <Button v-else size="lg" :variant="item === currentPage ? 'default' : 'ghost'"
+              class="transition-none min-w-8" @click="$router.push(`/blog/page/${item}/`)">
               {{ item }}
             </Button>
           </template>

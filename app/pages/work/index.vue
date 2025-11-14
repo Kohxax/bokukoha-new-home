@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarDays } from 'lucide-vue-next';
+import { CalendarDays, BriefcaseBusiness } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
 
@@ -13,10 +13,10 @@ const { data: posts } = await useAsyncData('work-list', () => {
 });
 
 watch(
-  () => route.query.page,
-  () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    () => route.query.page,
+    () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
 )
 
 useSeoMeta({
@@ -34,10 +34,12 @@ useHead({
 <template>
     <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen">
         <div class="mx-auto max-w-4xl gap-6">
-            <h1 class="mb-8 text-3xl font-bold tracking-tight">Work</h1>
+            <div class="flex flex-row text-center mb-5">
+                <BriefcaseBusiness class="mt-2 mr-3" />
+                <h1 class="text-3xl font-bold tracking-tight">Work</h1>
+            </div>
             <div class="space-y-12">
-                <Card v-for="post in posts" :key="post.path"
-                    class="overflow-hidden transition-all hover:shadow-lg">
+                <Card v-for="post in posts" :key="post.path" class="overflow-hidden transition-all hover:shadow-lg">
                     <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
                         class="h-40 md:h-80 w-full object-cover" />
                     <CardHeader>

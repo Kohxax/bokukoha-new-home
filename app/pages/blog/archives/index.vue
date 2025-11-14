@@ -58,8 +58,10 @@ useSeoMeta({
 <template>
     <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen">
         <template v-if="!year && !category">
-            <h1 class="mb-8 text-3xl font-bold tracking-tight">アーカイブ</h1>
-
+            <div class="mb-8 flex flex-row text-center gap-3">
+                <Archive class="w-6 h-6 mt-2" />
+                <h1 class="text-3xl font-bold tracking-tight">アーカイブ</h1>
+            </div>
             <section class="mb-12">
                 <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
                     <Hash class="h-5 w-5" /> カテゴリ
@@ -110,7 +112,7 @@ useSeoMeta({
                             <div class="flex justify-between items-center">
                                 <div class="p-5">
                                     <CardTitle class="text-lg font-semibold mb-1 max-w-100 line-clamp-2">{{ post.title
-                                        }}
+                                    }}
                                     </CardTitle>
                                     <div class="flex items-center gap-2 text-sm text-muted-foreground">
                                         <CalendarDays class="h-4 w-4" />
