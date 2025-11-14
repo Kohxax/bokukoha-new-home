@@ -1,6 +1,7 @@
 <script setup>
-const router = useRouter()
-router.replace('/blog/1/')
+definePageMeta({
+  redirect: '/blog/1/'
+})
 </script>
 
 <template>
