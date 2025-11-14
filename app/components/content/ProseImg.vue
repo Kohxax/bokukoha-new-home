@@ -1,6 +1,6 @@
 <template>
     <figure class="my-6">
-        <img :src="src" :alt="alt" class="rounded-lg shadow" />
+        <img :src="src" :alt="alt" class="rounded-lg shadow mx-auto" />
 
         <figcaption v-if="alt" class="text-md text-center text-muted-foreground mt-2">
             {{ alt }}
