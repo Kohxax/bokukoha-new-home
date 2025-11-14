@@ -10,6 +10,7 @@ const { data: related } = await useAsyncData(
     queryCollection("blog")
       .where("category", "=", props.category)
       .where("path", "!=", props.currentPath)
+      .where("draft", "=", "0")
       .select("title", "path", "date", "category", "coverImage")
       .order("date", "DESC")
       .limit(3)
