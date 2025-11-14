@@ -14,9 +14,9 @@ export default defineContentConfig({
                 category: z.string(),
                 tags: z.array(z.string()).optional(),
                 coverImage: z.string(),
-                draft: z.boolean().default(true)
+                draft: z.boolean().default(true),
+                rawbody: z.string()
             })
-
         }),
 
         work: defineCollection({

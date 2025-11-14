@@ -10,6 +10,11 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
 })
 
+const raw = page.value?.rawbody ?? ''
+const charsPerMin = 600
+
+const readingMin = Math.max(1, Math.ceil(raw.length / charsPerMin))
+
 useSchemaOrg([
   defineArticle({
     datePublised: page.value?.date,
@@ -54,6 +59,8 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
             <div class="flex items-center space-x-1">
               <CalendarIcon class="h-4 w-4" />
               <span>{{ page.date }}</span>
+              <ClockIcon class="h-4 w-4 ml-3" />
+              <span>読了時間: {{ readingMin }}分</span>
             </div>
           </div>
         </CardHeader>

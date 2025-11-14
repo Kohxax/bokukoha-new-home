@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarDays, Archive, NotebookPen } from "lucide-vue-next";
+import { CalendarDays, Archive, NotebookPen, ClockIcon } from "lucide-vue-next";
 import Archives from "~/components/partials/Archives.vue";
 
 const route = useRoute()
@@ -15,15 +15,25 @@ const { data: posts } = await useAsyncData(
   () =>
     queryCollection("blog")
       .where("draft", "=", "0")
-      .select("title", "category", "path", "description", "date", "coverImage")
+      .select("title", "category", "path", "description", "date", "coverImage", "rawbody")
       .order("date", "DESC")
       .all()
 )
 
+const readingSpeed = 600
+
 const paginatedPosts = computed(() => {
   if (!posts.value) return []
   const start = (currentPage.value - 1) * pageSize
-  return posts.value.slice(start, start + pageSize)
+  return posts.value.slice(start, start + pageSize).map(post => {
+    const raw = post.rawbody ?? ""
+    const charCount = raw.length
+    const minutes = Math.max(1, Math.ceil(charCount / readingSpeed))
+    return {
+      ...post,
+      readingTime: minutes
+    }
+  })
 })
 
 const totalPages = computed(() => {
@@ -104,9 +114,11 @@ useSeoMeta({
                 <CardTitle>{{ post.title }}</CardTitle>
               </NuxtLink>
 
-              <div class="flex flex-row items-center gap-x-3 mt-4">
+              <div class="flex flex-row items-center gap-x-1 mt-4">
                 <CalendarDays class="text-muted-foreground scale-80" />
                 <span class="text-base text-muted-foreground">{{ post.date }}</span>
+                <ClockIcon class="text-muted-foreground scale-80 ml-3" />
+                <span class="text-base text-muted-foreground">読了時間: {{ post.readingTime }}分</span>
               </div>
             </CardHeader>
           </Card>
