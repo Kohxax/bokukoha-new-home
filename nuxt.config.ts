@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     }
   },
 
+  watch: ['content/**'],
 
   app: {
     pageTransition: {

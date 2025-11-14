@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarDays, Archive, NotebookPen, ClockIcon } from "lucide-vue-next";
+import { CalendarIcon, Archive, NotebookPen, ClockIcon } from "lucide-vue-next";
 import Archives from "~/components/partials/Archives.vue";
 
 const route = useRoute()
@@ -15,7 +15,7 @@ const { data: posts } = await useAsyncData(
   () =>
     queryCollection("blog")
       .where("draft", "=", "0")
-      .select("title", "category", "path", "description", "date", "coverImage", "rawbody")
+      .select("title", "category", "path", "tags", "description", "date", "coverImage", "rawbody")
       .order("date", "DESC")
       .all()
 )
@@ -114,11 +114,20 @@ useSeoMeta({
                 <CardTitle>{{ post.title }}</CardTitle>
               </NuxtLink>
 
-              <div class="flex flex-row items-center gap-x-1 mt-4">
-                <CalendarDays class="text-muted-foreground scale-80" />
-                <span class="text-base text-muted-foreground">{{ post.date }}</span>
-                <ClockIcon class="text-muted-foreground scale-80 ml-3" />
-                <span class="text-base text-muted-foreground">読了時間: {{ post.readingTime }}分</span>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2">
+                <div class="flex items-center space-x-1">
+                  <CalendarIcon class="h-4 w-4" />
+                  <span>{{ post.date }}</span>
+                </div>
+                <div class="flex items-center space-x-1">
+                  <ClockIcon class="h-4 w-4" />
+                  <span>{{ post.readingTime }}分</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span v-for="tag in (post.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">
+                    #{{ tag }}
+                  </span>
+                </div>
               </div>
             </CardHeader>
           </Card>

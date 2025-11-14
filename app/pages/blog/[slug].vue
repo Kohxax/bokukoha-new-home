@@ -55,12 +55,19 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
           <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
             {{ page.title }}
           </CardTitle>
-          <div class="flex items-center text-muted-foreground text-sm space-x-4 mt-2">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2">
             <div class="flex items-center space-x-1">
               <CalendarIcon class="h-4 w-4" />
               <span>{{ page.date }}</span>
-              <ClockIcon class="h-4 w-4 ml-3" />
-              <span>読了時間: {{ readingMin }}分</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <ClockIcon class="h-4 w-4" />
+              <span>{{ readingMin }}分</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span v-for="tag in (page.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">
+                #{{ tag }}
+              </span>
             </div>
           </div>
         </CardHeader>
@@ -95,6 +102,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 }
 
 @media (min-width: 768px) {
+
   .prose :deep(h1),
   .prose :deep(h2),
   .prose :deep(h3),
