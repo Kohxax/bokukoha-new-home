@@ -124,7 +124,7 @@ const displayPages = computed(() => {
               size="lg"
               :variant="item === currentPage ? 'default' : 'ghost'"
               class="transition-none min-w-8"
-              @click="$router.push(`/blog/${item}/`)"
+              @click="$router.push(`/blog/page/${item}/`)"
             >
               {{ item }}
             </Button>

@@ -117,7 +117,7 @@ const scrollToContent = () => {
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-bold tracking-tight">Blog</h2>
-                    <NuxtLink to="/blog/1/"
+                    <NuxtLink to="/blog/page/1/"
                         class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
                         すべて見る
                         <ArrowRight class="h-4 w-4" />
@@ -147,7 +147,7 @@ const scrollToContent = () => {
             <div class="space-y-6">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-bold tracking-tight">Work</h2>
-                    <NuxtLink to="/work"
+                    <NuxtLink to="/work/"
                         class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
                         すべて見る
                         <ArrowRight class="h-4 w-4" />

@@ -52,19 +52,19 @@ onUnmounted(() => {
 
       <nav class="flex ml-auto space-x-4 pr-5">
         <NuxtLink 
-          to="/blog/1/" 
+          to="/blog/page/1/" 
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           Blog
         </NuxtLink>
         <NuxtLink 
-          to="/work" 
+          to="/work/" 
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           Work
         </NuxtLink>
         <NuxtLink 
-          to="/about" 
+          to="/about/" 
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           About

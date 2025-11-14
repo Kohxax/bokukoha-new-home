@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  redirect: '/blog/1/'
+  middleware: 'blog'
 })
 </script>
 
