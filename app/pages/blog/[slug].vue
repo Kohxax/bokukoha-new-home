@@ -76,7 +76,7 @@ useHead({
 
         <div class="flex flex-col items-center justify-center my-3">
           <LikeButton class="pl-5" :article-id="page.path" />
-          <SocialShare class="mt-3" />
+          <SocialShare class="mt-3" :showRSS="true" />
         </div>
       </Card>
 
