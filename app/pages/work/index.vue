@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarDays, BriefcaseBusiness } from 'lucide-vue-next';
+import { CalendarIcon, BriefcaseBusiness } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
 
@@ -7,7 +7,7 @@ const route = useRoute()
 const { data: posts } = await useAsyncData('work-list', () => {
     return queryCollection('work')
         .where('draft', '=', '0') // draft = 0 (false)は載せるようにする, bool読めないのバカすぎ
-        .select('title', 'category', 'path', 'description', 'date', 'coverImage')
+        .select('title', 'category', 'path', 'description', 'date', 'coverImage', 'tags')
         .order('date', 'DESC')
         .all()
 });
@@ -40,19 +40,28 @@ useHead({
             </div>
             <div class="space-y-12">
                 <Card v-for="post in posts" :key="post.path" class="overflow-hidden transition-all hover:shadow-lg">
-                    <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
-                        class="h-40 md:h-80 w-full object-cover" />
+                    <NuxtLink :to="post.path">
+                        <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
+                            class="h-40 md:h-80 w-full object-cover" />
+                    </NuxtLink>
+
                     <CardHeader>
-                        <span
-                            class="inline-block px-3 py-1 text-sm font-semibold bg-muted text-center rounded-full w-18">
+                        <span class="inline-block px-2 py-2 text-sm font-semibold bg-muted text-center rounded-lg w-25">
                             {{ post.category }}
                         </span>
                         <NuxtLink class="text-2xl mt-4" :to="post.path">
                             <CardTitle>{{ post.title }}</CardTitle>
                         </NuxtLink>
-                        <div class="flex flex-row items-center gap-x-3 mt-4">
-                            <CalendarDays class="text-muted-foreground scale-80" />
-                            <span class="text-base text-muted-foreground">{{ post.date }}</span>
+                        <div class="flex flex-row items-center gap-x-4 gap-y-2 mt-4 text-muted-foreground">
+                            <div class="flex items-center space-x-1"> 
+                                <CalendarIcon class="h-4 w-4" />
+                                <span>{{ post.date }}</span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                <span v-for="tag in (post.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">
+                                    #{{ tag }}
+                                </span>
+                            </div>
                         </div>
                     </CardHeader>
                 </Card>

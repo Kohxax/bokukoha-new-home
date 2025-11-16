@@ -28,8 +28,6 @@ useSeoMeta({
 useHead({
   title: page.value?.title,
 })
-
-const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 </script>
 
 <template>
@@ -42,8 +40,8 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
             style="view-transition-name: post-cover-image" />
         </div>
 
-        <CardHeader class="pt-6 px-10">
-          <span class="inline-block px-3 py-1 text-sm font-semibold bg-muted text-center rounded-full mb-2 w-18">
+        <CardHeader class="pt-2 px-5 md:px-10">
+          <span class="inline-block px-2 py-2 text-sm font-semibold bg-muted text-center rounded-lg w-25">
             {{ page.category }}
           </span>
           <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
@@ -54,10 +52,15 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
               <CalendarIcon class="h-4 w-4" />
               <span>{{ page.date }}</span>
             </div>
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span v-for="tag in (page.tags) ?? []" :key="tag" class="text-base whitespace-nowrap">
+                #{{ tag }}
+              </span>
+            </div>
           </div>
         </CardHeader>
 
-        <CardContent class="prose prose-invert max-w-none px-5 py-4">
+        <CardContent class="prose prose-invert max-w-none px-5 md:px-10 py-4">
           <ContentRenderer :value="page" />
         </CardContent>
 
@@ -84,6 +87,7 @@ const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 }
 
 @media (min-width: 768px) {
+
   .prose :deep(h1),
   .prose :deep(h2),
   .prose :deep(h3),

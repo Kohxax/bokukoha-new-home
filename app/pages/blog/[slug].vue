@@ -33,8 +33,6 @@ useSeoMeta({
 useHead({
   title: page.value?.title,
 })
-
-const tocLinks = computed(() => page.value?.body?.toc?.links || [])
 </script>
 
 <template>
