@@ -117,7 +117,7 @@ useHead({
 }
 
 .prose :deep(h2) {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin-top: 0;
 }
 
