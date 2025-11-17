@@ -18,8 +18,10 @@ title: "${name}"
 date: ${new Date().toISOString().split("T")[0]}
 draft: 1
 coverImage: "/images/blog/${name}/main.png"
-category: "雑記"
+category: 
+  - 雑記
 tags:
+  - 
 ---
 
 title
