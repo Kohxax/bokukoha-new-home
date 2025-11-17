@@ -1,0 +1,130 @@
+<script setup lang="ts">
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ChevronRight, ChevronLeft } from 'lucide-vue-next'
+
+const props = defineProps<{
+  images: string[],
+  autoDelay?: number
+}>()
+
+const images = props.images || []
+const autoDelay = props.autoDelay ?? 5000
+const currentIndex = ref(0)
+const container = ref<HTMLElement | null>(null)
+let intervalId: ReturnType<typeof setInterval> | null = null
+const autoSlideEnabled = ref(true)
+
+const scrollToIndex = (index: number) => {
+  if (!container.value) return
+  const width = container.value.clientWidth
+  container.value.scrollTo({
+    left: width * index,
+    behavior: 'smooth'
+  })
+}
+
+const prev = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--
+    stopAutoSlide()
+  }
+}
+const next = (manual = false) => {
+  if (currentIndex.value < images.length - 1) {
+    currentIndex.value++
+  } else {
+    currentIndex.value = 0
+  }
+  if (manual) {
+    stopAutoSlide()
+  }
+}
+
+const stopAutoSlide = () => {
+  if (intervalId !== null) {
+    clearInterval(intervalId)
+    intervalId = null
+    autoSlideEnabled.value = false
+  }
+}
+
+watch(currentIndex, (newIndex) => {
+  scrollToIndex(newIndex)
+})
+
+onMounted(() => {
+  scrollToIndex(currentIndex.value)
+  if (images.length > 1) {
+    intervalId = setInterval(() => {
+      if (autoSlideEnabled.value) {
+        next(false)
+      }
+    }, autoDelay)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (intervalId) clearInterval(intervalId)
+})
+</script>
+
+<template>
+  <div class="relative w-full overflow-hidden group">
+    <div
+      ref="container"
+      class="gallery overflow-x-auto snap-x snap-mandatory flex w-full scroll-smooth"
+    >
+      <div
+        v-for="(img, idx) in images"
+        :key="idx"
+        class="flex-none w-full h-full snap-start relative"
+      >
+        <img
+          :src="img"
+          :alt="`Gallery image ${idx + 1}`"
+          class="block object-cover aspect-video w-full h-full rounded-lg"
+        />
+      </div>
+    </div>
+
+    <div class="absolute bottom-2.5 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+      <span
+        v-for="(img, idx) in images"
+        :key="idx"
+        @click="currentIndex = idx; stopAutoSlide()"
+        :class="[
+          'w-2 h-2 rounded-full transition-colors cursor-pointer',
+          currentIndex === idx ? 'bg-white' : 'bg-white/50'
+        ]"
+      ></span>
+    </div>
+
+    <button
+      v-if="currentIndex > 0"
+      @click="prev"
+      class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full transition-opacity duration-200
+             hover:opacity-100 opacity-0 group-hover:opacity-50 disabled:opacity-20"
+    >
+      <ChevronLeft />
+    </button>
+
+    <button
+      v-if="images.length > 1"
+      @click="next(true)"
+      class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full transition-opacity duration-200
+             hover:opacity-100 opacity-0 group-hover:opacity-50"
+    >
+      <ChevronRight />
+    </button>
+  </div>
+</template>
+
+<style scoped>
+.gallery {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+</style>
