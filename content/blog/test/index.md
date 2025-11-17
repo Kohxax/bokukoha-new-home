@@ -18,3 +18,8 @@ fun main() {
     println('Hello, World!')
 }
 ```
+# ギャラリー
+
+ギャラリーのテストです。
+::Gallery{:images='["/images/blog/sanpo-log/1.jpg", "/images/blog/sanpo-log/2.jpg", "/images/blog/sanpo-log/3.jpg"]'}
+::
