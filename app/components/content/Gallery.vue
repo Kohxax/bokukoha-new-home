@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="relative w-full overflow-hidden group">
+  <div class="-mt-7 relative w-full overflow-hidden group">
     <div
       ref="container"
       class="gallery overflow-x-auto snap-x snap-mandatory flex w-full scroll-smooth"
@@ -77,12 +77,12 @@ onBeforeUnmount(() => {
       <div
         v-for="(img, idx) in images"
         :key="idx"
-        class="flex-none w-full h-full snap-start relative"
+        class="flex-none w-full h-full snap-start relative rounded-lg overflow-hidden"
       >
         <img
           :src="img"
           :alt="`Gallery image ${idx + 1}`"
-          class="block object-cover aspect-video w-full h-full rounded-lg"
+          class="block object-cover object-center aspect-video w-full h-full rounded-lg"
         />
       </div>
     </div>
@@ -102,8 +102,8 @@ onBeforeUnmount(() => {
     <button
       v-if="currentIndex > 0"
       @click="prev"
-      class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full transition-opacity duration-200
-             hover:opacity-100 opacity-0 group-hover:opacity-50 disabled:opacity-20"
+      class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200
+            opacity-50 group-hover:opacity-70 disabled:opacity-20 cursor-pointer"
     >
       <ChevronLeft />
     </button>
@@ -111,8 +111,8 @@ onBeforeUnmount(() => {
     <button
       v-if="images.length > 1"
       @click="next(true)"
-      class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full transition-opacity duration-200
-             hover:opacity-100 opacity-0 group-hover:opacity-50"
+      class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200
+             opacity-40 group-hover:opacity-70 cursor-pointer"
     >
       <ChevronRight />
     </button>
