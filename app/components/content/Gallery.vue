@@ -69,25 +69,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="-mt-7 relative w-full overflow-hidden group">
+  <div class="relative w-full overflow-hidden group">
     <div
       ref="container"
-      class="gallery overflow-x-auto snap-x snap-mandatory flex w-full scroll-smooth"
+      class="gallery overflow-x-auto snap-x snap-mandatory flex scroll-smooth rounded-lg aspect-video"
     >
-      <div
-        v-for="(img, idx) in images"
-        :key="idx"
-        class="flex-none w-full h-full snap-start relative rounded-lg overflow-hidden"
-      >
-        <img
-          :src="img"
-          :alt="`Gallery image ${idx + 1}`"
-          class="block object-cover object-center aspect-video w-full h-full rounded-lg"
-        />
+      <div v-for="(img, idx) in images" :key="idx" class="flex-none w-full h-full snap-start">
+        <img :src="img" :alt="`Gallery image ${idx + 1}`" class="w-full h-full !m-0" />
       </div>
     </div>
 
-    <div class="absolute bottom-2.5 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+    <div class="flex justify-center gap-2 mt-3">
       <span
         v-for="(img, idx) in images"
         :key="idx"
