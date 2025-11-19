@@ -74,7 +74,11 @@ onBeforeUnmount(() => {
       ref="container"
       class="gallery overflow-x-auto snap-x snap-mandatory flex scroll-smooth rounded-lg aspect-video"
     >
-      <div v-for="(img, idx) in images" :key="idx" class="flex-none w-full h-full snap-start">
+      <div
+        v-for="(img, idx) in images"
+        :key="idx"
+        class="flex-none w-full h-full object-cover object-center snap-start"
+      >
         <img :src="img" :alt="`Gallery image ${idx + 1}`" class="w-full h-full !m-0" />
       </div>
     </div>
