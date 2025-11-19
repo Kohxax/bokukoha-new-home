@@ -91,10 +91,7 @@ onBeforeUnmount(() => {
       <span
         v-for="(img, idx) in images"
         :key="idx"
-        @click="
-          currentIndex = idx
-          stopAutoSlide()
-        "
+        @click="((currentIndex = idx), stopAutoSlide())"
         :class="[
           'w-2 h-2 rounded-full transition-colors cursor-pointer',
           currentIndex === idx ? 'bg-white' : 'bg-white/50',
