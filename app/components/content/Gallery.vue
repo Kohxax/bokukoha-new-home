@@ -3,7 +3,7 @@ import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { ChevronRight, ChevronLeft } from 'lucide-vue-next'
 
 const props = defineProps<{
-  images: string[],
+  images: string[]
   autoDelay?: number
 }>()
 
@@ -19,7 +19,7 @@ const scrollToIndex = (index: number) => {
   const width = container.value.clientWidth
   container.value.scrollTo({
     left: width * index,
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 
@@ -91,10 +91,13 @@ onBeforeUnmount(() => {
       <span
         v-for="(img, idx) in images"
         :key="idx"
-        @click="currentIndex = idx; stopAutoSlide()"
+        @click="
+          currentIndex = idx
+          stopAutoSlide()
+        "
         :class="[
           'w-2 h-2 rounded-full transition-colors cursor-pointer',
-          currentIndex === idx ? 'bg-white' : 'bg-white/50'
+          currentIndex === idx ? 'bg-white' : 'bg-white/50',
         ]"
       ></span>
     </div>
@@ -102,8 +105,7 @@ onBeforeUnmount(() => {
     <button
       v-if="currentIndex > 0"
       @click="prev"
-      class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200
-            opacity-50 group-hover:opacity-70 disabled:opacity-20 cursor-pointer"
+      class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200 opacity-50 group-hover:opacity-70 disabled:opacity-20 cursor-pointer"
     >
       <ChevronLeft />
     </button>
@@ -111,8 +113,7 @@ onBeforeUnmount(() => {
     <button
       v-if="images.length > 1"
       @click="next(true)"
-      class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200
-             opacity-40 group-hover:opacity-70 cursor-pointer"
+      class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-card text-foreground p-2 rounded-full transition-opacity duration-200 opacity-40 group-hover:opacity-70 cursor-pointer"
     >
       <ChevronRight />
     </button>

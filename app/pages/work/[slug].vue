@@ -13,7 +13,7 @@ useSchemaOrg([
   defineArticle({
     datePublised: page.value?.date,
     image: page.value?.coverImage,
-  })
+  }),
 ])
 
 useSeoMeta({
@@ -22,7 +22,7 @@ useSeoMeta({
   ogDescription: page.value?.description,
   twitterTitle: page.value?.title,
   twitterDescription: page.value?.description,
-  twitterImage: page.value?.coverImage
+  twitterImage: page.value?.coverImage,
 })
 
 useHead({
@@ -34,14 +34,19 @@ useHead({
   <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12">
     <div v-if="page">
       <Card class="overflow-hidden rounded-lg shadow-xl border">
-
         <div v-if="page.coverImage" class="relative">
-          <img :src="page.coverImage" :alt="page.title" class="w-full aspect-video object-cover rounded-t-lg"
-            style="view-transition-name: post-cover-image" />
+          <img
+            :src="page.coverImage"
+            :alt="page.title"
+            class="w-full aspect-video object-cover rounded-t-lg"
+            style="view-transition-name: post-cover-image"
+          />
         </div>
 
         <CardHeader class="pt-2 px-5 md:px-10">
-          <span class="inline-block px-2 py-2 text-sm font-semibold bg-muted text-center rounded-lg w-25">
+          <span
+            class="inline-block px-2 py-2 text-sm font-semibold bg-muted text-center rounded-lg w-25"
+          >
             {{ page.category }}
           </span>
           <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
@@ -53,7 +58,7 @@ useHead({
               <span>{{ page.date }}</span>
             </div>
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span v-for="tag in (page.tags) ?? []" :key="tag" class="text-base whitespace-nowrap">
+              <span v-for="tag in page.tags ?? []" :key="tag" class="text-base whitespace-nowrap">
                 #{{ tag }}
               </span>
             </div>
@@ -87,7 +92,6 @@ useHead({
 }
 
 @media (min-width: 768px) {
-
   .prose :deep(h1),
   .prose :deep(h2),
   .prose :deep(h3),
@@ -100,7 +104,7 @@ useHead({
 }
 
 .prose :deep(h1) {
-  font-size: 2.0rem;
+  font-size: 2rem;
 }
 
 .prose :deep(h2) {

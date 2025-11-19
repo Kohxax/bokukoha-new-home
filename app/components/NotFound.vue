@@ -12,6 +12,6 @@
 
 <script setup lang="ts">
 useHead({
-    title: 'ページが見つかりません'
+  title: 'ページが見つかりません',
 })
 </script>

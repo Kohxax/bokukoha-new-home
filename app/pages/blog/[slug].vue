@@ -18,8 +18,8 @@ const readingMin = Math.max(1, Math.ceil(raw.length / charsPerMin))
 useSchemaOrg([
   defineArticle({
     datePublised: page.value?.date,
-    image: page.value?.coverImage
-  })
+    image: page.value?.coverImage,
+  }),
 ])
 
 useSeoMeta({
@@ -27,7 +27,7 @@ useSeoMeta({
   ogImage: page.value?.coverImage,
   ogDescription: page.value?.description,
   twitterTitle: page.value?.title,
-  twitterImage: page.value?.coverImage
+  twitterImage: page.value?.coverImage,
 })
 
 useHead({
@@ -39,9 +39,12 @@ useHead({
   <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12">
     <div v-if="page">
       <Card class="overflow-hidden rounded-lg shadow-xl border">
-
         <div v-if="page.coverImage" class="relative">
-          <img :src="page.coverImage" :alt="page.title" class="w-full aspect-video object-cover rounded-t-lg" />
+          <img
+            :src="page.coverImage"
+            :alt="page.title"
+            class="w-full aspect-video object-cover rounded-t-lg"
+          />
         </div>
 
         <CardHeader class="pt-2 px-5 md:px-10">
@@ -53,7 +56,9 @@ useHead({
           <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
             {{ page.title }}
           </CardTitle>
-          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2">
+          <div
+            class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2"
+          >
             <div class="flex items-center space-x-1">
               <CalendarIcon class="h-4 w-4" />
               <span>{{ page.date }}</span>
@@ -63,7 +68,7 @@ useHead({
               <span>読了時間: {{ readingMin }}分</span>
             </div>
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span v-for="tag in (page.tags ?? [])" :key="tag" class="text-base whitespace-nowrap">
+              <span v-for="tag in page.tags ?? []" :key="tag" class="text-base whitespace-nowrap">
                 #{{ tag }}
               </span>
             </div>
@@ -100,7 +105,6 @@ useHead({
 }
 
 @media (min-width: 768px) {
-
   .prose :deep(h1),
   .prose :deep(h2),
   .prose :deep(h3),
@@ -113,7 +117,7 @@ useHead({
 }
 
 .prose :deep(h1) {
-  font-size: 2.0rem;
+  font-size: 2rem;
 }
 
 .prose :deep(h2) {

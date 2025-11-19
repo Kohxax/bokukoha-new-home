@@ -1,12 +1,12 @@
 <script setup>
-import { Archive, LucideHash } from "lucide-vue-next"
+import { Archive, LucideHash } from 'lucide-vue-next'
 
-const { data: posts } = await useAsyncData("all-posts", () =>
-  queryCollection("blog")
+const { data: posts } = await useAsyncData('all-posts', () =>
+  queryCollection('blog')
     .where('draft', '=', '0')
-    .select("title", "category", "date")
-    .order("date", "DESC")
-    .all()
+    .select('title', 'category', 'date')
+    .order('date', 'DESC')
+    .all(),
 )
 
 const archivesByYear = computed(() => {
@@ -17,7 +17,9 @@ const archivesByYear = computed(() => {
     map[y]++
   })
 
-  return Object.entries(map).sort((a, b) => Number(b[0]) - Number(a[0])).map(([year, count]) => ({ year, count }))
+  return Object.entries(map)
+    .sort((a, b) => Number(b[0]) - Number(a[0]))
+    .map(([year, count]) => ({ year, count }))
 })
 
 const archivesByCategory = computed(() => {
@@ -39,8 +41,11 @@ const archivesByCategory = computed(() => {
       </NuxtLink>
 
       <ul class="space-y-2">
-        <li v-for="item in archivesByYear" :key="item.year"
-          class="flex justify-between items-center rounded-md bg-muted/30 px-4 py-2 hover:bg-muted cursor-pointer transition">
+        <li
+          v-for="item in archivesByYear"
+          :key="item.year"
+          class="flex justify-between items-center rounded-md bg-muted/30 px-4 py-2 hover:bg-muted cursor-pointer transition"
+        >
           <NuxtLink :to="`/blog/archives?year=${item.year}`" class="flex justify-between w-full">
             <span class="font-medium">{{ item.year }}</span>
             <span class="text-muted-foreground">{{ item.count }}</span>
@@ -56,9 +61,12 @@ const archivesByCategory = computed(() => {
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <NuxtLink v-for="(count, category) in archivesByCategory" :key="category"
+        <NuxtLink
+          v-for="(count, category) in archivesByCategory"
+          :key="category"
           :to="`/blog/archives?category=${category}`"
-          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md">
+          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md"
+        >
           {{ category }}
         </NuxtLink>
       </div>

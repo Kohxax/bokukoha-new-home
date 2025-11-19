@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  middleware: 'blog'
+  middleware: 'blog',
 })
 </script>
 
