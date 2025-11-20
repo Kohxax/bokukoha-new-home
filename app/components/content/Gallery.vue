@@ -79,7 +79,11 @@ onBeforeUnmount(() => {
         :key="idx"
         class="flex-none w-full h-full object-cover object-center snap-start"
       >
-        <img :src="img" :alt="`Gallery image ${idx + 1}`" class="w-full h-full m-0!" />
+        <img
+          :src="img"
+          :alt="`Gallery image ${idx + 1}`"
+          class="w-full h-full m-0! object-cover object-center"
+        />
       </div>
     </div>
 
