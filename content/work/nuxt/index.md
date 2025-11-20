@@ -76,7 +76,7 @@ GitHubのIssueやネット上にも同様の報告がない稀なケースでし
 
 # 今後の課題
 
-Google Serch Insightのスコアが、スマートフォン版だけ異様に低いです。（主に画像の拡張子関連）
+PageSpeed Insightsのスコアが、スマートフォン版だけ異様に低いです。（主に画像の拡張子関連）
 
 ![スマートフォン版](/images/work/nuxt/10.webp)
 ![PC版](/images/work/nuxt/11.webp)
