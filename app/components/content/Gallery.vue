@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="relative w-full overflow-hidden group">
+  <div class="relative w-full overflow-hidden group mb-7">
     <div
       ref="container"
       class="gallery overflow-x-auto snap-x snap-mandatory flex scroll-smooth rounded-lg aspect-video"
