@@ -1,7 +1,7 @@
 <template>
   <div class="relative my-4 overflow-hidden rounded-lg border border-border bg-background">
     <div
-      class="flex items-center justify-between border-b border-border bg-muted px-3 py-2.5 text-xs text-muted-foreground"
+      class="flex items-center justify-between border-b border-border bg-muted px-3 py-1 text-xs text-muted-foreground"
     >
       <span v-if="filename" class="font-medium select-none">
         {{ filename }}
