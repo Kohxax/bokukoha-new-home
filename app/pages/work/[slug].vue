@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
+import { Rocket } from 'lucide-vue-next'
 import SocialShare from '~/components/partials/SocialShare.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
 import LikeButton from '~/components/partials/LikeButton.vue'
@@ -54,7 +54,7 @@ useHead({
           </CardTitle>
           <div class="flex items-center text-muted-foreground text-sm space-x-4 mt-2">
             <div class="flex items-center space-x-1">
-              <CalendarIcon class="h-4 w-4" />
+              <Rocket class="h-4 w-4" />
               <span>{{ page.date }}</span>
             </div>
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1">

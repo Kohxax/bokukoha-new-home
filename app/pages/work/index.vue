@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CalendarIcon, BriefcaseBusiness } from 'lucide-vue-next'
+import { Rocket, BriefcaseBusiness } from 'lucide-vue-next'
 import { useRoute } from 'vue-router'
 import { watch } from 'vue'
 
@@ -64,7 +64,7 @@ useHead({
             </NuxtLink>
             <div class="flex flex-row items-center gap-x-4 gap-y-2 mt-4 text-muted-foreground">
               <div class="flex items-center space-x-1">
-                <CalendarIcon class="h-4 w-4" />
+                <Rocket class="h-4 w-4" />
                 <span>{{ post.date }}</span>
               </div>
               <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
