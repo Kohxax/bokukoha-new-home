@@ -7,6 +7,7 @@ import {
   BriefcaseBusiness,
   NotebookPenIcon,
   BriefcaseBusinessIcon,
+  Tags,
 } from 'lucide-vue-next'
 import MisskeyIcon from '~/components/svg/MisskeyIcon.vue'
 import XIcon from '~/components/svg/XIcon.vue'
@@ -49,7 +50,7 @@ const { data: blogPosts } = await useAsyncData('blog-list', () => {
 const { data: works } = await useAsyncData('work-list', () => {
   return queryCollection('work')
     .where('draft', '=', '0')
-    .select('title', 'category', 'path', 'description', 'date', 'coverImage')
+    .select('title', 'category', 'path', 'description', 'date', 'coverImage', 'tags')
     .order('date', 'DESC')
     .limit(2)
     .all()
@@ -211,11 +212,15 @@ useSeoMeta({
                 class="aspect-video h-55 w-full object-cover"
               />
               <CardHeader>
-                <div class="flex items-center justify-between text-sm text-muted-foreground pt-3">
+                <CardTitle class="text-lg pt-3">{{ work.title }}</CardTitle>
+                <div class="flex items-center justify-between text-sm text-muted-foreground">
                   <span>{{ work.category }}</span>
-                  <span>{{ work.date }}</span>
+                  <div class="flex flex-wrap items-center gap-x-2">
+                    <span v-for="tag in work.tags ?? []" :key="tag" class="line-clamp-1">
+                      #{{ tag }}
+                    </span>
+                  </div>
                 </div>
-                <CardTitle class="text-lg pb-2">{{ work.title }}</CardTitle>
               </CardHeader>
             </NuxtLink>
           </Card>
