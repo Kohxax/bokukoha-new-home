@@ -24,7 +24,7 @@ const links = [
   {
     title: 'Misskey',
     icon: MisskeyIcon,
-    href: 'https://misskey.io/@bokukoha',
+    href: 'https://mi.bokukoha.dev/@Koha',
   },
   {
     title: 'X',
