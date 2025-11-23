@@ -75,7 +75,7 @@ useHead({
           </div>
         </CardHeader>
 
-        <CardContent class="prose prose-invert max-w-none px-5 md:px-10 py-4">
+        <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
           <ContentRenderer :value="page" />
         </CardContent>
 
@@ -118,6 +118,8 @@ useHead({
 
 .prose :deep(h1) {
   font-size: 2rem;
+  display: flow-root;
+  margin-top: 2rem !important;
 }
 
 .prose :deep(h2) {
