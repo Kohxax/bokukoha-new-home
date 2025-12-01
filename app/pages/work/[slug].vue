@@ -28,6 +28,21 @@ useSeoMeta({
 useHead({
   title: page.value?.title,
 })
+
+const { $imageViewer } = useNuxtApp()
+const { open, register, unregister } = $imageViewer
+
+onMounted(() => {
+  if (page.value?.coverImage) {
+    register(page.value.coverImage, page.value.title)
+  }
+})
+
+onUnmounted(() => {
+  if (page.value?.coverImage) {
+    unregister(page.value.coverImage)
+  }
+})
 </script>
 
 <template>
@@ -38,8 +53,9 @@ useHead({
           <img
             :src="page.coverImage"
             :alt="page.title"
-            class="w-full aspect-video object-cover rounded-t-lg"
+            class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
             style="view-transition-name: post-cover-image"
+            @click="open(page.coverImage)"
           />
         </div>
 

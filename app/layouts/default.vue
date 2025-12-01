@@ -8,4 +8,5 @@ import BackToTop from '~/components/partials/BackToTop.vue'
   <div class="min-h-screen">
     <slot />
   </div>
+  <ImageViewer />
 </template>
