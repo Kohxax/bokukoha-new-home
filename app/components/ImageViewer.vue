@@ -35,6 +35,13 @@ watch(currentImage, () => {
   showControls.value = true
 })
 
+// Lock body scroll when open
+watch(isOpen, (val) => {
+  if (import.meta.client) {
+    document.body.style.overflow = val ? 'hidden' : ''
+  }
+})
+
 // Swipe Logic
 const handleTouchStart = (e: TouchEvent) => {
   if (isZoomed.value || e.touches.length === 0) return
@@ -54,7 +61,14 @@ const handleTouchEnd = (e: TouchEvent) => {
   const deltaX = touchEndX - start.x
   const deltaY = touchEndY - start.y
 
-  // Threshold for swipe
+  // Swipe Down to Close (Vertical swipe > 100px, Horizontal < 50px to avoid diagonal)
+  if (deltaY > 100 && Math.abs(deltaX) < 80) {
+    close()
+    touchStart.value = null
+    return
+  }
+
+  // Horizontal Swipe for Navigation
   if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 100) {
     if (deltaX > 0) {
       handlePrev()
