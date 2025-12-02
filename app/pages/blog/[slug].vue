@@ -11,7 +11,7 @@ const { data: page } = await useAsyncData(route.path, () => {
 })
 
 const raw = page.value?.rawbody ?? ''
-const charsPerMin = 600
+const charsPerMin = 800
 
 const readingMin = Math.max(1, Math.ceil(raw.length / charsPerMin))
 
