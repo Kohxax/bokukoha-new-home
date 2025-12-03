@@ -2,7 +2,7 @@
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-vue-next'
 
 const { $imageViewer } = useNuxtApp()
-const { isOpen, currentImage, close, next, prev, hasNext, hasPrev } = $imageViewer
+const { isOpen, currentImage, close, next, prev, hasNext, hasPrev, currentIndex, images } = $imageViewer
 
 const transitionName = ref('slide-next')
 const isZoomed = ref(false)
@@ -131,6 +131,11 @@ const handleKeydown = (e: KeyboardEvent) => {
         leave-to-class="opacity-0"
       >
         <div v-show="showControls" class="contents">
+          <!-- Counter -->
+          <div class="absolute top-4 left-4 px-4 py-2 text-white/90 bg-black/20 rounded-full backdrop-blur-md z-20 font-medium select-none">
+            {{ currentIndex + 1 }} / {{ images.length }}
+          </div>
+
           <!-- Close button -->
           <button
             class="absolute top-4 right-4 p-2 text-white/70 hover:text-white bg-black/20 hover:bg-black/50 rounded-full transition-colors z-20 backdrop-blur-md"
