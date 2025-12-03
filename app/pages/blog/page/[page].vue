@@ -8,7 +8,7 @@ const currentPage = computed(() => {
   return Number.isFinite(p) && p > 0 ? p : 1
 })
 
-const pageSize = 3
+const pageSize = 4
 
 const { data: posts } = await useAsyncData(
   `blog-page-${currentPage.value}`,
