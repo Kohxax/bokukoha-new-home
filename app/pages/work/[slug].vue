@@ -46,7 +46,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12">
+  <div class="container mx-auto max-w-4xl px-4 py-8 md:py-12">
     <div v-if="page">
       <Card class="overflow-hidden rounded-lg shadow-xl border">
         <div v-if="page.coverImage" class="relative">
