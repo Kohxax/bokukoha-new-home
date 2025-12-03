@@ -65,7 +65,7 @@ const archivesByCategory = computed(() => {
           v-for="(count, category) in archivesByCategory"
           :key="category"
           :to="`/blog/archives?category=${category}`"
-          class="rounded-md bg-muted/30 px-3 py-1 hover:bg-muted transition text-md"
+          class="rounded-md bg-muted/35 px-3 py-1 hover:bg-muted transition text-md"
         >
           {{ category }}
         </NuxtLink>
