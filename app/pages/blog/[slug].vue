@@ -154,7 +154,15 @@ onUnmounted(() => {
 }
 
 .prose :deep(p) {
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-size: 1.13rem;
+  line-height: 1.7;
 }
+
+@media (min-width: 768px) {
+  .prose :deep(p) {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+}
+
 </style>
