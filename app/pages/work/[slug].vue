@@ -142,5 +142,6 @@ onUnmounted(() => {
 
 .prose :deep(p) {
   font-size: 1.15rem;
+  line-height: 1.8;
 }
 </style>
