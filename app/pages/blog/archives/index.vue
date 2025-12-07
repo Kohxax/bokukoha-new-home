@@ -132,12 +132,13 @@ useSeoMeta({
                     </span>
                   </div>
                 </div>
-                <img
-                  v-if="post.coverImage"
-                  :src="post.coverImage"
-                  alt=""
-                  class="w-24 h-24 object-cover rounded-2xl pt-3 pr-2"
-                />
+                  <NuxtImg
+                    v-if="post.coverImage"
+                    :src="post.coverImage"
+                    alt=""
+                    format="webp"
+                    class="w-24 h-24 object-cover rounded-2xl pt-3 pr-2"
+                  />
               </div>
             </NuxtLink>
           </Card>

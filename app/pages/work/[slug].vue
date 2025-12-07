@@ -29,18 +29,24 @@ useHead({
   title: page.value?.title,
 })
 
+const img = useImage()
+const optimizedCoverImage = computed(() => {
+  if (!page.value?.coverImage) return ''
+  return img(page.value.coverImage, { format: 'webp' })
+})
+
 const { $imageViewer } = useNuxtApp()
 const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
   if (page.value?.coverImage) {
-    register(page.value.coverImage, page.value.title)
+    register(optimizedCoverImage.value, page.value.title)
   }
 })
 
 onUnmounted(() => {
   if (page.value?.coverImage) {
-    unregister(page.value.coverImage)
+    unregister(optimizedCoverImage.value)
   }
 })
 </script>
@@ -50,12 +56,13 @@ onUnmounted(() => {
     <div v-if="page">
       <Card class="overflow-hidden rounded-lg shadow-xl border">
         <div v-if="page.coverImage" class="relative">
-          <img
+          <NuxtImg
             :src="page.coverImage"
             :alt="page.title"
+            format="webp"
             class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
             style="view-transition-name: post-cover-image"
-            @click="open(page.coverImage)"
+            @click="open(optimizedCoverImage)"
           />
         </div>
 

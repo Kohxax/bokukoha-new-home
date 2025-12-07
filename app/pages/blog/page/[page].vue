@@ -99,7 +99,7 @@ useSeoMeta({
         <div class="space-y-6 md:space-y-12">
           <Card v-for="post in paginatedPosts" :key="post.path" class="overflow-hidden transition-all hover:shadow-lg">
             <NuxtLink :to="post.path">
-              <img v-if="post.coverImage" :src="post.coverImage" :alt="post.title"
+              <NuxtImg v-if="post.coverImage" :src="post.coverImage" :alt="post.title" format="webp"
                 class="h-40 md:h-80 w-full object-cover" />
             </NuxtLink>
 

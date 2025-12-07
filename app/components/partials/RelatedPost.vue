@@ -30,9 +30,10 @@ const { data: related } = await useAsyncData(`related-${props.category}-${props.
           class="overflow-hidden transition-all hover:opacity-80 hover:scale-[0.99] shrink-0 w-[300px] sm:w-[320px] snap-center"
         >
           <NuxtLink :to="post.path">
-            <img
+            <NuxtImg
               :src="post.coverImage"
               :alt="post.title"
+              format="webp"
               class="aspect-video w-full object-cover"
             />
             <CardHeader>

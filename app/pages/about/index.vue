@@ -32,7 +32,7 @@ const age = ref<number>(calculateAge(birthDate))
     class="flex min-h-screen flex-col items-center bg-background px-4 py-16 text-foreground sm:py-24"
   >
     <Avatar class="mb-12 h-50 w-50 shadow-xl">
-      <img src="~/assets/img/icon_glass.png" alt="Koha" />
+      <img src="~/assets/img/icon_glass.webp" alt="Koha" />
       <AvatarFallback>KH</AvatarFallback>
     </Avatar>
 

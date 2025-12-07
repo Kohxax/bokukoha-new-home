@@ -92,7 +92,7 @@ useSeoMeta({
     >
       <div class="flex flex-col items-center justify-center space-y-4">
         <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
-          <img src="~/assets/img/icon_glass.png" alt="Koha" />
+          <img src="~/assets/img/icon_glass.webp" alt="Koha" />
           <AvatarFallback>KH</AvatarFallback>
         </Avatar>
 
@@ -164,9 +164,10 @@ useSeoMeta({
             class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
           >
             <NuxtLink :to="post.path">
-              <img
+              <NuxtImg
                 :src="post.coverImage"
                 :alt="post.title"
+                format="webp"
                 class="aspect-video w-full object-cover"
               />
               <CardHeader>
@@ -206,9 +207,10 @@ useSeoMeta({
             class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
           >
             <NuxtLink :to="work.path">
-              <img
+              <NuxtImg
                 :src="work.coverImage"
                 :alt="work.title"
+                format="webp"
                 class="aspect-video h-55 w-full object-cover"
               />
               <CardHeader>
