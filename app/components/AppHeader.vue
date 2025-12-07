@@ -34,7 +34,7 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="sticky top-0 z-50 w-fullb shadow-lg bg-background/95 backdrop-blur-xl transition-transform duration-300 ease-in-out"
+    class="sticky top-0 z-50 w-fullb shadow-lg bg-background/95  backdrop-blur-sm transition-transform duration-300 ease-in-out"
     :class="{ '-translate-y-full': !isVisible }"
   >
     <div class="flex h-14 items-center">
