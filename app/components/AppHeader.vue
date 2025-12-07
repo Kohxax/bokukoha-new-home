@@ -38,7 +38,7 @@ onUnmounted(() => {
     :class="{ '-translate-y-full': !isVisible }"
   >
     <div class="flex h-14 items-center">
-      <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:scale-98 ransition-colors">
+      <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:scale-99 hover:opacity-80 transition-all" alt="ホームに戻る">
         <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         </Avatar>
@@ -49,18 +49,21 @@ onUnmounted(() => {
         <NuxtLink
           to="/blog/page/1/"
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          alt="Blog"
         >
           Blog
         </NuxtLink>
         <NuxtLink
           to="/work/"
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          alt="Work"
         >
           Work
         </NuxtLink>
         <NuxtLink
           to="/about/"
           class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          alt="Blog"
         >
           About
         </NuxtLink>

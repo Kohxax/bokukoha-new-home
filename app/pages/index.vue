@@ -121,6 +121,7 @@ useSeoMeta({
             v-for="link in links"
             :key="link.title"
             :href="link.href"
+            :alt="link.title"
             target="_blank"
             rel="noopener noreferrer"
             class="hover:opacity-80 hover:scale-98 transition"
@@ -151,6 +152,7 @@ useSeoMeta({
           <NuxtLink
             to="/blog/page/1/"
             class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            alt="すべて見る"
           >
             すべて見る
             <ArrowRight class="h-4 w-4" />
@@ -194,6 +196,7 @@ useSeoMeta({
           <NuxtLink
             to="/work/"
             class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            alt="すべて見る"
           >
             すべて見る
             <ArrowRight class="h-4 w-4" />

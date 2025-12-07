@@ -4,7 +4,7 @@
     <p class="text-muted-foreground mt-4">
       お探しのページは削除されたか、URLが変更された可能性があります。
     </p>
-    <NuxtLink to="/">
+    <NuxtLink to="/" alt="ホームに戻る">
       <Button class="mt-6">ホームに戻る</Button>
     </NuxtLink>
   </div>
