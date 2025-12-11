@@ -107,15 +107,11 @@ useSeoMeta({
             </NuxtLink>
 
             <CardHeader>
-              <div class="flex flex-row justify-between">
-                <Button variant="secondary" size="sm" as-child class="w-18">
-                  <NuxtLink :to="`/blog/archives?category=${post.category}`">
-                    {{ post.category }}
-                  </NuxtLink>
-                </Button>
-
-                <Likes />
-              </div>
+              <Button variant="secondary" size="sm" as-child class="w-18">
+                <NuxtLink :to="`/blog/archives?category=${post.category}`">
+                  {{ post.category }}
+                </NuxtLink>
+              </Button>
 
               <NuxtLink class="text-2xl mt-3" :to="post.path">
                 <CardTitle>{{ post.title }}</CardTitle>
@@ -124,6 +120,8 @@ useSeoMeta({
               <div
                 class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2"
               >
+                <Likes colorClass="text-foreground" />
+
                 <div class="flex items-center space-x-1">
                   <CalendarIcon class="h-4 w-4" />
                   <span>{{ post.date }}</span>
