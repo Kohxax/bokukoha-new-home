@@ -29,7 +29,7 @@ useSchemaOrg([
 ])
 
 useSeoMeta({
-  ogImage: '/og/coverImage.png',
+  ogImage: '/og/coverImage.webp',
 })
 </script>
 
