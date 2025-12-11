@@ -14,6 +14,18 @@ const { data: related } = await useAsyncData(`related-${props.category}-${props.
     .limit(5)
     .all(),
 )
+const scrollContainer = ref(null)
+
+const onWheel = (e) => {
+  if (scrollContainer.value) {
+    if (e.deltaY !== 0) {
+      scrollContainer.value.scrollBy({
+        left: e.deltaY * 3,
+        behavior: 'smooth',
+      })
+    }
+  }
+}
 </script>
 
 <template>
@@ -22,7 +34,9 @@ const { data: related } = await useAsyncData(`related-${props.category}-${props.
 
     <div class="relative">
       <div
-        class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-none mx-auto max-w-full px-1 sm:px-0"
+        ref="scrollContainer"
+        @wheel.prevent="onWheel"
+        class="flex gap-6 overflow-x-auto pb-4 snap-x snap-proximity scrollbar-none mx-auto max-w-full px-1 sm:px-0"
       >
         <Card
           v-for="post in related"
