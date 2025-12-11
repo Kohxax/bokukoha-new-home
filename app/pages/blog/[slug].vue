@@ -119,7 +119,7 @@ onUnmounted(() => {
       </aside>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 max-w-[1280px] w-full mt-10">
+    <div class="gap-10 max-w-[1280px] w-full mt-10">
       <div class="min-w-0">
         <RelatedPost :category="page.category" :current-path="page.path" />
       </div>

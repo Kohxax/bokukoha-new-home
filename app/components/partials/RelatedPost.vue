@@ -11,7 +11,7 @@ const { data: related } = await useAsyncData(`related-${props.category}-${props.
     .where('draft', '=', '0')
     .select('title', 'path', 'date', 'category', 'coverImage')
     .order('date', 'DESC')
-    .limit(3)
+    .limit(5)
     .all(),
 )
 </script>
