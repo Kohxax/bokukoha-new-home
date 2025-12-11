@@ -118,9 +118,9 @@ useSeoMeta({
               </NuxtLink>
 
               <div
-                class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2"
+                class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-3"
               >
-                <Likes colorClass="text-foreground" />
+                <Likes :article-id="post.path" />
 
                 <div class="flex items-center space-x-1">
                   <CalendarIcon class="h-4 w-4" />
