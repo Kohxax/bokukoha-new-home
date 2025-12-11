@@ -1,5 +1,6 @@
 <script setup>
 import { CalendarDays, Hash, Archive } from 'lucide-vue-next'
+import Likes from '~/components/partials/Likes.vue'
 
 const route = useRoute()
 const year = computed(() => route.query.year)
@@ -116,15 +117,16 @@ useSeoMeta({
           <Card
             v-for="post in filteredPosts"
             :key="post.path"
-            class="overflow-hidden transition-all hover:shadow-lg"
+            class="overflow-hidden transition-all hover:shadow-lg max-h-26"
           >
-            <NuxtLink :to="post.path" class="max-h-27">
+            <NuxtLink :to="post.path">
               <div class="flex justify-between items-center">
-                <div class="p-5">
-                  <CardTitle class="text-lg font-semibold mb-1 max-w-100 line-clamp-2"
+                <div class="p-5 max-w-150">
+                  <CardTitle class="text-lg font-semibold mb-1 line-clamp-1"
                     >{{ post.title }}
                   </CardTitle>
                   <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Likes :article-id="post.path" />
                     <CalendarDays class="h-4 w-4" />
                     <span>{{ post.date }}</span>
                     <span class="px-2 py-0.5 text-xs rounded-md bg-muted">
@@ -132,13 +134,13 @@ useSeoMeta({
                     </span>
                   </div>
                 </div>
-                  <NuxtImg
-                    v-if="post.coverImage"
-                    :src="post.coverImage"
-                    alt=""
-                    format="webp"
-                    class="w-24 h-24 object-cover rounded-2xl pt-3 pr-2"
-                  />
+                <NuxtImg
+                  v-if="post.coverImage"
+                  :src="post.coverImage"
+                  alt=""
+                  format="webp"
+                  class="w-24 h-24 object-cover rounded-xl m-1"
+                />
               </div>
             </NuxtLink>
           </Card>
