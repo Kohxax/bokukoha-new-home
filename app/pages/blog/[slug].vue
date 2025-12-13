@@ -58,73 +58,76 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 md:py-12 flex flex-col items-center">
+  <div class="container mx-auto px-4 py-8 md:py-12 flex flex-col">
     <template v-if="page">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 max-w-[1280px] w-full">
-      <div class="min-w-0">
-        <Card class="overflow-hidden rounded-lg shadow-xl border">
-          <div v-if="page.coverImage" class="relative">
-            <NuxtImg
-              :src="page.coverImage"
-              :alt="page.title"
-              format="webp"
-              class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
-              @click="open(optimizedCoverImage)"
-            />
-          </div>
-
-          <CardHeader class="pt-2 px-5 md:px-10">
-            <Button variant="secondary" class="mb-2 w-18">
-              <NuxtLink :to="`/blog/archives?category=${page.category}`">
-                {{ page.category }}
-              </NuxtLink>
-            </Button>
-            <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
-              {{ page.title }}
-            </CardTitle>
-            <div
-              class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2"
-            >
-              <div class="flex items-center space-x-1">
-                <CalendarIcon class="h-4 w-4" />
-                <span>{{ page.date }}</span>
-              </div>
-              <div class="flex items-center space-x-1">
-                <ClockIcon class="h-4 w-4" />
-                <span>読了時間: {{ readingMin }}分</span>
-              </div>
-              <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span v-for="tag in page.tags ?? []" :key="tag" class="text-base whitespace-nowrap">
-                  #{{ tag }}
-                </span>
-              </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 max-w-[1280px] w-full ml-auto mr-10"
+      >
+        <div class="min-w-0">
+          <Card class="overflow-hidden rounded-lg shadow-xl border">
+            <div v-if="page.coverImage" class="relative">
+              <NuxtImg
+                :src="page.coverImage"
+                :alt="page.title"
+                format="webp"
+                class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
+                @click="open(optimizedCoverImage)"
+              />
             </div>
-          </CardHeader>
 
-          <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
-            <ContentRenderer :value="page" />
-          </CardContent>
+            <CardHeader class="pt-2 px-5 md:px-10">
+              <Button variant="secondary" class="mb-2 w-18">
+                <NuxtLink :to="`/blog/archives?category=${page.category}`">
+                  {{ page.category }}
+                </NuxtLink>
+              </Button>
+              <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
+                {{ page.title }}
+              </CardTitle>
+              <div
+                class="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm mt-2"
+              >
+                <div class="flex items-center space-x-1">
+                  <CalendarIcon class="h-4 w-4" />
+                  <span>{{ page.date }}</span>
+                </div>
+                <div class="flex items-center space-x-1">
+                  <ClockIcon class="h-4 w-4" />
+                  <span>読了時間: {{ readingMin }}分</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span
+                    v-for="tag in page.tags ?? []"
+                    :key="tag"
+                    class="text-base whitespace-nowrap"
+                  >
+                    #{{ tag }}
+                  </span>
+                </div>
+              </div>
+            </CardHeader>
 
-          <div class="flex flex-col items-center justify-center my-3">
-            <LikeButton class="pl-5" :article-id="page.path" />
-            <SocialShare class="mt-3" :showRSS="true" />
-          </div>
-        </Card>
+            <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
+              <ContentRenderer :value="page" />
+            </CardContent>
 
+            <div class="flex flex-col items-center justify-center my-3">
+              <LikeButton class="pl-5" :article-id="page.path" />
+              <SocialShare class="mt-3" :showRSS="true" />
+            </div>
+          </Card>
+        </div>
 
+        <aside class="hidden lg:block relative">
+          <Toc :toc="page.body?.toc" />
+        </aside>
       </div>
 
-      <aside class="hidden lg:block relative">
-        <Toc :toc="page.body?.toc" />
-      </aside>
-    </div>
-
-    <div class="gap-10 max-w-[1280px] w-full mt-10">
-      <div class="min-w-0">
-        <RelatedPost :category="page.category" :current-path="page.path" />
+      <div class="gap-10 max-w-[1280px] w-full mt-10 ml-auto mr-12">
+        <div class="min-w-0">
+          <RelatedPost :category="page.category" :current-path="page.path" />
+        </div>
       </div>
-    </div>
-
     </template>
     <NotFound v-else />
   </div>
@@ -187,5 +190,4 @@ onUnmounted(() => {
     line-height: 1.8;
   }
 }
-
 </style>
