@@ -10,7 +10,9 @@ const embedUrl = computed(() => {
   if (!props.src) return ''
 
   // YouTube
-  const youtubeMatch = props.src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)
+  const youtubeMatch = props.src.match(
+    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
+  )
   if (youtubeMatch) {
     return `https://www.youtube.com/embed/${youtubeMatch[1]}`
   }
@@ -33,14 +35,19 @@ const isNative = computed(() => {
 
 <template>
   <div class="my-8">
-    <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg bg-black">
+    <div
+      :class="[
+        'relative w-full rounded-lg overflow-hidden shadow-lg bg-black',
+        isNative ? '' : 'aspect-video',
+      ]"
+    >
       <video
         v-if="isNative"
         :src="src"
         controls
         playsinline
         preload="metadata"
-        class="absolute -top-8 left-0 w-full h-full object-cover"
+        class="w-full h-auto !m-0 !p-0 block"
       ></video>
       <iframe
         v-else-if="embedUrl"
@@ -50,7 +57,7 @@ const isNative = computed(() => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>
-      <div v-else class="flex items-center justify-center w-full h-full text-white">
+      <div v-else class="flex items-center justify-center w-20 h-full text-white">
         Invalid Video URL
       </div>
     </div>
