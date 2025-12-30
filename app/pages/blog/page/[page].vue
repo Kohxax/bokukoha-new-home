@@ -19,7 +19,7 @@ const { data: posts } = await useAsyncData(`blog-page-${currentPage.value}`, () 
     .all(),
 )
 
-const readingSpeed = 600
+const readingSpeed = 800
 
 const paginatedPosts = computed(() => {
   if (!posts.value) return []
