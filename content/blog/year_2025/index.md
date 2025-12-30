@@ -1,6 +1,6 @@
 ---
 title: "2025年楽しかったことまとめ"
-date: 2025-12-25
+date: 2025-12-30
 draft: 0
 coverImage: "/images/blog/year_2025/main.jpg"
 category: 
