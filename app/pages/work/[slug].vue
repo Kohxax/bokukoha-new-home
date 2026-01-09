@@ -53,7 +53,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 md:py-12 flex">
+  <div class="container mx-auto px-4 py-8 md:py-12 flex flex-col">
     <div
       v-if="page"
       class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 max-w-[1280px] w-full ml-auto mr-10"
