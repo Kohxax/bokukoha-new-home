@@ -13,6 +13,7 @@ const props = defineProps<{
       children?: any[]
     }>
   }
+  isInline?: boolean
 }>()
 
 const scrollToHeading = (id: string) => {
@@ -57,15 +58,27 @@ onMounted(() => {
 
 <template>
   <Card
-    class="w-full bg-card/50 backdrop-blur top-24 sticky max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar"
+    :class="[
+      'w-full bg-card/50 backdrop-blur custom-scrollbar',
+      isInline
+        ? 'border-none bg-muted/30 shadow-none'
+        : 'top-24 sticky max-h-[calc(100vh-8rem)] overflow-y-auto',
+    ]"
   >
-    <CardHeader class="mt-4 -mb-2">
+    <CardHeader :class="isInline ? 'pb-2 pt-4 px-4' : 'mt-4 -mb-2'">
       <CardTitle class="text-foreground flex flex-row gap-2 items-center">
-        <Hash class="h-5 w-5 text-primary" />
-        <span class="text-lg font-semibold tracking-tight">目次</span>
+        <Hash :class="isInline ? 'h-4 w-4 text-primary' : 'h-5 w-5 text-primary'" />
+        <span
+          :class="
+            isInline
+              ? 'text-base font-medium tracking-tight'
+              : 'text-lg font-semibold tracking-tight'
+          "
+          >目次</span
+        >
       </CardTitle>
     </CardHeader>
-    <CardContent class="pb-6">
+    <CardContent :class="isInline ? 'pb-4 px-4' : 'pb-6'">
       <nav v-if="toc && toc.links && toc.links.length > 0">
         <ul class="space-y-2 text-sm">
           <li v-for="(link, i) in toc.links" :key="link.id">

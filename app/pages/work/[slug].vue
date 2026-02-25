@@ -94,6 +94,7 @@ onUnmounted(() => {
           </CardHeader>
 
           <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
+            <Toc :toc="page.body?.toc" is-inline class="block lg:hidden mb-8 not-prose" />
             <ContentRenderer :value="page" />
           </CardContent>
 

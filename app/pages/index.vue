@@ -129,6 +129,8 @@ useSeoMeta({
             <component :is="link.icon" class="h-6 w-6" />
           </a>
         </div>
+
+        <!-- <AccessCounter class="mt-8" style="view-transition-name: disable" /> -->
       </div>
 
       <div
