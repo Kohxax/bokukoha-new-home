@@ -60,9 +60,7 @@ onUnmounted(() => {
 <template>
   <div class="container mx-auto px-4 py-8 md:py-12 flex flex-col">
     <template v-if="page">
-      <div
-        class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-10 max-w-[1280px] w-full ml-auto mr-10"
-      >
+      <div class="max-w-4xl mx-auto w-full">
         <div class="min-w-0">
           <Card class="overflow-hidden rounded-lg shadow-xl border">
             <div v-if="page.coverImage" class="relative">
@@ -107,8 +105,11 @@ onUnmounted(() => {
               </div>
             </CardHeader>
 
+            <div class="px-5 md:px-10 mb-8" v-if="page.body?.toc">
+              <Toc :toc="page.body?.toc" is-inline />
+            </div>
+
             <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
-              <Toc :toc="page.body?.toc" is-inline class="block lg:hidden mb-8 not-prose" />
               <ContentRenderer :value="page" />
             </CardContent>
 
@@ -118,13 +119,9 @@ onUnmounted(() => {
             </div>
           </Card>
         </div>
-
-        <aside class="hidden lg:block relative">
-          <Toc :toc="page.body?.toc" />
-        </aside>
       </div>
 
-      <div class="gap-10 max-w-[1280px] w-full mt-10 ml-auto mr-12">
+      <div class="max-w-4xl mx-auto w-full mt-10">
         <div class="min-w-0">
           <RelatedPost :category="page.category" :current-path="page.path" />
         </div>
