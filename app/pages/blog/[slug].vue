@@ -135,7 +135,7 @@ onUnmounted(() => {
         </aside>
       </div>
 
-      <div class="max-w-4xl mx-auto w-full mt-10">
+      <div class="max-w-4xl mx-auto w-full mt-7">
         <div class="min-w-0">
           <RelatedPost :category="page.category" :current-path="page.path" />
         </div>
