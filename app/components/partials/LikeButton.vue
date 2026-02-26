@@ -7,6 +7,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  isVertical: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const likeCount = ref(0)
@@ -49,18 +53,21 @@ const handleLike = async () => {
   <div class="flex flex-col items-center">
     <button
       @click="handleLike"
-      class="flex items-center gap-3 rounded-3xl px-6 py-4 text-2xl transition-all select-none"
-      :class="{
-        'text-muted-foreground opacity-70 cursor-not-allowed': liked,
-      }"
+      class="flex transition-all select-none"
+      :class="[
+        liked ? 'text-muted-foreground opacity-70 cursor-not-allowed' : '',
+        isVertical
+          ? 'flex-col items-center gap-1 p-2 text-xl hover:bg-muted/50 rounded-xl'
+          : 'items-center gap-3 rounded-3xl px-6 py-4 text-2xl hover:bg-muted/30',
+      ]"
     >
       <Heart
-        class="w-9 h-9"
-        :class="
+        :class="[
+          isVertical ? 'w-7 h-7' : 'w-9 h-9',
           liked
             ? 'text-muted-foreground fill-muted-foreground'
-            : 'text-red-400 fill-red-400 hover:scale-110'
-        "
+            : 'text-red-400 fill-red-400 hover:scale-110',
+        ]"
       />
       <transition name="like-bump" mode="out-in">
         <span :key="likeCount">{{ likeCount }}</span>

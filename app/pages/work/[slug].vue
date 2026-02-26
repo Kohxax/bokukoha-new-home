@@ -54,7 +54,14 @@ onUnmounted(() => {
 
 <template>
   <div class="container mx-auto px-4 py-8 md:py-12 flex flex-col">
-    <div v-if="page" class="max-w-4xl mx-auto w-full">
+    <div
+      v-if="page"
+      class="grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,896px)_1fr] w-full max-w-[1440px] mx-auto gap-4 xl:gap-10"
+    >
+      <!-- Left Side: Empty for centering -->
+      <div class="hidden xl:block"></div>
+
+      <!-- Center: Main Article Content -->
       <div class="min-w-0">
         <Card class="overflow-hidden rounded-lg shadow-xl border">
           <div v-if="page.coverImage" class="relative">
@@ -98,12 +105,20 @@ onUnmounted(() => {
             <ContentRenderer :value="page" />
           </CardContent>
 
-          <div class="flex flex-col items-center justify-center my-3">
-            <LikeButton class="pl-5" :article-id="page.path" />
-            <SocialShare class="mt-3" />
+          <div class="flex flex-col items-center justify-center my-8">
+            <LikeButton :article-id="page.path" />
+            <SocialShare class="mt-4" />
           </div>
         </Card>
       </div>
+
+      <!-- Right Side: Like and SocialShare buttons -->
+      <aside class="hidden xl:flex flex-col items-start sticky top-32 h-[calc(100vh-8rem)]">
+        <div class="flex flex-col items-center">
+          <LikeButton :article-id="page.path" is-vertical />
+          <SocialShare class="mt-8" is-vertical />
+        </div>
+      </aside>
     </div>
     <NotFound v-else />
   </div>

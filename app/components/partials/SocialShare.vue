@@ -12,6 +12,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isVertical: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const copyLink = async () => {
@@ -43,13 +47,19 @@ const shareToMisskey = () => {
 </script>
 
 <template>
-  <div class="">
-    <div class="flex items-center justify-center gap-2 mb-4">
+  <div :class="isVertical ? 'flex flex-col items-center gap-6' : ''">
+    <div v-if="!isVertical" class="flex items-center justify-center gap-2 mb-4">
       <Share2 class="h-5 w-5 text-muted-foreground" />
       <h3 class="font-semibold text-base">{{ title }}</h3>
     </div>
 
-    <div class="flex gap-6 text-muted-foreground pl-2">
+    <div
+      :class="
+        isVertical
+          ? 'flex flex-col items-center gap-6 text-muted-foreground'
+          : 'flex gap-6 text-muted-foreground pl-2'
+      "
+    >
       <button class="hover:text-sky-400 transition" @click="copyLink" title="リンクをコピー">
         <Link2 class="h-6 w-6" />
       </button>
