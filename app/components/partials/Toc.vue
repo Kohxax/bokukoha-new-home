@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Hash } from 'lucide-vue-next'
+import { Hash, Minus, Plus } from 'lucide-vue-next'
 
 const props = defineProps<{
   toc?: {
@@ -31,6 +31,7 @@ const scrollToHeading = (id: string) => {
 }
 
 const activeId = ref<string>('')
+const isOpen = ref(true)
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -65,7 +66,10 @@ onMounted(() => {
         : 'top-24 sticky max-h-[calc(100vh-8rem)] overflow-y-auto',
     ]"
   >
-    <CardHeader :class="isInline ? 'pb-2 pt-4 px-4' : 'mt-4 -mb-2'">
+    <CardHeader
+      class="flex flex-row items-center justify-between space-y-0"
+      :class="isInline ? 'pb-2 pt-4 px-4' : 'mt-4 -mb-2'"
+    >
       <CardTitle class="text-foreground flex flex-row gap-2 items-center">
         <Hash :class="isInline ? 'h-4 w-4 text-primary' : 'h-5 w-5 text-primary'" />
         <span
@@ -77,8 +81,18 @@ onMounted(() => {
           >目次</span
         >
       </CardTitle>
+      <Button
+        variant="ghost"
+        size="icon"
+        class="h-7 w-7 text-muted-foreground hover:text-foreground hover:bg-muted"
+        @click="isOpen = !isOpen"
+        title="目次の開閉"
+      >
+        <Minus v-if="isOpen" class="h-4 w-4" />
+        <Plus v-else class="h-4 w-4" />
+      </Button>
     </CardHeader>
-    <CardContent :class="isInline ? 'pb-4 px-4' : 'pb-6'">
+    <CardContent v-show="isOpen" :class="isInline ? 'pb-4 px-4' : 'pb-6'">
       <nav v-if="toc && toc.links && toc.links.length > 0">
         <ul class="space-y-2 text-sm">
           <li v-for="(link, i) in toc.links" :key="link.id">

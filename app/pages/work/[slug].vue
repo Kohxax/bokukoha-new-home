@@ -97,7 +97,7 @@ onUnmounted(() => {
             </div>
           </CardHeader>
 
-          <div class="px-5 md:px-10 mb-8" v-if="page.body?.toc">
+          <div class="px-5 md:px-10 mb-6" v-if="page.body?.toc">
             <Toc :toc="page.body?.toc" is-inline />
           </div>
 
