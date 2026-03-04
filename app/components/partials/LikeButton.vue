@@ -13,6 +13,7 @@ const props = defineProps({
   },
 })
 
+const likeCount = ref<number | null>(null)
 const liked = ref(false)
 const LIMIT = 1
 
@@ -22,34 +23,27 @@ const apiKey = config.public.likeApiKey
 
 const localKey = `user_like_count_${props.articleId}`
 
-const { data: likeCount } = await useAsyncData(
-  `like-button-${props.articleId}`,
-  () =>
-    $fetch(`${apiEndpoint}/${encodeURIComponent(props.articleId)}`, {
-      headers: { 'x-api-key': apiKey },
-    })
-      .then((res: any) => res.likes || 0)
-      .catch((e: any) => {
-        console.error(`Failed to fetch likes for ${props.articleId}:`, e.message || String(e))
-        return 0
-      }),
-  {
-    lazy: true,
-    server: true,
-    default: () => 0,
-  },
-)
-
-onMounted(() => {
+onMounted(async () => {
   const userLikes = parseInt(localStorage.getItem(localKey) || '0')
   if (userLikes >= LIMIT) liked.value = true
+
+  try {
+    const res = await fetch(`${apiEndpoint}/${encodeURIComponent(props.articleId)}`, {
+      headers: { 'x-api-key': apiKey },
+    })
+    const data = await res.json()
+    likeCount.value = data.likes || 0
+  } catch (e: any) {
+    console.error(`Failed to fetch likes for ${props.articleId}:`, e.message || String(e))
+    likeCount.value = 0
+  }
 })
 
 const handleLike = async () => {
   if (liked.value) return
 
   liked.value = true
-  likeCount.value++
+  likeCount.value = (likeCount.value || 0) + 1
   localStorage.setItem(localKey, '1')
 
   const id = props.articleId
@@ -80,7 +74,13 @@ const handleLike = async () => {
             : 'text-red-400 fill-red-400 hover:scale-110',
         ]"
       />
-      <transition name="like-bump" mode="out-in">
+      <template v-if="likeCount === null">
+        <span
+          class="bg-muted animate-pulse rounded-md"
+          :class="isVertical ? 'h-6 w-5' : 'h-8 w-6'"
+        ></span>
+      </template>
+      <transition v-else name="like-bump" mode="out-in">
         <span :key="likeCount">{{ likeCount }}</span>
       </transition>
     </button>
@@ -94,7 +94,6 @@ const handleLike = async () => {
 
 .like-bump-leave-active {
   transition: all 0.2s ease;
-  position: absolute;
 }
 
 .like-bump-enter-from {
