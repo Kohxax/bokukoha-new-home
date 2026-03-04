@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { Heart } from 'lucide-vue-next'
 
@@ -13,7 +13,6 @@ const props = defineProps({
   },
 })
 
-const likeCount = ref(0)
 const liked = ref(false)
 const LIMIT = 1
 
@@ -23,13 +22,25 @@ const apiKey = config.public.likeApiKey
 
 const localKey = `user_like_count_${props.articleId}`
 
-onMounted(async () => {
-  const res = await fetch(`${apiEndpoint}/${encodeURIComponent(props.articleId)}`, {
-    headers: { 'x-api-key': apiKey },
-  })
-  const data = await res.json()
-  likeCount.value = data.likes || 0
+const { data: likeCount } = await useAsyncData(
+  `like-button-${props.articleId}`,
+  () =>
+    $fetch(`${apiEndpoint}/${encodeURIComponent(props.articleId)}`, {
+      headers: { 'x-api-key': apiKey },
+    })
+      .then((res: any) => res.likes || 0)
+      .catch((e: any) => {
+        console.error(`Failed to fetch likes for ${props.articleId}:`, e.message || String(e))
+        return 0
+      }),
+  {
+    lazy: true,
+    server: true,
+    default: () => 0,
+  },
+)
 
+onMounted(() => {
   const userLikes = parseInt(localStorage.getItem(localKey) || '0')
   if (userLikes >= LIMIT) liked.value = true
 })
