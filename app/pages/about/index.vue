@@ -28,7 +28,12 @@ function calculateAge(birthDateString: string): number {
 const age = ref<number>(calculateAge(birthDate))
 
 const skills = [
-  { name: 'Java', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-plain.svg', type: 'url', style: 'filter: hue-rotate(200deg);' },
+  {
+    name: 'Java',
+    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-plain.svg',
+    type: 'url',
+    style: 'filter: hue-rotate(200deg);',
+  },
   { name: 'Kotlin', slug: 'kotlin', type: 'simple-icon' },
   { name: 'TypeScript', slug: 'typescript', type: 'simple-icon' },
   { name: 'Nuxt.js', slug: 'nuxt', type: 'simple-icon' },
@@ -63,47 +68,6 @@ const skills = [
           <p>性別: 男</p>
           <p>趣味: PCゲーム, 散歩, 飲酒, 音楽, 旅行</p>
           <p>言語: JPN 〇 ENG △</p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight"> # スキル </CardTitle>
-        </CardHeader>
-        <CardContent class="text-foreground">
-          <div class="flex flex-wrap gap-4">
-            <div
-              v-for="skill in skills"
-              :key="skill.slug"
-              class="flex flex-col items-center gap-2"
-            >
-              <img
-                v-if="skill.type === 'simple-icon'"
-                :src="`https://cdn.simpleicons.org/${skill.slug}`"
-                :alt="skill.name"
-                class="h-10 w-10"
-                loading="lazy"
-                width="40"
-                height="40"
-              />
-              <img
-                v-else-if="skill.type === 'url'"
-                :src="skill.url"
-                :alt="skill.name"
-                class="h-10 w-10"
-                :style="skill.style"
-                loading="lazy"
-                width="40"
-                height="40"
-              />
-              <component
-                :is="skill.icon"
-                v-else-if="skill.type === 'lucide'"
-                class="h-10 w-10 text-yellow-200"
-              />
-              <span class="text-xs text-muted-foreground">{{ skill.name }}</span>
-            </div>
-          </div>
         </CardContent>
       </Card>
 
