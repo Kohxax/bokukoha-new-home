@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { Database, Server, Code } from 'lucide-vue-next'
+import { Github } from 'lucide-vue-next'
+import MisskeyIcon from '~/components/svg/MisskeyIcon.vue'
+import XIcon from '~/components/svg/XIcon.vue'
+import DiscordIcon from '~/components/svg/DiscordIcon.vue'
+
 useSeoMeta({
   title: 'About',
   ogDescription: 'オタクの自己紹介ページ',
@@ -9,130 +13,139 @@ useSeoMeta({
 
 const birthDate = '2004-08-27'
 
-function calculateAge(birthDateString: string): number {
-  const today = new Date()
-  const birthDate = new Date(birthDateString)
-
-  let age = today.getFullYear() - birthDate.getFullYear()
-  const judgeBirthDay =
-    today.getMonth() > birthDate.getMonth() ||
-    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate())
-
-  if (!judgeBirthDay) {
-    age--
-  }
-
-  return age
-}
-
-const age = ref<number>(calculateAge(birthDate))
-
-const skills = [
+const links = [
   {
-    name: 'Java',
-    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-plain.svg',
-    type: 'url',
-    style: 'filter: hue-rotate(200deg);',
+    title: 'GitHub',
+    icon: Github,
+    href: 'https://github.com/Kohxax',
   },
-  { name: 'Kotlin', slug: 'kotlin', type: 'simple-icon' },
-  { name: 'TypeScript', slug: 'typescript', type: 'simple-icon' },
-  { name: 'Nuxt.js', slug: 'nuxt', type: 'simple-icon' },
-  { name: 'API Gateway', icon: Server, type: 'lucide' },
-  { name: 'DynamoDB', icon: Database, type: 'lucide' },
-  { name: 'Lambda', icon: Code, type: 'lucide' },
-  { name: 'Proxmox', slug: 'proxmox', type: 'simple-icon' },
-  { name: 'Ubuntu', slug: 'ubuntu', type: 'simple-icon' },
-  { name: 'Docker', slug: 'docker', type: 'simple-icon' },
-  { name: 'Git', slug: 'git', type: 'simple-icon' },
+  {
+    title: 'Misskey',
+    icon: MisskeyIcon,
+    href: 'https://mi.bokukoha.dev/@Koha',
+  },
+  {
+    title: 'X',
+    icon: XIcon,
+    href: 'https://x.com/kohxax',
+  },
+  {
+    title: 'Discord',
+    icon: DiscordIcon,
+    href: "https://discord.com/users/441869177389580308'",
+  },
+]
+
+const games = [
+  { title: '崩壊スターレイル', characters: '銀狼 / 花火 / ヘルタ / アベンチュリン / キュレネ' },
+  { title: '崩壊3rd', characters: 'ゼーレ / ブローニャ / エリシア' },
+  { title: 'PCゲー', characters: 'Minecraft / MHWilds / Rocket League / ンィー゛など' },
+  { title: 'CS', characters: 'どう森シリーズ / モンハンシリーズ' },
+]
+
+const profile = [
+  { label: '名前', value: 'こは' },
+  { label: '誕生日', value: birthDate },
+  { label: '言語', value: 'JPN 〇 / ENG △' },
+  { label: '趣味', value: 'PCゲーム・散歩・飲酒・音楽・旅行' },
 ]
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen flex-col items-center bg-background px-4 py-16 text-foreground sm:py-24"
-  >
-    <Avatar class="mb-12 h-50 w-50 shadow-xl">
-      <img src="~/assets/img/icon_glass.webp" alt="Koha" />
-      <AvatarFallback>KH</AvatarFallback>
-    </Avatar>
+  <div class="min-h-screen bg-background text-foreground">
+    <section class="flex flex-col items-center px-4 pt-16 pb-14 text-center sm:pt-24">
+      <Avatar class="mb-3 h-28 w-28 shadow-xl" style="view-transition-name: main-avatar">
+        <img src="~/assets/img/icon_glass.webp" alt="Koha" />
+        <AvatarFallback>KH</AvatarFallback>
+      </Avatar>
 
-    <main class="w-full max-w-2xl space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight"> # 自己紹介 </CardTitle>
-        </CardHeader>
-        <CardContent class="space-y-2 text-foreground">
-          <p>名前: こは</p>
-          <p>誕生日: {{ birthDate }}</p>
-          <p>年齢: {{ age }}</p>
-          <p>性別: 男</p>
-          <p>趣味: PCゲーム, 散歩, 飲酒, 音楽, 旅行</p>
-          <p>言語: JPN 〇 ENG △</p>
-        </CardContent>
-      </Card>
+      <h1 class="mb-1 text-3xl font-bold tracking-tight">Koha</h1>
+      <p class="mb-2 text-sm text-muted-foreground">@Kohxax / こは</p>
 
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight">
-            # ゲームと好きなキャラ
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="space-y-2 text-foreground">
-          <p>崩壊スターレイル: 銀狼, 花火, ヘルタ, アベンチュリン, キュレネ</p>
-          <p>崩壊3rd: ゼーレ, ブローニャ, エリシア</p>
-          <p>PCゲー: Minecraft, MHWilds, Rocket League 等</p>
-          <p>CS: どう森シリーズ, モンハンシリーズ</p>
-        </CardContent>
-      </Card>
+      <p class="mb-3 text-sm text-muted-foreground"></p>
 
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight"> # 音楽 </CardTitle>
-        </CardHeader>
-        <CardContent class="text-foreground">
-          <p>
-            Aiobahn,
-            rejectionみたいな電子音楽、エロゲ曲、アニソン、崩壊シリーズの劇中歌が好き。音楽の趣味が合う人はぜひ教えてください。
-          </p>
-          <p>音響機器もそこそこ好きです。A5000, ifi go barユーザー。</p>
-        </CardContent>
-      </Card>
+      <div class="flex gap-x-5 text-foreground">
+        <a
+          v-for="link in links"
+          :key="link.title"
+          :href="link.href"
+          :alt="link.title"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition hover:scale-95 hover:opacity-80"
+        >
+          <component :is="link.icon" class="h-5 w-5" />
+        </a>
+      </div>
+    </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight"> # 自宅サーバー </CardTitle>
-        </CardHeader>
-        <CardContent class="text-foreground">
-          <p>
-            メルカリとかでパーツ拾って組んだPCにProxmox入れて遊んでます。CPUはi7-6700k,
-            RAMは48GBです。色々とやりたいことはあるんですが、基本的にお金とストレージ不足；；
-          </p>
-        </CardContent>
-      </Card>
+    <main class="mx-auto w-full max-w-2xl px-6 pb-16">
+      <section class="about-section">
+        <h2 class="section-heading">PROFILE</h2>
+        <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+          <div v-for="item in profile" :key="item.label">
+            <dt class="text-xs text-muted-foreground">{{ item.label }}</dt>
+            <dd class="mt-0.5 text-sm font-medium">{{ item.value }}</dd>
+          </div>
+        </div>
+      </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle class="title text-xl font-bold tracking-tight"> # 適当 </CardTitle>
-        </CardHeader>
-        <CardContent class="text-foreground">
-          <p>
-            ここまで読んでくださってありがとうございます。趣味あう人と話すのは楽しくて好きなので、気軽に話しかけてください。Discord含むゲームとかのフレ申請は知り合いなら通します！よろしくお願いします！
-          </p>
-        </CardContent>
-      </Card>
+      <section class="about-section">
+        <h2 class="section-heading">GAMES &amp; CHARACTERS</h2>
+        <dl class="space-y-3">
+          <div
+            v-for="game in games"
+            :key="game.title"
+            class="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-6"
+          >
+            <dt class="min-w-32 shrink-0 text-sm font-medium">{{ game.title }}</dt>
+            <dd class="text-sm text-muted-foreground">{{ game.characters }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="about-section">
+        <h2 class="section-heading">MUSIC</h2>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          Aiobahn,
+          rejectionみたいな電子音楽、エロゲ曲、アニソン、崩壊シリーズの劇中歌が好き。音楽の趣味が合う人はぜひ教えてください。
+        </p>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          音響機器もそこそこ好きです。A5000, ifi go barユーザー。
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2 class="section-heading">HOME SERVER</h2>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          メルカリとかでパーツ拾って組んだPCにProxmox入れて遊んでます。CPUはi7-6700k,
+          RAMは48GBです。色々とやりたいことはあるんですが、基本的にお金とストレージ不足；；
+        </p>
+      </section>
+
+      <section class="about-section border-b-0! pb-0!">
+        <h2 class="section-heading">ETC.</h2>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          ここまで読んでくださってありがとうございます。趣味あう人と話すのは楽しくて好きなので、気軽に話しかけてください。Discord含むゲームとかのフレ申請は知り合いなら通します！よろしくお願いします！
+        </p>
+      </section>
     </main>
-
-    <footer class="mt-12">
-      <NuxtLink to="/" class="text-sm text-muted-foreground hover:text-foreground">
-        ← Home
-      </NuxtLink>
-    </footer>
   </div>
 </template>
 
 <style scoped>
-.title {
-  margin-top: 1rem;
-  margin-bottom: -0.5rem;
+.about-section {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 </style>
