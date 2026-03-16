@@ -1,21 +1,14 @@
 import twemoji from '@twemoji/api'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const parseEmoji = () => {
-    twemoji.parse(document.body, {
-      folder: 'svg',
-      ext: '.svg',
-      base: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/',
-    })
-  }
-
-  nuxtApp.hook('page:finish', () => {
-    nextTick(() => {
-      parseEmoji()
-    })
-  })
-
+  // SSG/SSR で事前レンダリングされた HTML（F5時）の絵文字をカバーする
   nuxtApp.hook('app:mounted', () => {
-    parseEmoji()
+    nextTick(() => {
+      twemoji.parse(document.body, {
+        folder: 'svg',
+        ext: '.svg',
+        base: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/',
+      })
+    })
   })
 })

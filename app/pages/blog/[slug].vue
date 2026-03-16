@@ -6,6 +6,8 @@ import SocialShare from '~/components/partials/SocialShare.vue'
 import LikeButton from '~/components/partials/LikeButton.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
 
+useTwemoji()
+
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
