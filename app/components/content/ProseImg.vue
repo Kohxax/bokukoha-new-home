@@ -1,11 +1,10 @@
 <template>
   <figure class="my-6">
-    <NuxtImg
+    <img
       :src="src"
       :alt="alt"
-      format="webp"
       class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
-      @click="open(optimizedSrc)"
+      @click="open(src)"
     />
 
     <figcaption v-if="alt" class="text-md text-center text-muted-foreground mt-2">
@@ -18,17 +17,12 @@
 const props = defineProps({
   src: {
     type: String,
-    default: ''
+    default: '',
   },
   alt: {
     type: String,
-    default: ''
+    default: '',
   },
-})
-
-const img = useImage()
-const optimizedSrc = computed(() => {
-  return img(props.src, { format: 'webp' })
 })
 
 const { $imageViewer } = useNuxtApp()
@@ -36,13 +30,13 @@ const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
   if (props.src) {
-    register(optimizedSrc.value, props.alt)
+    register(props.src, props.alt)
   }
 })
 
 onUnmounted(() => {
   if (props.src) {
-    unregister(optimizedSrc.value)
+    unregister(props.src)
   }
 })
 </script>

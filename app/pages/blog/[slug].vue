@@ -35,24 +35,18 @@ useHead({
   title: page.value?.title,
 })
 
-const img = useImage()
-const optimizedCoverImage = computed(() => {
-  if (!page.value?.coverImage) return ''
-  return img(page.value.coverImage, { format: 'webp' })
-})
-
 const { $imageViewer } = useNuxtApp()
 const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
   if (page.value?.coverImage) {
-    register(optimizedCoverImage.value, page.value.title)
+    register(page.value.coverImage, page.value.title)
   }
 })
 
 onUnmounted(() => {
   if (page.value?.coverImage) {
-    unregister(optimizedCoverImage.value)
+    unregister(page.value.coverImage)
   }
 })
 </script>
@@ -75,7 +69,7 @@ onUnmounted(() => {
                 :alt="page.title"
                 format="webp"
                 class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
-                @click="open(optimizedCoverImage)"
+                @click="open(page.coverImage)"
               />
             </div>
 
