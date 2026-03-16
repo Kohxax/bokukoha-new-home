@@ -64,7 +64,6 @@ onUnmounted(() => {
             <NuxtImg
               :src="page.coverImage"
               :alt="page.title"
-              format="webp"
               class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
               style="view-transition-name: post-cover-image"
               @click="open(page.coverImage)"

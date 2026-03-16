@@ -138,7 +138,6 @@ useSeoMeta({
                   v-if="post.coverImage"
                   :src="post.coverImage"
                   alt=""
-                  format="webp"
                   class="w-24 h-24 object-cover rounded-xl m-1"
                 />
               </div>

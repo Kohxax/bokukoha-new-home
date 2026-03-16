@@ -121,7 +121,6 @@ onUnmounted(() => {
             <NuxtImg
               :src="post.coverImage"
               :alt="post.title"
-              format="webp"
               class="aspect-video w-full object-cover"
             />
             <CardHeader>

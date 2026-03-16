@@ -171,7 +171,6 @@ useSeoMeta({
               <NuxtImg
                 :src="post.coverImage"
                 :alt="post.title"
-                format="webp"
                 class="aspect-video w-full object-cover"
               />
               <CardHeader>
@@ -215,7 +214,6 @@ useSeoMeta({
               <NuxtImg
                 :src="work.coverImage"
                 :alt="work.title"
-                format="webp"
                 class="aspect-video h-55 w-full object-cover"
               />
               <CardHeader>
