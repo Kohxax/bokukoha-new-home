@@ -1,6 +1,6 @@
 <template>
   <figure class="my-6">
-    <img
+    <NuxtImg
       :src="src"
       :alt="alt"
       class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
