@@ -37,9 +37,12 @@ const links = [
 ]
 
 const games = [
-  { title: '崩壊スターレイル', characters: '銀狼 / 花火 / ヘルタ / アベンチュリン / キュレネ' },
-  { title: '崩壊3rd', characters: 'ゼーレ / ブローニャ / エリシア' },
-  { title: 'PCゲー', characters: 'Minecraft / MHWilds / Rocket League / ンィー゛など' },
+  {
+    title: '崩壊スターレイル',
+    characters: '星銀 / 星アベ / アナアグ / 花火 など 雑食気味',
+  },
+  { title: '崩壊3rd', characters: 'ゼレブロ' },
+  { title: 'PCゲー', characters: 'Minecraft / OverWatch / Rocket League / ンィー゛など' },
   { title: 'CS', characters: 'どう森シリーズ / モンハンシリーズ' },
 ]
 
@@ -61,8 +64,6 @@ const profile = [
 
       <h1 class="mb-1 text-3xl font-bold tracking-tight">Koha</h1>
       <p class="mb-2 text-sm text-muted-foreground">@Kohxax / こは</p>
-
-      <p class="mb-3 text-sm text-muted-foreground"></p>
 
       <div class="flex gap-x-5 text-foreground">
         <a
@@ -91,7 +92,7 @@ const profile = [
       </section>
 
       <section class="about-section">
-        <h2 class="section-heading">GAMES &amp; CHARACTERS</h2>
+        <h2 class="section-heading">GAMES &amp; CP</h2>
         <dl class="space-y-3">
           <div
             v-for="game in games"
@@ -105,28 +106,22 @@ const profile = [
       </section>
 
       <section class="about-section">
-        <h2 class="section-heading">MUSIC</h2>
+        <h2 class="section-heading">ABOUT ME</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
-          Aiobahn,
-          rejectionみたいな電子音楽、エロゲ曲、アニソン、崩壊シリーズの劇中歌が好き。音楽の趣味が合う人はぜひ教えてください。
+          インターネットではこはと名乗っています。簡単なプロフィールは上に書いてある通りです。わからんことを調べること、良い物語を見て最高に苦しい気分になることが大好きです。
         </p>
         <p class="text-sm leading-relaxed text-muted-foreground">
-          音響機器もそこそこ好きです。A5000, ifi go barユーザー。
-        </p>
-      </section>
-
-      <section class="about-section">
-        <h2 class="section-heading">HOME SERVER</h2>
-        <p class="text-sm leading-relaxed text-muted-foreground">
-          メルカリとかでパーツ拾って組んだPCにProxmox入れて遊んでます。CPUはi7-6700k,
-          RAMは48GBです。色々とやりたいことはあるんですが、基本的にお金とストレージ不足；；
+          色々知りたいと思ってくださった方はmisskeyの普段の投稿でも見ていただければと思います。よろしくお願いします。
         </p>
       </section>
 
       <section class="about-section border-b-0! pb-0!">
-        <h2 class="section-heading">ETC.</h2>
+        <h2 class="section-heading">ABOUT THIS SITE</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
-          ここまで読んでくださってありがとうございます。趣味あう人と話すのは楽しくて好きなので、気軽に話しかけてください。Discord含むゲームとかのフレ申請は知り合いなら通します！よろしくお願いします！
+          ぼくこは.devは、こはが0から作った個人サイトです。今ご覧になられているプロフィールに加えて、私がやったことや体験したことなんかを文章と写真でまとめたBlogセクション、制作物をまとめたWorkセクションがあります。
+        </p>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          まともなサイトを作るのは初めてのことなので、何かご意見等あれば積極的に共有してくださるとうれしいです！
         </p>
       </section>
     </main>
