@@ -82,7 +82,7 @@ useSeoMeta({
         <h1 class="text-3xl font-bold tracking-tight text-foreground">Koha</h1>
         <p class="text-md text-muted-foreground">@Kohxax / こは</p>
 
-        <div class="flex flex-col sm:flex-row items-center gap-3 mt-5">
+        <div class="flex flex-row items-center gap-3 mt-5">
           <NuxtLink to="/about">
             <Button
               variant="outline"
