@@ -1,5 +1,5 @@
 ---
-title: "春休みラストの京都旅行してきたぞ！～1,2日目～"
+title: "春休みラストの京都旅行してきたぞ！～関西1,2日目～"
 date: 2026-03-30
 draft: 0
 coverImage: "/images/blog/kansai_ryokou/main.jpg"
