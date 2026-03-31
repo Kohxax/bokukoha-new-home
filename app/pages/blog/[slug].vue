@@ -94,6 +94,7 @@ onUnmounted(() => {
                   <ClockIcon class="h-4 w-4" />
                   <span>読了時間: {{ readingMin }}分</span>
                 </div>
+                <LikeButton :article-id="page.path" is-compact class="xl:hidden" />
                 <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span
                     v-for="tag in page.tags ?? []"

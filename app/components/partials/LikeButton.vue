@@ -11,6 +11,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isCompact: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const likeCount = ref<number | null>(null)
@@ -55,20 +59,22 @@ const handleLike = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
+  <div :class="isCompact ? 'inline-flex' : 'flex flex-col items-center'">
     <button
       @click="handleLike"
       class="flex transition-all select-none"
       :class="[
         liked ? 'text-muted-foreground opacity-70 cursor-not-allowed' : '',
-        isVertical
-          ? 'flex-col items-center gap-1 p-2 text-xl hover:bg-muted/50 rounded-xl'
-          : 'items-center gap-3 rounded-3xl px-6 py-4 text-2xl hover:bg-muted/30',
+        isCompact
+          ? 'items-center gap-1.5 rounded-md px-2.5 py-1 text-sm hover:bg-muted/40 border border-border/50'
+          : isVertical
+            ? 'flex-col items-center gap-1 p-2 text-xl hover:bg-muted/50 rounded-xl'
+            : 'items-center gap-3 rounded-3xl px-6 py-4 text-2xl hover:bg-muted/30',
       ]"
     >
       <Heart
         :class="[
-          isVertical ? 'w-7 h-7' : 'w-9 h-9',
+          isCompact ? 'w-4 h-4' : isVertical ? 'w-7 h-7' : 'w-9 h-9',
           liked
             ? 'text-muted-foreground fill-muted-foreground'
             : 'text-red-400 fill-red-400 hover:scale-110',
@@ -77,7 +83,7 @@ const handleLike = async () => {
       <template v-if="likeCount === null">
         <span
           class="bg-muted animate-pulse rounded-md"
-          :class="isVertical ? 'h-6 w-5' : 'h-8 w-6'"
+          :class="isCompact ? 'h-4 w-3' : isVertical ? 'h-6 w-5' : 'h-8 w-6'"
         ></span>
       </template>
       <transition v-else name="like-bump" mode="out-in">
