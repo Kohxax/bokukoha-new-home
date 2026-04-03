@@ -7,7 +7,7 @@ export default defineContentConfig({
     collections: {
         blog: defineCollection({
             type: 'page',
-            source: 'blog/**/',
+            source: { include: 'blog/**/*.md' },
             schema: z.object({
                 title: z.string(),
                 date: z.string(),
@@ -21,7 +21,7 @@ export default defineContentConfig({
 
         work: defineCollection({
             type: 'page',
-            source: 'work/**/',
+            source: { include: 'work/**/*.md' },
             schema: z.object({
                 title: z.string(),
                 date: z.string(),
@@ -35,12 +35,12 @@ export default defineContentConfig({
         content: defineCollection(
             asSitemapCollection({
                 type: 'page',
-                source: 'blog/**/'
+                source: { include: 'blog/**/*.md' }
             }),
 
             asRobotsCollection({
                 type: 'page',
-                source: '**'
+                source: { include: '**/*.md' }
             }),
         ),
     },
