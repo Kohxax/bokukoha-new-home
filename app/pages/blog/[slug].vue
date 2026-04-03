@@ -68,8 +68,9 @@ onUnmounted(() => {
         <div class="min-w-0 max-w-4xl mx-auto w-full">
           <Card class="overflow-hidden rounded-lg shadow-xl border">
             <div v-if="resolvedCoverImage" class="relative">
-              <NuxtImg
-                :src="resolvedCoverImage"
+              <CoverImg
+                :src="page.coverImage"
+                :article-path="route.path"
                 :alt="page.title"
                 class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
                 @click="open(resolvedCoverImage)"

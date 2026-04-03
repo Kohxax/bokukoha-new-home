@@ -45,9 +45,10 @@ useHead({
           class="overflow-hidden transition-all hover:shadow-lg"
         >
           <NuxtLink :to="post.path">
-            <NuxtImg
+            <CoverImg
               v-if="post.coverImage"
-              :src="resolveCoverImage(post.coverImage, post.path)"
+              :src="post.coverImage"
+              :article-path="post.path"
               :alt="post.title"
               class="h-40 md:h-80 w-full object-cover"
             />

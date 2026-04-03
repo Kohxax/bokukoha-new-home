@@ -143,8 +143,9 @@ useSeoMeta({
             class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
           >
             <NuxtLink :to="post.path">
-              <NuxtImg
-                :src="resolveCoverImage(post.coverImage, post.path)"
+              <CoverImg
+                :src="post.coverImage"
+                :article-path="post.path"
                 :alt="post.title"
                 class="aspect-video w-full object-cover"
               />
@@ -186,8 +187,9 @@ useSeoMeta({
             class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
           >
             <NuxtLink :to="work.path">
-              <NuxtImg
-                :src="resolveCoverImage(work.coverImage, work.path)"
+              <CoverImg
+                :src="work.coverImage"
+                :article-path="work.path"
                 :alt="work.title"
                 class="aspect-video h-55 w-full object-cover"
               />

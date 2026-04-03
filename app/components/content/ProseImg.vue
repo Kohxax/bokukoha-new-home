@@ -1,6 +1,15 @@
 <template>
   <figure class="my-6">
+    <img
+      v-if="isContentImage"
+      :src="resolvedSrc"
+      :alt="alt"
+      class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
+      loading="lazy"
+      @click="open(resolvedSrc)"
+    />
     <NuxtImg
+      v-else
       :src="resolvedSrc"
       :alt="alt"
       class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
@@ -26,6 +35,11 @@ const props = defineProps({
 })
 
 const route = useRoute()
+
+const isContentImage = computed(() => {
+  const src = props.src
+  return !!src && !src.startsWith('/') && !/^https?:\/\//.test(src)
+})
 
 const resolvedSrc = computed(() => {
   const src = props.src

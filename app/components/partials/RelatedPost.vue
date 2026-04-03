@@ -118,8 +118,9 @@ onUnmounted(() => {
           :class="[isDragging ? '' : 'snap-center']"
         >
           <NuxtLink :to="post.path">
-            <NuxtImg
-              :src="resolveCoverImage(post.coverImage, post.path)"
+            <CoverImg
+              :src="post.coverImage"
+              :article-path="post.path"
               :alt="post.title"
               class="aspect-video w-full object-cover"
             />
