@@ -6,7 +6,7 @@ tags:
   - Typescript
   - twitter-scraper
   - Misskey-js
-coverImage: /images/work/misskey-x-mirror-bot/main.png
+coverImage: main.png
 draft: 0
 description: Xの特定アカウントの投稿を、Misskeyにミラー投稿する個人用botを作ってきました。botの核となる部分はtwitter-scraperという、Cookieに保存されたXのトークンを使って認証、そしてXの投稿を取得することができるというOSSです。
 ---
