@@ -7,7 +7,9 @@ const props = defineProps<{
   autoDelay?: number
 }>()
 
-const images = props.images || []
+const route = useRoute()
+
+const images = (props.images || []).map(img => resolveCoverImage(img, route.path) ?? img)
 const autoDelay = props.autoDelay ?? 5000
 const currentIndex = ref(0)
 const container = ref<HTMLElement | null>(null)

@@ -124,6 +124,9 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/sitemap.xml', '/rss.xml', '/']
     },
+    publicAssets: [
+      { dir: 'content', baseURL: '/', maxAge: 0 }
+    ],
   },
 
   shadcn: {

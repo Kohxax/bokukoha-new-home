@@ -47,7 +47,7 @@ useHead({
           <NuxtLink :to="post.path">
             <NuxtImg
               v-if="post.coverImage"
-              :src="post.coverImage"
+              :src="resolveCoverImage(post.coverImage, post.path)"
               :alt="post.title"
               class="h-40 md:h-80 w-full object-cover"
             />

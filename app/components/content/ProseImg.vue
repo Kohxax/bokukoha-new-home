@@ -1,10 +1,10 @@
 <template>
   <figure class="my-6">
     <NuxtImg
-      :src="src"
+      :src="resolvedSrc"
       :alt="alt"
       class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
-      @click="open(src)"
+      @click="open(resolvedSrc)"
     />
 
     <figcaption v-if="alt" class="text-md text-center text-muted-foreground mt-2">
@@ -25,18 +25,27 @@ const props = defineProps({
   },
 })
 
+const route = useRoute()
+
+const resolvedSrc = computed(() => {
+  const src = props.src
+  if (!src || src.startsWith('/') || /^https?:\/\//.test(src)) return src
+  const base = route.path.endsWith('/') ? route.path : route.path + '/'
+  return base + src
+})
+
 const { $imageViewer } = useNuxtApp()
 const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
-  if (props.src) {
-    register(props.src, props.alt)
+  if (resolvedSrc.value) {
+    register(resolvedSrc.value, props.alt)
   }
 })
 
 onUnmounted(() => {
-  if (props.src) {
-    unregister(props.src)
+  if (resolvedSrc.value) {
+    unregister(resolvedSrc.value)
   }
 })
 </script>

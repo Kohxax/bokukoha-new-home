@@ -136,7 +136,7 @@ useSeoMeta({
                 </div>
                 <NuxtImg
                   v-if="post.coverImage"
-                  :src="post.coverImage"
+                  :src="resolveCoverImage(post.coverImage, post.path)"
                   alt=""
                   class="w-24 h-24 object-cover rounded-xl m-1"
                 />

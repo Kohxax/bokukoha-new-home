@@ -144,7 +144,7 @@ useSeoMeta({
           >
             <NuxtLink :to="post.path">
               <NuxtImg
-                :src="post.coverImage"
+                :src="resolveCoverImage(post.coverImage, post.path)"
                 :alt="post.title"
                 class="aspect-video w-full object-cover"
               />
@@ -187,7 +187,7 @@ useSeoMeta({
           >
             <NuxtLink :to="work.path">
               <NuxtImg
-                :src="work.coverImage"
+                :src="resolveCoverImage(work.coverImage, work.path)"
                 :alt="work.title"
                 class="aspect-video h-55 w-full object-cover"
               />

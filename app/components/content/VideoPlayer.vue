@@ -6,11 +6,21 @@ const props = defineProps<{
   description?: string
 }>()
 
+const route = useRoute()
+
+const resolvedSrc = computed(() => {
+  const src = props.src
+  if (!src || src.startsWith('/') || /^https?:\/\//.test(src)) return src
+  const base = route.path.endsWith('/') ? route.path : route.path + '/'
+  return base + src
+})
+
 const embedUrl = computed(() => {
-  if (!props.src) return ''
+  const src = resolvedSrc.value
+  if (!src) return ''
 
   // YouTube
-  const youtubeMatch = props.src.match(
+  const youtubeMatch = src.match(
     /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
   )
   if (youtubeMatch) {
@@ -18,7 +28,7 @@ const embedUrl = computed(() => {
   }
 
   // Niconico
-  const niconicoMatch = props.src.match(/(?:nicovideo\.jp\/watch\/|nico\.ms\/)((?:sm|nm|so)\d+)/)
+  const niconicoMatch = src.match(/(?:nicovideo\.jp\/watch\/|nico\.ms\/)((?:sm|nm|so)\d+)/)
   if (niconicoMatch) {
     return `https://embed.nicovideo.jp/watch/${niconicoMatch[1]}`
   }
@@ -27,9 +37,9 @@ const embedUrl = computed(() => {
 })
 
 const isNative = computed(() => {
-  if (!props.src) return false
-  // Check for common video extensions or if it's a relative path starting with /
-  return /\.(mp4|webm|ogg|mov)$/i.test(props.src) || props.src.startsWith('/')
+  const src = resolvedSrc.value
+  if (!src) return false
+  return /\.(mp4|webm|ogg|mov)$/i.test(src) || src.startsWith('/')
 })
 </script>
 
@@ -43,7 +53,7 @@ const isNative = computed(() => {
     >
       <video
         v-if="isNative"
-        :src="src"
+        :src="resolvedSrc"
         controls
         playsinline
         preload="metadata"

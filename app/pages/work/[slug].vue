@@ -12,20 +12,22 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('work').path(route.path).first()
 })
 
+const resolvedCoverImage = computed(() => resolveCoverImage(page.value?.coverImage, route.path))
+
 useSchemaOrg([
   defineArticle({
     datePublised: page.value?.date,
-    image: page.value?.coverImage,
+    image: resolvedCoverImage.value,
   }),
 ])
 
 useSeoMeta({
   title: page.value?.title,
-  ogImage: page.value?.coverImage,
+  ogImage: resolvedCoverImage.value,
   ogDescription: page.value?.description,
   twitterTitle: page.value?.title,
   twitterDescription: page.value?.description,
-  twitterImage: page.value?.coverImage,
+  twitterImage: resolvedCoverImage.value,
 })
 
 useHead({
@@ -36,14 +38,14 @@ const { $imageViewer } = useNuxtApp()
 const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
-  if (page.value?.coverImage) {
-    register(page.value.coverImage, page.value.title)
+  if (resolvedCoverImage.value) {
+    register(resolvedCoverImage.value, page.value?.title ?? '')
   }
 })
 
 onUnmounted(() => {
-  if (page.value?.coverImage) {
-    unregister(page.value.coverImage)
+  if (resolvedCoverImage.value) {
+    unregister(resolvedCoverImage.value)
   }
 })
 </script>
@@ -60,13 +62,13 @@ onUnmounted(() => {
       <!-- Center: Main Article Content -->
       <div class="min-w-0">
         <Card class="overflow-hidden rounded-lg shadow-xl border">
-          <div v-if="page.coverImage" class="relative">
+          <div v-if="resolvedCoverImage" class="relative">
             <NuxtImg
-              :src="page.coverImage"
+              :src="resolvedCoverImage"
               :alt="page.title"
               class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
               style="view-transition-name: post-cover-image"
-              @click="open(page.coverImage)"
+              @click="open(resolvedCoverImage)"
             />
           </div>
 

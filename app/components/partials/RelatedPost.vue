@@ -119,7 +119,7 @@ onUnmounted(() => {
         >
           <NuxtLink :to="post.path">
             <NuxtImg
-              :src="post.coverImage"
+              :src="resolveCoverImage(post.coverImage, post.path)"
               :alt="post.title"
               class="aspect-video w-full object-cover"
             />
