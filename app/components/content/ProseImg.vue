@@ -45,7 +45,8 @@ const resolvedSrc = computed(() => {
   const src = props.src
   if (!src || src.startsWith('/') || /^https?:\/\//.test(src)) return src
   const base = route.path.endsWith('/') ? route.path : route.path + '/'
-  return base + src
+  const imageBase = base.replace(/^\/(blog|work)\//, '/images/$1/')
+  return imageBase + src
 })
 
 const { $imageViewer } = useNuxtApp()

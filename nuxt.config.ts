@@ -1,6 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import taillwindcss from '@tailwindcss/vite'
+import { cpSync, existsSync } from 'node:fs'
+import { join } from 'node:path'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -119,14 +121,33 @@ export default defineNuxtConfig({
     },
   },
 
+  hooks: {
+    'build:before': () => {
+      const IMAGE_EXTS = /\.(jpe?g|png|gif|webp|svg|avif)$/i
+      const contentDir = join(process.cwd(), 'content')
+      const publicDir = join(process.cwd(), 'public')
+
+      const copyImages = (src: string, dest: string) => {
+        if (!existsSync(src)) return
+        cpSync(src, dest, {
+          recursive: true,
+          filter: (srcPath) => {
+            const isDir = !srcPath.includes('.')
+            return isDir || IMAGE_EXTS.test(srcPath)
+          },
+        })
+      }
+
+      copyImages(join(contentDir, 'blog'), join(publicDir, 'images', 'blog'))
+      copyImages(join(contentDir, 'work'), join(publicDir, 'images', 'work'))
+    },
+  },
+
   nitro: {
     preset: 'static',
     prerender: {
       routes: ['/sitemap.xml', '/rss.xml', '/']
     },
-    publicAssets: [
-      { dir: 'content', baseURL: '/', maxAge: 0 }
-    ],
   },
 
   shadcn: {

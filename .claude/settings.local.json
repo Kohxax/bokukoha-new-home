@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"coverImage\" D:/bokukoha-new-home/content/blog/*/index.md)",
+      "Bash(grep -r \"coverImage\" D:/bokukoha-new-home/content/work/*/index.md)"
+    ]
+  }
+}

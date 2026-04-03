@@ -12,7 +12,9 @@ const IMAGE_EXTS: Record<string, string> = {
   '.avif': 'image/avif',
 }
 
-const CONTENT_PREFIXES = ['/blog/', '/work/']
+// /images/blog/<slug>/file.jpg → content/blog/<slug>/file.jpg
+// /images/work/<slug>/file.jpg → content/work/<slug>/file.jpg
+const CONTENT_PREFIXES = ['/images/blog/', '/images/work/']
 
 export default defineEventHandler(async (event) => {
   const url = event.path
@@ -23,7 +25,9 @@ export default defineEventHandler(async (event) => {
   const mimeType = IMAGE_EXTS[ext]
   if (!mimeType) return
 
-  const filePath = join(process.cwd(), 'content', url)
+  // Strip leading /images to get content-relative path
+  const contentRelative = url.replace(/^\/images\//, '/')
+  const filePath = join(process.cwd(), 'content', contentRelative)
   try {
     const file = await readFile(filePath)
     setResponseHeader(event, 'Content-Type', mimeType)

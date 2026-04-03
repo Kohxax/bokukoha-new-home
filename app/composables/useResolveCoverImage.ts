@@ -2,5 +2,6 @@ export function resolveCoverImage(coverImage: string | undefined | null, article
   if (!coverImage) return undefined
   if (coverImage.startsWith('/') || /^https?:\/\//.test(coverImage)) return coverImage
   const base = articlePath.endsWith('/') ? articlePath : articlePath + '/'
-  return base + coverImage
+  const imageBase = base.replace(/^\/(blog|work)\//, '/images/$1/')
+  return imageBase + coverImage
 }
