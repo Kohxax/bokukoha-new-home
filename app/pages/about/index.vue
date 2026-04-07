@@ -52,6 +52,14 @@ const profile = [
   { label: '言語', value: 'JPN 〇 / ENG △' },
   { label: '趣味', value: 'PCゲーム・散歩・飲酒・音楽・旅行' },
 ]
+
+// { siteName: string, image: string, href: string } のオブジェクト配置予定
+const mutualLinks = [
+]
+
+const isLinksAvail = computed(() => {
+  return mutualLinks.length > 0
+})
 </script>
 
 <template>
@@ -115,7 +123,7 @@ const profile = [
         </p>
       </section>
 
-      <section class="about-section border-b-0! pb-0!">
+      <section class="about-section" :class="{'border-b-0! pb-0!' : !isLinksAvail}">
         <h2 class="section-heading">ABOUT THIS SITE</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           ぼくこは.devは、こはが0から作った個人サイトです。今ご覧になられているプロフィールに加えて、私がやったことや体験したことなんかを文章と写真でまとめたBlogセクション、制作物をまとめたWorkセクションがあります。
@@ -123,6 +131,10 @@ const profile = [
         <p class="text-sm leading-relaxed text-muted-foreground">
           まともなサイトを作るのは初めてのことなので、何かご意見等あれば積極的に共有してくださるとうれしいです！
         </p>
+      </section>
+
+      <section v-if="isLinksAvail" class="about-section border-b-0! pb-0!">
+        <h2 class="section-heading">MUTUAL LINKS</h2>
       </section>
     </main>
   </div>
