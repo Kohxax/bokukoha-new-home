@@ -36,10 +36,10 @@ function makeCmsSource(collection: 'blog' | 'work') {
       const res = await fetch(`${cmsApiUrl}/api/${collection}`)
       if (!res.ok) throw new Error(`CMS ${collection} list failed: ${res.status}`)
       const articles: { slug: string }[] = await res.json()
-      return articles.map(a => `${a.slug}.md`)
+      return articles.map(a => `${collection}/${a.slug}/index.md`)
     },
     getItem: async (key: string) => {
-      const slug = key.replace(/\.md$/, '')
+      const slug = key.replace(`${collection}/`, '').replace('/index.md', '')
       const res = await fetch(`${cmsApiUrl}/api/${collection}/${slug}`)
       if (!res.ok) throw new Error(`CMS ${collection}/${slug} not found: ${res.status}`)
       const data = await res.json()
