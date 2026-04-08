@@ -82,11 +82,11 @@ export default defineContentConfig({
     content: defineCollection(
       asSitemapCollection({
         type: 'page',
-        source: { include: 'blog/**/*.md' },
+        source: cmsApiUrl ? [makeCmsSource('blog'), { include: 'blog/**/*.md' }] : { include: 'blog/**/*.md' },
       }),
       asRobotsCollection({
         type: 'page',
-        source: { include: '**/*.md' },
+        source: cmsApiUrl ? [makeCmsSource('blog'), makeCmsSource('work'), { include: '**/*.md' }] : { include: '**/*.md' },
       }),
     ),
   },
