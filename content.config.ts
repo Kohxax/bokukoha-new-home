@@ -52,7 +52,7 @@ export default defineContentConfig({
   collections: {
     blog: defineCollection({
       type: 'page',
-      source: cmsApiUrl ? makeCmsSource('blog') : { include: 'blog/**/*.md' },
+      source: cmsApiUrl ? [makeCmsSource('blog'), { include: 'blog/**/*.md' }] : { include: 'blog/**/*.md' },
       schema: z.object({
         title: z.string(),
         date: z.string(),
@@ -67,7 +67,7 @@ export default defineContentConfig({
 
     work: defineCollection({
       type: 'page',
-      source: cmsApiUrl ? makeCmsSource('work') : { include: 'work/**/*.md' },
+      source: cmsApiUrl ? [makeCmsSource('work'), { include: 'work/**/*.md' }] : { include: 'work/**/*.md' },
       schema: z.object({
         title: z.string(),
         date: z.string(),
