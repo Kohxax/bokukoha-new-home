@@ -2,7 +2,7 @@ import { defineContentConfig, defineCollection, defineCollectionSource, z } from
 import { asSitemapCollection } from '@nuxtjs/sitemap/content'
 import { asRobotsCollection } from '@nuxtjs/robots/content'
 
-const cmsApiUrl = process.env.CMS_API_URL
+const cmsApiUrl = process.env.CMS_API_URL!
 
 /**
  * Reconstruct a markdown file string with YAML frontmatter from a CMS API response.
@@ -52,7 +52,7 @@ export default defineContentConfig({
   collections: {
     blog: defineCollection({
       type: 'page',
-      source: cmsApiUrl ? [makeCmsSource('blog'), { include: 'blog/**/*.md' }] : { include: 'blog/**/*.md' },
+      source: [makeCmsSource('blog')],
       schema: z.object({
         title: z.string(),
         date: z.string(),
@@ -67,7 +67,7 @@ export default defineContentConfig({
 
     work: defineCollection({
       type: 'page',
-      source: cmsApiUrl ? [makeCmsSource('work'), { include: 'work/**/*.md' }] : { include: 'work/**/*.md' },
+      source: [makeCmsSource('work')],
       schema: z.object({
         title: z.string(),
         date: z.string(),
@@ -82,11 +82,11 @@ export default defineContentConfig({
     content: defineCollection(
       asSitemapCollection({
         type: 'page',
-        source: cmsApiUrl ? [makeCmsSource('blog'), { include: 'blog/**/*.md' }] : { include: 'blog/**/*.md' },
+        source: [makeCmsSource('blog')],
       }),
       asRobotsCollection({
         type: 'page',
-        source: cmsApiUrl ? [makeCmsSource('blog'), makeCmsSource('work'), { include: '**/*.md' }] : { include: '**/*.md' },
+        source: [makeCmsSource('blog'), makeCmsSource('work')],
       }),
     ),
   },
