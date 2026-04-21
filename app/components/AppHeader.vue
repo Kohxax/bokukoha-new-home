@@ -1,4 +1,3 @@
-\
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -30,11 +29,21 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+
+const route = useRoute()
+
+const navLinks = [
+  { label: 'Blog', to: '/blog/page/1/', match: '/blog' },
+  { label: 'Work', to: '/work/', match: '/work' },
+  { label: 'About', to: '/about/', match: '/about' },
+]
+
+const isActive = (match: string) => route.path.startsWith(match)
 </script>
 
 <template>
   <header
-    class="sticky top-0 z-50 w-fullb shadow-lg bg-background/95  backdrop-blur-sm transition-transform duration-300 ease-in-out"
+    class="sticky top-0 z-50 w-full shadow-lg bg-background/95 backdrop-blur-sm transition-transform duration-300 ease-in-out"
     :class="{ '-translate-y-full': !isVisible }"
   >
     <div class="flex h-14 items-center">
@@ -47,25 +56,14 @@ onUnmounted(() => {
 
       <nav class="flex ml-auto space-x-4 pr-5">
         <NuxtLink
-          to="/blog/page/1/"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          alt="Blog"
+          v-for="link in navLinks"
+          :key="link.to"
+          :to="link.to"
+          class="text-sm font-medium transition-colors hover:text-foreground"
+          :class="isActive(link.match) ? 'text-foreground' : 'text-muted-foreground'"
+          :alt="link.label"
         >
-          Blog
-        </NuxtLink>
-        <NuxtLink
-          to="/work/"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          alt="Work"
-        >
-          Work
-        </NuxtLink>
-        <NuxtLink
-          to="/about/"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          alt="Blog"
-        >
-          About
+          {{ link.label }}
         </NuxtLink>
       </nav>
     </div>
