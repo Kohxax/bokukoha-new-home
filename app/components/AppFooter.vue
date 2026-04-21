@@ -10,7 +10,7 @@ const navLinks = [
 ]
 
 const launchYear = 2025
-const currentYear = new (Date)().getFullYear()
+const currentYear = new Date().getFullYear()
 
 const brandYear = computed(() => {
   return launchYear === currentYear ? `${launchYear}` : `${launchYear}-${currentYear}`
