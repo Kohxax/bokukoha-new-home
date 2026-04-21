@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { Github } from 'lucide-vue-next'
-import MisskeyIcon from '~/components/svg/MisskeyIcon.vue'
-import XIcon from '~/components/svg/XIcon.vue'
-import DiscordIcon from '~/components/svg/DiscordIcon.vue'
+import SocialLinks from '~/components/partials/SocialLinks.vue'
 
 useSeoMeta({
   title: 'About',
@@ -13,28 +10,6 @@ useSeoMeta({
 
 const birthDate = '2004-08-27'
 
-const links = [
-  {
-    title: 'GitHub',
-    icon: Github,
-    href: 'https://github.com/Kohxax',
-  },
-  {
-    title: 'Misskey',
-    icon: MisskeyIcon,
-    href: 'https://mi.bokukoha.dev/@Koha',
-  },
-  {
-    title: 'X',
-    icon: XIcon,
-    href: 'https://x.com/kohxax',
-  },
-  {
-    title: 'Discord',
-    icon: DiscordIcon,
-    href: "https://discord.com/users/441869177389580308'",
-  },
-]
 
 const games = [
   {
@@ -73,19 +48,7 @@ const isLinksAvail = computed(() => {
       <h1 class="mb-1 text-3xl font-bold tracking-tight">Koha</h1>
       <p class="mb-2 text-sm text-muted-foreground">@Kohxax / こは</p>
 
-      <div class="flex gap-x-5 text-foreground">
-        <a
-          v-for="link in links"
-          :key="link.title"
-          :href="link.href"
-          :alt="link.title"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition hover:scale-95 hover:opacity-80"
-        >
-          <component :is="link.icon" class="h-5 w-5" />
-        </a>
-      </div>
+      <SocialLinks />
     </section>
 
     <main class="mx-auto w-full max-w-2xl px-6 pb-16">

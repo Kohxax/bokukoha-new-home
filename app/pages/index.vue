@@ -1,38 +1,12 @@
 <script lang="ts" setup>
 import {
-  Github,
   ArrowRight,
   NotebookPenIcon,
   BriefcaseBusinessIcon,
   UserRound,
 } from 'lucide-vue-next'
-import MisskeyIcon from '~/components/svg/MisskeyIcon.vue'
-import XIcon from '~/components/svg/XIcon.vue'
-import DiscordIcon from '~/components/svg/DiscordIcon.vue'
 import Avatar from '~/components/ui/avatar/Avatar.vue'
-
-const links = [
-  {
-    title: 'GitHub',
-    icon: Github,
-    href: 'https://github.com/Kohxax',
-  },
-  {
-    title: 'Misskey',
-    icon: MisskeyIcon,
-    href: 'https://mi.bokukoha.dev/@Koha',
-  },
-  {
-    title: 'X',
-    icon: XIcon,
-    href: 'https://x.com/kohxax',
-  },
-  {
-    title: 'Discord',
-    icon: DiscordIcon,
-    href: "https://discord.com/users/441869177389580308'",
-  },
-]
+import SocialLinks from '~/components/partials/SocialLinks.vue'
 
 const { data: blogPosts } = await useAsyncData('blog-list', () => {
   return queryCollection('blog')
@@ -103,18 +77,8 @@ useSeoMeta({
           </Button>
         </div>
 
-        <div class="mt-5 flex gap-x-5 text-foreground">
-          <a
-            v-for="link in links"
-            :key="link.title"
-            :href="link.href"
-            :alt="link.title"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:opacity-80 hover:scale-98 transition"
-          >
-            <component :is="link.icon" class="h-6 w-6" />
-          </a>
+        <div class="mt-5">
+          <SocialLinks size="lg" />
         </div>
       </div>
     </main>
