@@ -20,9 +20,9 @@ const brandYear = computed(() => {
 <template>
   <footer class="w-full bg-background border-t border-border mt-12">
     <div class="container mx-auto max-w-5xl px-6 py-8">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-8">
         <!-- Brand -->
-        <div class="flex flex-col gap-1.5">
+        <div class="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
           <NuxtLink to="/" class="font-bold text-base hover:opacity-80 transition">
             ぼくこは.dev
           </NuxtLink>
@@ -34,14 +34,16 @@ const brandYear = computed(() => {
         <!-- Nav -->
         <div class="flex flex-col gap-2">
           <span class="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-1">Pages</span>
-          <NuxtLink
-            v-for="link in navLinks"
-            :key="link.to"
-            :to="link.to"
-            class="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
-          >
-            {{ link.label }}
-          </NuxtLink>
+          <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2">
+            <NuxtLink
+              v-for="link in navLinks"
+              :key="link.to"
+              :to="link.to"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </div>
         </div>
 
         <!-- Social -->
