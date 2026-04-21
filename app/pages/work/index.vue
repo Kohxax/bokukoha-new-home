@@ -32,13 +32,13 @@ useHead({
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12 min-h-screen">
+  <div class="container mx-auto max-w-5xl px-3 py-8 md:py-12 min-h-screen">
     <div class="mx-auto max-w-4xl gap-6">
       <div class="flex flex-row text-center mb-5">
         <BriefcaseBusiness class="mt-2 mr-3" />
         <h1 class="text-3xl font-bold tracking-tight">Work</h1>
       </div>
-      <div class="space-y-12">
+      <div class="space-y-6 md:space-y-12">
         <Card
           v-for="post in posts"
           :key="post.path"
