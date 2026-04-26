@@ -120,7 +120,6 @@ onUnmounted(() => {
           <NuxtLink :to="post.path">
             <CoverImg
               :src="post.coverImage"
-              :article-path="post.path"
               :alt="post.title"
               class="aspect-video w-full object-cover"
             />

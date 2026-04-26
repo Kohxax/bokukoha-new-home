@@ -100,7 +100,6 @@ useSeoMeta({
               <CoverImg
                 v-if="post.coverImage"
                 :src="post.coverImage"
-                :article-path="post.path"
                 :alt="post.title"
                 class="h-40 md:h-80 w-full object-cover"
               />

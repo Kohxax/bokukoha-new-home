@@ -12,7 +12,7 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection('work').path(route.path).first()
 })
 
-const resolvedCoverImage = computed(() => resolveCoverImage(page.value?.coverImage, route.path))
+const resolvedCoverImage = computed(() => resolveCoverImage(page.value?.coverImage))
 
 useSchemaOrg([
   defineArticle({
@@ -65,7 +65,6 @@ onUnmounted(() => {
           <div v-if="resolvedCoverImage" class="relative">
             <CoverImg
               :src="page.coverImage"
-              :article-path="route.path"
               :alt="page.title"
               class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
               style="view-transition-name: post-cover-image"

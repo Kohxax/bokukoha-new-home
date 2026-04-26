@@ -1,19 +1,11 @@
 <template>
   <figure class="my-6">
-    <img
-      v-if="isContentImage"
-      :src="resolvedSrc"
+    <NuxtImg
+      :src="src"
       :alt="alt"
       class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
       loading="lazy"
-      @click="open(resolvedSrc)"
-    />
-    <NuxtImg
-      v-else
-      :src="resolvedSrc"
-      :alt="alt"
-      class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
-      @click="open(resolvedSrc)"
+      @click="open(src)"
     />
 
     <figcaption v-if="alt" class="text-md text-center text-muted-foreground mt-2">
@@ -34,33 +26,18 @@ const props = defineProps({
   },
 })
 
-const route = useRoute()
-
-const isContentImage = computed(() => {
-  const src = props.src
-  return !!src && !src.startsWith('/') && !/^https?:\/\//.test(src)
-})
-
-const resolvedSrc = computed(() => {
-  const src = props.src
-  if (!src || src.startsWith('/') || /^https?:\/\//.test(src)) return src
-  const base = route.path.endsWith('/') ? route.path : route.path + '/'
-  const imageBase = base.replace(/^\/(blog|work)\//, '/images/$1/')
-  return imageBase + src
-})
-
 const { $imageViewer } = useNuxtApp()
 const { open, register, unregister } = $imageViewer
 
 onMounted(() => {
-  if (resolvedSrc.value) {
-    register(resolvedSrc.value, props.alt)
+  if (props.src) {
+    register(props.src, props.alt)
   }
 })
 
 onUnmounted(() => {
-  if (resolvedSrc.value) {
-    unregister(resolvedSrc.value)
+  if (props.src) {
+    unregister(props.src)
   }
 })
 </script>

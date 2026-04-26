@@ -7,9 +7,7 @@ const props = defineProps<{
   autoDelay?: number
 }>()
 
-const route = useRoute()
-
-const images = (props.images || []).map(img => resolveCoverImage(img, route.path) ?? img)
+const images = props.images || []
 const autoDelay = props.autoDelay ?? 5000
 const currentIndex = ref(0)
 const container = ref<HTMLElement | null>(null)
@@ -81,10 +79,11 @@ onBeforeUnmount(() => {
         :key="idx"
         class="flex-none w-full h-full object-cover object-center snap-start"
       >
-        <img
+        <NuxtImg
           :src="img"
           :alt="`Gallery image ${idx + 1}`"
           class="w-full h-full m-0! object-cover object-center"
+          loading="lazy"
         />
       </div>
     </div>

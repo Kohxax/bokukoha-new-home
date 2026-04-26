@@ -18,7 +18,7 @@ const charsPerMin = 800
 
 const readingMin = Math.max(1, Math.ceil(raw.length / charsPerMin))
 
-const resolvedCoverImage = computed(() => resolveCoverImage(page.value?.coverImage, route.path))
+const resolvedCoverImage = computed(() => resolveCoverImage(page.value?.coverImage))
 
 useSchemaOrg([
   defineArticle({
@@ -70,7 +70,6 @@ onUnmounted(() => {
             <div v-if="resolvedCoverImage" class="relative">
               <CoverImg
                 :src="page.coverImage"
-                :article-path="route.path"
                 :alt="page.title"
                 class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
                 @click="open(resolvedCoverImage)"

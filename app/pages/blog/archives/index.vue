@@ -137,7 +137,6 @@ useSeoMeta({
                 <CoverImg
                   v-if="post.coverImage"
                   :src="post.coverImage"
-                  :article-path="post.path"
                   alt=""
                   class="w-24 h-24 object-cover rounded-xl m-1"
                 />
