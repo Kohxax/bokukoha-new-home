@@ -48,10 +48,13 @@ useSeoMeta({
       class="relative flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem)] p-4 text-center"
     >
       <div class="flex flex-col items-center justify-center">
-        <Avatar class="mb-3 h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
-          <img src="~/assets/img/icon_glass.webp" alt="Koha" />
-          <AvatarFallback>KH</AvatarFallback>
-        </Avatar>
+        <div class="relative mb-3">
+          <div class="absolute inset-0 rounded-full scale-105 blur-xl opacity-15 bg-brand" />
+          <Avatar class="relative h-50 w-50 shadow-xl" style="view-transition-name: main-avatar">
+            <img src="~/assets/img/icon_glass.webp" alt="Koha" />
+            <AvatarFallback>KH</AvatarFallback>
+          </Avatar>
+        </div>
 
         <h1 class="text-3xl font-bold tracking-tight text-foreground">Koha</h1>
         <p class="text-md text-muted-foreground">@Kohxax / こは</p>
