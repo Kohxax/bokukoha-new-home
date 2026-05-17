@@ -25,15 +25,28 @@ const emit = defineEmits<{
   refresh: []
 }>()
 
-const CONTENT_THRESHOLD = 200
 const REPLY_THRESHOLD = 2
 
+const contentRef = ref<HTMLParagraphElement | null>(null)
 const showReplyForm = ref(false)
 const isCollapsed = ref(false)
 const isContentExpanded = ref(false)
 const isRepliesExpanded = ref(false)
+const isLongContent = ref(false)
 
-const isLongContent = computed(() => (props.comment.content?.length ?? 0) > CONTENT_THRESHOLD)
+const checkOverflow = async () => {
+  await nextTick()
+  await document.fonts.ready
+  if (contentRef.value) {
+    isLongContent.value = contentRef.value.scrollHeight > contentRef.value.clientHeight
+  }
+}
+
+onMounted(checkOverflow)
+
+watch(isCollapsed, (collapsed) => {
+  if (!collapsed) checkOverflow()
+})
 
 const hasManyReplies = computed(() => props.comment.replies.length > REPLY_THRESHOLD)
 const visibleReplies = computed(() =>
@@ -103,8 +116,9 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
       <div class="pl-9">
         <div class="relative">
           <p
+            ref="contentRef"
             class="text-sm leading-relaxed whitespace-pre-wrap"
-            :class="isLongContent && !isContentExpanded ? 'line-clamp-4' : ''"
+            :class="!isContentExpanded ? 'line-clamp-5' : ''"
           >
             {{ comment.content }}
           </p>
@@ -122,8 +136,7 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
             @click="isContentExpanded = true"
             class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
           >
-            <span>もっと見る</span>
-            <span class="text-muted-foreground">— 全{{ comment.content?.length }}文字</span>
+            もっと見る
           </button>
         </div>
 
@@ -133,7 +146,7 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
             @click="isContentExpanded = false"
             class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
           >
-            閉じる — 全{{ comment.content?.length }}文字
+            閉じる
           </button>
         </div>
       </div>
