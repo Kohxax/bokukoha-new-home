@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MessageSquare } from 'lucide-vue-next'
+import { MessageSquare, Trash2 } from 'lucide-vue-next'
 import CommentForm from './CommentForm.vue'
 
 export interface Comment {
@@ -26,6 +26,8 @@ const emit = defineEmits<{
 }>()
 
 const showReplyForm = ref(false)
+const deleting = ref(false)
+const showDeleteConfirm = ref(false)
 
 const formatDate = (iso: string) => {
   return new Date(iso).toLocaleDateString('ja-JP', {
@@ -36,6 +38,20 @@ const formatDate = (iso: string) => {
 }
 
 const isDeleted = computed(() => props.comment.status === 'deleted')
+
+const deleteComment = async () => {
+  deleting.value = true
+  showDeleteConfirm.value = false
+  try {
+    await fetch(`${props.apiBase}/comments/${props.articleId}/${props.comment.commentId}`, {
+      method: 'DELETE',
+      headers: { 'x-api-key': props.apiKey },
+    })
+    emit('refresh')
+  } finally {
+    deleting.value = false
+  }
+}
 </script>
 
 <template>
@@ -69,7 +85,31 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
           ID:{{ comment.authorId }}
         </span>
       </div>
-      <span class="text-muted-foreground text-xs shrink-0">{{ formatDate(comment.createdAt) }}</span>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-muted-foreground text-xs">{{ formatDate(comment.createdAt) }}</span>
+        <button
+          v-if="!showDeleteConfirm"
+          @click="showDeleteConfirm = true"
+          :disabled="deleting"
+          class="text-muted-foreground/40 hover:text-red-400 transition-colors disabled:opacity-50"
+          title="削除"
+        >
+          <Trash2 class="w-3.5 h-3.5" />
+        </button>
+        <span v-if="showDeleteConfirm" class="flex items-center gap-1 text-xs">
+          <span class="text-muted-foreground">削除しますか？</span>
+          <button
+            @click="deleteComment"
+            :disabled="deleting"
+            class="text-red-400 hover:text-red-300 font-medium transition-colors disabled:opacity-50"
+          >はい</button>
+          <span class="text-muted-foreground/40">·</span>
+          <button
+            @click="showDeleteConfirm = false"
+            class="text-muted-foreground hover:text-foreground transition-colors"
+          >キャンセル</button>
+        </span>
+      </div>
     </div>
 
     <p class="text-sm leading-relaxed whitespace-pre-wrap pl-9">{{ comment.content }}</p>
