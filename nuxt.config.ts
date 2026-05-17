@@ -68,6 +68,8 @@ export default defineNuxtConfig({
     public: {
       likeApi: process.env.NUXT_PUBLIC_LIKE_API,
       likeApiKey: process.env.NUXT_PUBLIC_LIKE_API_KEY,
+      commentApi: process.env.NUXT_PUBLIC_COMMENT_API,
+      commentApiKey: process.env.NUXT_PUBLIC_COMMENT_API_KEY,
       siteURL: 'https://www.bokukoha.dev',
       posthogPublicKey: 'phc_oQSYqHltZoWuFStVSNCP9GzO253LCZJXhDttSTR4ZuT',
       posthogHost: 'https://us.i.posthog.com',

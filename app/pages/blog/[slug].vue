@@ -4,6 +4,7 @@ import Toc from '~/components/partials/Toc.vue'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
 import SocialShare from '~/components/partials/SocialShare.vue'
 import LikeButton from '~/components/partials/LikeButton.vue'
+import CommentSection from '~/components/partials/CommentSection.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
 
 useTwemoji()
@@ -137,6 +138,10 @@ onUnmounted(() => {
         <div class="min-w-0">
           <RelatedPost :category="page.category" :current-path="page.path" />
         </div>
+      </div>
+
+      <div class="max-w-4xl mx-auto w-full mt-7">
+        <CommentSection :article-id="page.path" />
       </div>
     </template>
     <NotFound v-else />

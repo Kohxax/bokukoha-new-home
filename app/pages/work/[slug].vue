@@ -4,6 +4,7 @@ import Toc from '~/components/partials/Toc.vue'
 import SocialShare from '~/components/partials/SocialShare.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
 import LikeButton from '~/components/partials/LikeButton.vue'
+import CommentSection from '~/components/partials/CommentSection.vue'
 
 useTwemoji()
 
@@ -52,8 +53,8 @@ onUnmounted(() => {
 
 <template>
   <div class="container mx-auto px-3 py-8 md:py-12 flex flex-col">
+    <template v-if="page">
     <div
-      v-if="page"
       class="grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,896px)_1fr] w-full max-w-[1440px] mx-auto gap-4 xl:gap-10"
     >
       <!-- Left Side: Empty for centering -->
@@ -117,6 +118,11 @@ onUnmounted(() => {
         </div>
       </aside>
     </div>
+
+    <div class="max-w-4xl mx-auto w-full mt-7">
+      <CommentSection :article-id="page.path" />
+    </div>
+    </template>
     <NotFound v-else />
   </div>
 </template>
