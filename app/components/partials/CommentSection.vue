@@ -42,8 +42,8 @@ onMounted(fetchComments)
 </script>
 
 <template>
-  <Card class="rounded-lg border px-5 md:px-10 py-8">
-    <h2 class="text-xl font-bold mb-6">
+  <section>
+    <h2 class="text-xl font-semibold tracking-tight mb-6">
       コメント
       <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
         {{ totalCount }}件
@@ -51,8 +51,11 @@ onMounted(fetchComments)
     </h2>
 
     <!-- Loading skeleton -->
-    <div v-if="loading" class="space-y-3 mb-8">
-      <div v-for="i in 2" :key="i" class="h-20 bg-muted/30 animate-pulse rounded-lg" />
+    <div v-if="loading" class="divide-y divide-border/30 mb-8">
+      <div v-for="i in 2" :key="i" class="py-5">
+        <div class="h-3 bg-muted/40 animate-pulse rounded w-1/4 mb-3" />
+        <div class="h-3 bg-muted/30 animate-pulse rounded w-3/4" />
+      </div>
     </div>
 
     <!-- Error -->
@@ -65,7 +68,7 @@ onMounted(fetchComments)
       <div v-if="comments.length === 0" class="text-muted-foreground text-sm mb-8">
         まだコメントがありません。最初のコメントを投稿してみましょう！
       </div>
-      <div v-else class="space-y-4 mb-10">
+      <div v-else class="divide-y divide-border/30 mb-10">
         <CommentItem
           v-for="comment in comments"
           :key="comment.commentId"
@@ -78,7 +81,6 @@ onMounted(fetchComments)
       </div>
 
       <div class="border-t border-border/30 pt-6">
-        <h3 class="text-base font-semibold mb-4">コメントを投稿</h3>
         <CommentForm
           :article-id="safeId"
           :api-base="apiBase"
@@ -87,5 +89,15 @@ onMounted(fetchComments)
         />
       </div>
     </template>
-  </Card>
+  </section>
 </template>
+
+<style scoped>
+.section-heading {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+</style>

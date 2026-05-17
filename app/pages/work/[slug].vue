@@ -119,7 +119,7 @@ onUnmounted(() => {
       </aside>
     </div>
 
-    <div class="max-w-4xl mx-auto w-full mt-7">
+    <div class="max-w-4xl mx-auto w-full mt-18">
       <CommentSection :article-id="page.path" />
     </div>
     </template>

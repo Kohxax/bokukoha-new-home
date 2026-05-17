@@ -40,9 +40,9 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
 
 <template>
   <!-- Deleted comment with remaining replies -->
-  <div v-if="isDeleted && comment.replies.length > 0" class="border-l-2 border-muted pl-4 py-1">
+  <div v-if="isDeleted && comment.replies.length > 0" class="py-5">
     <p class="text-muted-foreground text-xs italic">このコメントは削除されました。</p>
-    <div class="mt-3 space-y-3">
+    <div class="mt-3 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20">
       <CommentItem
         v-for="reply in comment.replies"
         :key="reply.commentId"
@@ -56,7 +56,7 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
   </div>
 
   <!-- Normal comment -->
-  <div v-else-if="!isDeleted" class="bg-muted/20 rounded-lg p-4 border border-border/30">
+  <div v-else-if="!isDeleted" class="py-5">
     <div class="flex items-center justify-between gap-2 mb-2">
       <div class="flex items-center gap-2 min-w-0 flex-1">
         <div
@@ -103,7 +103,7 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
     <!-- Nested replies -->
     <div
       v-if="comment.replies.length > 0"
-      class="mt-4 ml-4 pl-4 border-l-2 border-muted space-y-3"
+      class="mt-2 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20"
     >
       <CommentItem
         v-for="reply in comment.replies"
