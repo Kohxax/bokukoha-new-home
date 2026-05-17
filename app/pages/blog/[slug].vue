@@ -2,8 +2,8 @@
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import Toc from '~/components/partials/Toc.vue'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
-import SocialShare from '~/components/partials/SocialShare.vue'
 import LikeButton from '~/components/partials/LikeButton.vue'
+import ArticleActions from '~/components/partials/ArticleActions.vue'
 import CommentSection from '~/components/partials/CommentSection.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
 
@@ -118,9 +118,8 @@ onUnmounted(() => {
               <ContentRenderer :value="page" />
             </CardContent>
 
-            <div class="flex flex-col items-center justify-center my-8">
-              <LikeButton :article-id="page.path" />
-              <SocialShare class="mt-4" :showRSS="true" />
+            <div class="flex items-center justify-center my-8">
+              <ArticleActions :article-id="page.path" show-rss />
             </div>
           </Card>
         </div>
@@ -128,8 +127,7 @@ onUnmounted(() => {
         <!-- Right Side: Sticky button column -->
         <aside class="hidden xl:flex flex-col items-start sticky top-32 h-[calc(100vh-8rem)]">
           <div class="flex flex-col items-center">
-            <LikeButton :article-id="page.path" is-vertical />
-            <SocialShare class="mt-8" is-vertical :showRSS="true" />
+            <ArticleActions :article-id="page.path" is-vertical show-rss />
           </div>
         </aside>
       </div>
@@ -140,7 +138,7 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <div class="max-w-4xl mx-auto w-full mt-16">
+      <div id="comments" class="max-w-4xl mx-auto w-full mt-16">
         <CommentSection :article-id="page.path" />
       </div>
     </template>

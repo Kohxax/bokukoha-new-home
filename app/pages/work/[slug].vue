@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Rocket } from 'lucide-vue-next'
 import Toc from '~/components/partials/Toc.vue'
-import SocialShare from '~/components/partials/SocialShare.vue'
 import { defineArticle, useSchemaOrg } from '#imports'
-import LikeButton from '~/components/partials/LikeButton.vue'
+import ArticleActions from '~/components/partials/ArticleActions.vue'
 import CommentSection from '~/components/partials/CommentSection.vue'
 
 useTwemoji()
@@ -103,9 +102,8 @@ onUnmounted(() => {
             <ContentRenderer :value="page" />
           </CardContent>
 
-          <div class="flex flex-col items-center justify-center my-8">
-            <LikeButton :article-id="page.path" />
-            <SocialShare class="mt-4" />
+          <div class="flex items-center justify-center my-8">
+            <ArticleActions :article-id="page.path" />
           </div>
         </Card>
       </div>
@@ -113,13 +111,12 @@ onUnmounted(() => {
       <!-- Right Side: Like and SocialShare buttons -->
       <aside class="hidden xl:flex flex-col items-start sticky top-32 h-[calc(100vh-8rem)]">
         <div class="flex flex-col items-center">
-          <LikeButton :article-id="page.path" is-vertical />
-          <SocialShare class="mt-8" is-vertical />
+          <ArticleActions :article-id="page.path" is-vertical />
         </div>
       </aside>
     </div>
 
-    <div class="max-w-4xl mx-auto w-full mt-18">
+    <div id="comments" class="max-w-4xl mx-auto w-full mt-18">
       <CommentSection :article-id="page.path" />
     </div>
     </template>
