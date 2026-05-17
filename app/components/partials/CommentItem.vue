@@ -10,6 +10,7 @@ export interface Comment {
   content?: string
   parentId: string | null
   status: string
+  isAdmin?: boolean
   createdAt: string
   replies: Comment[]
 }
@@ -74,6 +75,7 @@ const hashStr = (s: string) => {
 
 // HSL→相対輝度（WCAG準拠）でテキスト色を決定
 const avatarStyle = computed(() => {
+  if (props.comment.isAdmin) return null
   const seed = props.comment.authorId ?? props.comment.authorName ?? '?'
   const hue = hashStr(seed) % 360
   const sat = (60 + hashStr(seed + 's') % 20) / 100   // 0.60–0.79
@@ -121,14 +123,24 @@ const avatarStyle = computed(() => {
         <button
           @click="isCollapsed = !isCollapsed"
           :title="isCollapsed ? 'スレッドを展開' : 'スレッドを折りたたむ'"
-          :style="avatarStyle"
-          class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none hover:ring-1 hover:ring-border transition-all"
+          :style="comment.isAdmin ? undefined : (avatarStyle ?? undefined)"
+          class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none hover:ring-1 hover:ring-border transition-all overflow-hidden"
+          :class="comment.isAdmin ? 'ring-1 ring-primary/40' : ''"
         >
-          {{ isCollapsed ? '+' : (comment.authorName?.charAt(0).toUpperCase() ?? '?') }}
+          <template v-if="comment.isAdmin && !isCollapsed">
+            <NuxtImg src="icon_glass.webp" alt="こは" class="w-full h-full object-cover" />
+          </template>
+          <template v-else>
+            {{ isCollapsed ? '+' : (comment.authorName?.charAt(0).toUpperCase() ?? '?') }}
+          </template>
         </button>
         <span class="font-semibold text-sm truncate">{{ comment.authorName }}</span>
         <span
-          v-if="comment.authorId"
+          v-if="comment.isAdmin"
+          class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium bg-primary/10 text-primary shrink-0"
+        >管理者</span>
+        <span
+          v-else-if="comment.authorId"
           class="text-xs text-muted-foreground font-mono select-all shrink-0"
         >
           ID:{{ comment.authorId }}
