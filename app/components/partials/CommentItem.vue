@@ -65,6 +65,35 @@ const formatDate = (iso: string) => {
 }
 
 const isDeleted = computed(() => props.comment.status === 'deleted')
+
+const hashStr = (s: string) => {
+  let h = 0
+  for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0
+  return Math.abs(h)
+}
+
+// HSL→相対輝度（WCAG準拠）でテキスト色を決定
+const avatarStyle = computed(() => {
+  const seed = props.comment.authorId ?? props.comment.authorName ?? '?'
+  const hue = hashStr(seed) % 360
+  const sat = (60 + hashStr(seed + 's') % 20) / 100   // 0.60–0.79
+  const lit = (38 + hashStr(seed + 'l') % 20) / 100   // 0.38–0.57
+
+  const hslChannel = (n: number) => {
+    const k = (n + hue / 30) % 12
+    return lit - sat * Math.min(lit, 1 - lit) * Math.max(-1, Math.min(k - 3, 9 - k, 1))
+  }
+  const toLinear = (c: number) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  const lum = 0.2126 * toLinear(hslChannel(0)) + 0.7152 * toLinear(hslChannel(8)) + 0.0722 * toLinear(hslChannel(4))
+
+  const onWhite = 1.05 / (lum + 0.05)
+  const onBlack = (lum + 0.05) / 0.05
+
+  return {
+    backgroundColor: `hsl(${hue}, ${Math.round(sat * 100)}%, ${Math.round(lit * 100)}%)`,
+    color: onWhite >= onBlack ? '#ffffff' : '#111827',
+  }
+})
 </script>
 
 <template>
@@ -92,6 +121,7 @@ const isDeleted = computed(() => props.comment.status === 'deleted')
         <button
           @click="isCollapsed = !isCollapsed"
           :title="isCollapsed ? 'スレッドを展開' : 'スレッドを折りたたむ'"
+          :style="avatarStyle"
           class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none hover:ring-1 hover:ring-border transition-all"
         >
           {{ isCollapsed ? '+' : (comment.authorName?.charAt(0).toUpperCase() ?? '?') }}
