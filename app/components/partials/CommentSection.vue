@@ -43,7 +43,7 @@ onMounted(fetchComments)
 
 <template>
   <section>
-    <h2 class="text-xl font-semibold tracking-tight mb-6">
+    <h2 class="text-xl font-semibold tracking-tight mb-4">
       コメント
       <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
         {{ totalCount }}件
@@ -68,7 +68,7 @@ onMounted(fetchComments)
       <div v-if="comments.length === 0" class="text-muted-foreground text-sm mb-8">
         まだコメントがありません。最初のコメントを投稿してみましょう！
       </div>
-      <div v-else class="divide-y divide-border/30 mb-10">
+      <div v-else class="divide-y divide-border/30 mb-8">
         <CommentItem
           v-for="comment in comments"
           :key="comment.commentId"
