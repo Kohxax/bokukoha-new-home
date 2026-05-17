@@ -19,6 +19,11 @@ const safeId = computed(() =>
   props.articleId.replace(/^\/|\/$/g, '').replace(/\//g, '_')
 )
 
+const countComments = (list: Comment[]): number =>
+  list.reduce((acc, c) => acc + 1 + countComments(c.replies), 0)
+
+const totalCount = computed(() => countComments(comments.value))
+
 const fetchComments = async () => {
   loading.value = true
   fetchError.value = false
@@ -41,7 +46,7 @@ onMounted(fetchComments)
     <h2 class="text-xl font-bold mb-6">
       コメント
       <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
-        {{ comments.length }}件
+        {{ totalCount }}件
       </span>
     </h2>
 
