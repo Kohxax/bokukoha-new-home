@@ -138,5 +138,8 @@ const submit = async () => {
         キャンセル
       </Button>
     </div>
+    <p class="text-xs text-muted-foreground/60">
+      投稿することで<NuxtLink to="/comment-policy" class="underline underline-offset-2 hover:text-muted-foreground transition-colors">コメントポリシー</NuxtLink>に同意したものとみなします。
+    </p>
   </form>
 </template>
