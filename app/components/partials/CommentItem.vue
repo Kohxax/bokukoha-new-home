@@ -30,7 +30,6 @@ const REPLY_THRESHOLD = 2
 
 const contentRef = ref<HTMLParagraphElement | null>(null)
 const showReplyForm = ref(false)
-const isCollapsed = ref(false)
 const isContentExpanded = ref(false)
 const isRepliesExpanded = ref(false)
 const isLongContent = ref(false)
@@ -44,10 +43,6 @@ const checkOverflow = async () => {
 }
 
 onMounted(checkOverflow)
-
-watch(isCollapsed, (collapsed) => {
-  if (!collapsed) checkOverflow()
-})
 
 const hasManyReplies = computed(() => props.comment.replies.length > REPLY_THRESHOLD)
 const visibleReplies = computed(() =>
@@ -119,21 +114,19 @@ const avatarStyle = computed(() => {
   <div v-else-if="!isDeleted" class="py-5">
     <div class="flex items-center justify-between gap-2 mb-2">
       <div class="flex items-center gap-2 min-w-0 flex-1">
-        <!-- Avatar doubles as collapse toggle -->
-        <button
-          @click="isCollapsed = !isCollapsed"
-          :title="isCollapsed ? 'スレッドを展開' : 'スレッドを折りたたむ'"
+        <!-- Avatar -->
+        <div
           :style="comment.isAdmin ? undefined : (avatarStyle ?? undefined)"
-          class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none hover:ring-1 hover:ring-border transition-all overflow-hidden"
+          class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none overflow-hidden"
           :class="comment.isAdmin ? 'ring-1 ring-primary/40' : ''"
         >
-          <template v-if="comment.isAdmin && !isCollapsed">
+          <template v-if="comment.isAdmin">
             <img src="~/assets/img/icon_glass.webp" alt="こは" class="w-full h-full object-cover" />
           </template>
           <template v-else>
-            {{ isCollapsed ? '+' : (comment.authorName?.charAt(0).toUpperCase() ?? '?') }}
+            {{ comment.authorName?.charAt(0).toUpperCase() ?? '?' }}
           </template>
-        </button>
+        </div>
         <span class="font-semibold text-sm truncate">{{ comment.authorName }}</span>
         <span
           v-if="comment.isAdmin"
@@ -145,17 +138,11 @@ const avatarStyle = computed(() => {
         >
           ID:{{ comment.authorId }}
         </span>
-        <!-- Collapsed preview -->
-        <span v-if="isCollapsed" class="text-xs text-muted-foreground truncate italic">
-          {{ comment.content?.slice(0, 60) }}{{ (comment.content?.length ?? 0) > 60 ? '…' : '' }}
-        </span>
       </div>
       <span class="text-muted-foreground text-xs whitespace-nowrap shrink-0">{{ formatDate(comment.createdAt) }}</span>
     </div>
 
-    <!-- Collapsible body -->
-    <template v-if="!isCollapsed">
-      <div class="pl-9">
+    <div class="pl-9">
         <div class="relative">
           <p
             ref="contentRef"
@@ -251,6 +238,5 @@ const avatarStyle = computed(() => {
           </button>
         </div>
       </div>
-    </template>
   </div>
 </template>
