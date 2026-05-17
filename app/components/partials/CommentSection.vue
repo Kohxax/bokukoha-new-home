@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CommentItem, { type Comment } from './CommentItem.vue'
-import CommentForm from './CommentForm.vue'
+import CommentDialog from './CommentDialog.vue'
 
 const props = defineProps<{
   articleId: string
@@ -39,16 +39,23 @@ const fetchComments = async () => {
 }
 
 onMounted(fetchComments)
+
+const dialogOpen = ref(false)
 </script>
 
 <template>
   <section>
-    <h2 class="text-xl font-semibold tracking-tight mb-4">
-      コメント
-      <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
-        {{ totalCount }}件
-      </span>
-    </h2>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold tracking-tight">
+        コメント
+        <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
+          {{ totalCount }}件
+        </span>
+      </h2>
+      <Button size="sm" @click="dialogOpen = true">
+        + コメントを書く
+      </Button>
+    </div>
 
     <!-- Loading skeleton -->
     <div v-if="loading" class="divide-y divide-border/30 mb-8">
@@ -79,16 +86,17 @@ onMounted(fetchComments)
           @refresh="fetchComments"
         />
       </div>
-
-      <div class="border-t border-border/30 pt-6">
-        <CommentForm
-          :article-id="safeId"
-          :api-base="apiBase"
-          :api-key="apiKey"
-          @success="fetchComments"
-        />
-      </div>
     </template>
+
+    <!-- Comment dialog -->
+    <CommentDialog
+      v-if="dialogOpen"
+      :article-id="safeId"
+      :api-base="apiBase"
+      :api-key="apiKey"
+      @success="fetchComments"
+      @close="dialogOpen = false"
+    />
   </section>
 </template>
 
