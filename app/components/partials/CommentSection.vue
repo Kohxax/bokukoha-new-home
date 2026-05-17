@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CommentItem, { type Comment } from './CommentItem.vue'
-import CommentDialog from './CommentDialog.vue'
 
 const props = defineProps<{
   articleId: string
@@ -14,7 +13,6 @@ const comments = ref<Comment[]>([])
 const loading = ref(true)
 const fetchError = ref(false)
 
-// /blog/my-article/ → blog_my-article (スラッシュはAPIパスと競合するため_に変換)
 const safeId = computed(() =>
   props.articleId.replace(/^\/|\/$/g, '').replace(/\//g, '_')
 )
@@ -40,25 +38,142 @@ const fetchComments = async () => {
 
 onMounted(fetchComments)
 
-const dialogOpen = ref(false)
+// Inline form state
+const formExpanded = ref(false)
+const newContent = ref('')
+const newAuthorName = ref('')
+const newAuthorEmail = ref('')
+const submitting = ref(false)
+const errorMessage = ref('')
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const cancelForm = () => {
+  newContent.value = ''
+  newAuthorName.value = ''
+  newAuthorEmail.value = ''
+  errorMessage.value = ''
+  formExpanded.value = false
+}
+
+const submitComment = async () => {
+  const emailTrimmed = newAuthorEmail.value.trim()
+  if (emailTrimmed && !EMAIL_RE.test(emailTrimmed)) {
+    errorMessage.value = 'メールアドレスの形式が正しくありません。'
+    return
+  }
+
+  submitting.value = true
+  errorMessage.value = ''
+
+  try {
+    const body: Record<string, string> = { content: newContent.value.trim() }
+    if (newAuthorName.value.trim()) body.authorName = newAuthorName.value.trim()
+    if (emailTrimmed) body.authorEmail = emailTrimmed
+
+    const res = await fetch(`${apiBase}/comments/${safeId.value}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
+      body: JSON.stringify(body),
+    })
+
+    const data = await res.json()
+
+    if (res.status === 201) {
+      cancelForm()
+      fetchComments()
+    } else if (data.type === 'validation') {
+      const fieldMessages: Record<string, string> = {
+        content: 'コメントの内容が無効です（1〜5000文字）。',
+        authorName: '名前が長すぎます（100文字以内）。',
+        authorEmail: 'メールアドレスの形式が正しくありません。',
+      }
+      errorMessage.value = fieldMessages[data.field] ?? '入力内容を確認してください。'
+    } else {
+      errorMessage.value = '投稿できませんでした。内容を確認してください。'
+    }
+  } catch {
+    errorMessage.value = '送信に失敗しました。しばらく経ってからお試しください。'
+  } finally {
+    submitting.value = false
+  }
+}
 </script>
 
 <template>
   <section>
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-semibold tracking-tight">
-        コメント
-        <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
-          {{ totalCount }}件
-        </span>
-      </h2>
-      <Button size="sm" @click="dialogOpen = true">
-        + コメントを書く
-      </Button>
+    <h2 class="text-xl font-semibold tracking-tight mb-6">
+      コメント
+      <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
+        {{ totalCount }}件
+      </span>
+    </h2>
+
+    <!-- Inline comment form -->
+    <div class="mb-8">
+      <!-- Main input (always visible) -->
+      <div class="border-b border-border/40 pb-2">
+        <textarea
+          v-model="newContent"
+          maxlength="5000"
+          rows="1"
+          placeholder="コメントする..."
+          class="w-full bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground/40 resize-none overflow-hidden"
+          @focus="formExpanded = true"
+          @input="(e) => { const el = e.target as HTMLTextAreaElement; el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px' }"
+        />
+      </div>
+
+      <!-- Expanded area (name/email + buttons + policy) -->
+      <Transition name="form-expand">
+        <div v-if="formExpanded" class="overflow-hidden">
+          <!-- Name + email -->
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <input
+              v-model="newAuthorName"
+              type="text"
+              maxlength="100"
+              placeholder="名前（任意）"
+              class="bg-transparent border-b border-border/40 pb-1.5 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
+            />
+            <input
+              v-model="newAuthorEmail"
+              type="email"
+              maxlength="200"
+              placeholder="メール（任意・非公開）"
+              class="bg-transparent border-b border-border/40 pb-1.5 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
+            />
+          </div>
+
+          <!-- Error -->
+          <p v-if="errorMessage" class="text-red-400 text-xs mt-2">{{ errorMessage }}</p>
+
+          <!-- Buttons + policy (same row) -->
+          <div class="flex items-center gap-3 mt-3">
+            <span class="text-xs text-muted-foreground/50 mr-auto">
+              投稿することで<NuxtLink to="/comment-policy" class="underline underline-offset-2 hover:text-muted-foreground/70 transition-colors">コメントポリシー</NuxtLink>に同意したものとみなします。
+            </span>
+            <button
+              type="button"
+              class="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              @click="cancelForm"
+            >
+              キャンセル
+            </button>
+            <Button
+              size="sm"
+              :disabled="!newContent.trim() || submitting"
+              @click="submitComment"
+            >
+              {{ submitting ? '送信中...' : 'コメント' }}
+            </Button>
+          </div>
+        </div>
+      </Transition>
     </div>
 
     <!-- Loading skeleton -->
-    <div v-if="loading" class="divide-y divide-border/30 mb-8">
+    <div v-if="loading" class="divide-y divide-border/30">
       <div v-for="i in 2" :key="i" class="py-5">
         <div class="h-3 bg-muted/40 animate-pulse rounded w-1/4 mb-3" />
         <div class="h-3 bg-muted/30 animate-pulse rounded w-3/4" />
@@ -66,16 +181,16 @@ const dialogOpen = ref(false)
     </div>
 
     <!-- Error -->
-    <p v-else-if="fetchError" class="text-muted-foreground text-sm mb-8">
+    <p v-else-if="fetchError" class="text-muted-foreground text-sm">
       コメントの読み込みに失敗しました。
     </p>
 
     <!-- Comment list -->
     <template v-else>
-      <div v-if="comments.length === 0" class="text-muted-foreground text-sm mb-8">
+      <p v-if="comments.length === 0" class="text-muted-foreground text-sm">
         まだコメントがありません。最初のコメントを投稿してみましょう！
-      </div>
-      <div v-else class="divide-y divide-border/30 mb-8">
+      </p>
+      <div v-else class="divide-y divide-border/30">
         <CommentItem
           v-for="comment in comments"
           :key="comment.commentId"
@@ -87,25 +202,17 @@ const dialogOpen = ref(false)
         />
       </div>
     </template>
-
-    <!-- Comment dialog -->
-    <CommentDialog
-      v-if="dialogOpen"
-      :article-id="safeId"
-      :api-base="apiBase"
-      :api-key="apiKey"
-      @success="fetchComments"
-      @close="dialogOpen = false"
-    />
   </section>
 </template>
 
 <style scoped>
-.section-heading {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
+.form-expand-enter-active,
+.form-expand-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.form-expand-enter-from,
+.form-expand-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 </style>

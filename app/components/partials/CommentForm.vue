@@ -129,7 +129,6 @@ const submit = async () => {
         {{ submitting ? '送信中...' : parentId ? '返信する' : '投稿する' }}
       </Button>
       <Button
-        v-if="parentId"
         type="button"
         variant="ghost"
         size="sm"
