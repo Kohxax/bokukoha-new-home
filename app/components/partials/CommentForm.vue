@@ -17,16 +17,25 @@ const content = ref('')
 const submitting = ref(false)
 const errorMessage = ref('')
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 const submit = async () => {
   submitting.value = true
   errorMessage.value = ''
+
+  const emailTrimmed = authorEmail.value.trim()
+  if (emailTrimmed && !EMAIL_RE.test(emailTrimmed)) {
+    errorMessage.value = 'メールアドレスの形式が正しくありません。'
+    submitting.value = false
+    return
+  }
 
   try {
     const body: Record<string, string> = {
       content: content.value.trim(),
     }
     if (authorName.value.trim()) body.authorName = authorName.value.trim()
-    if (authorEmail.value.trim()) body.authorEmail = authorEmail.value.trim()
+    if (emailTrimmed) body.authorEmail = emailTrimmed
     if (props.parentId) body.parentId = props.parentId
 
     const res = await fetch(
