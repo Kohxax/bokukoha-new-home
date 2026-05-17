@@ -128,7 +128,7 @@ const avatarStyle = computed(() => {
           :class="comment.isAdmin ? 'ring-1 ring-primary/40' : ''"
         >
           <template v-if="comment.isAdmin && !isCollapsed">
-            <NuxtImg src="icon_glass.webp" alt="こは" class="w-full h-full object-cover" />
+            <img src="~/assets/img/icon_glass.webp" alt="こは" class="w-full h-full object-cover" />
           </template>
           <template v-else>
             {{ isCollapsed ? '+' : (comment.authorName?.charAt(0).toUpperCase() ?? '?') }}
