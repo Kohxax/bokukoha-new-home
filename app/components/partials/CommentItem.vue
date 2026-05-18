@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { MessageSquare } from 'lucide-vue-next'
 import CommentForm from './CommentForm.vue'
+import { parseTwemoji } from '~/composables/useTwemoji'
 
 export interface Comment {
   commentId: string
@@ -42,7 +43,10 @@ const checkOverflow = async () => {
   }
 }
 
-onMounted(checkOverflow)
+onMounted(async () => {
+  await checkOverflow()
+  if (contentRef.value) parseTwemoji(contentRef.value)
+})
 
 const hasManyReplies = computed(() => props.comment.replies.length > REPLY_THRESHOLD)
 const visibleReplies = computed(() =>
