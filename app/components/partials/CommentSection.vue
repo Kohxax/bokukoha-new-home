@@ -22,6 +22,16 @@ const countComments = (list: Comment[]): number =>
 
 const totalCount = computed(() => countComments(comments.value))
 
+const sortOrder = ref<'asc' | 'desc'>('asc')
+const sortedComments = computed(() => {
+  const list = [...comments.value]
+  list.sort((a, b) => {
+    const diff = a.createdAt.localeCompare(b.createdAt)
+    return sortOrder.value === 'asc' ? diff : -diff
+  })
+  return list
+})
+
 const fetchComments = async () => {
   loading.value = true
   fetchError.value = false
@@ -105,12 +115,25 @@ const submitComment = async () => {
 
 <template>
   <section>
-    <h2 class="text-xl font-semibold tracking-tight mb-6">
-      コメント
-      <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
-        {{ totalCount }}件
-      </span>
-    </h2>
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-xl font-semibold tracking-tight">
+        コメント
+        <span v-if="!loading && !fetchError" class="text-muted-foreground text-sm font-normal ml-2">
+          {{ totalCount }}件
+        </span>
+      </h2>
+      <div v-if="!loading && !fetchError && comments.length > 1" class="flex text-xs text-muted-foreground">
+        <button
+          :class="sortOrder === 'asc' ? 'text-foreground font-medium' : 'hover:text-foreground transition-colors'"
+          @click="sortOrder = 'asc'"
+        >古い順</button>
+        <span class="mx-1.5">|</span>
+        <button
+          :class="sortOrder === 'desc' ? 'text-foreground font-medium' : 'hover:text-foreground transition-colors'"
+          @click="sortOrder = 'desc'"
+        >新しい順</button>
+      </div>
+    </div>
 
     <!-- Inline comment form -->
     <div class="mb-8">
@@ -196,7 +219,7 @@ const submitComment = async () => {
       </p>
       <div v-else class="divide-y divide-border/30">
         <CommentItem
-          v-for="comment in comments"
+          v-for="comment in sortedComments"
           :key="comment.commentId"
           :comment="comment"
           :article-id="safeId"
