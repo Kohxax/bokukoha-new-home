@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MessageSquare } from 'lucide-vue-next'
+import { MessageSquare, Pin } from 'lucide-vue-next'
 import CommentForm from './CommentForm.vue'
 import { parseTwemoji } from '~/composables/useTwemoji'
 
@@ -12,6 +12,7 @@ export interface Comment {
   parentId: string | null
   status: string
   isAdmin?: boolean
+  pinned?: boolean
   createdAt: string
   replies: Comment[]
 }
@@ -143,6 +144,7 @@ const avatarStyle = computed(() => {
           ID:{{ comment.authorId }}
         </span>
       </div>
+      <Pin v-if="comment.pinned" class="w-3 h-3 shrink-0 text-amber-400/70" />
       <span class="text-muted-foreground text-xs whitespace-nowrap shrink-0">{{ formatDate(comment.createdAt) }}</span>
     </div>
 

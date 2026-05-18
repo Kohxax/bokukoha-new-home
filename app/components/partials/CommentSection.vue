@@ -26,6 +26,8 @@ const sortOrder = ref<'asc' | 'desc'>('asc')
 const sortedComments = computed(() => {
   const list = [...comments.value]
   list.sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1
+    if (!a.pinned && b.pinned) return 1
     const diff = a.createdAt.localeCompare(b.createdAt)
     return sortOrder.value === 'asc' ? diff : -diff
   })
