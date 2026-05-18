@@ -19,6 +19,9 @@ const errorMessage = ref('')
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const contentTrimmed = computed(() => content.value.trim())
+const contentTooShort = computed(() => contentTrimmed.value.length > 0 && contentTrimmed.value.length < 2)
+
 const submit = async () => {
   submitting.value = true
   errorMessage.value = ''
@@ -118,13 +121,14 @@ const submit = async () => {
       </div>
     </div>
 
-    <p v-if="errorMessage" class="text-red-400 text-sm">{{ errorMessage }}</p>
+    <p v-if="contentTooShort" class="text-amber-400 text-sm">2文字以上入力してください。</p>
+    <p v-else-if="errorMessage" class="text-red-400 text-sm">{{ errorMessage }}</p>
 
     <div class="flex items-center gap-2">
       <Button
         type="submit"
         size="sm"
-        :disabled="submitting || !content.trim()"
+        :disabled="submitting || contentTrimmed.length < 2"
       >
         {{ submitting ? '送信中...' : parentId ? '返信する' : '投稿する' }}
       </Button>

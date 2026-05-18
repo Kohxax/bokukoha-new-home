@@ -48,6 +48,9 @@ const errorMessage = ref('')
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const contentTrimmed = computed(() => newContent.value.trim())
+const contentTooShort = computed(() => contentTrimmed.value.length > 0 && contentTrimmed.value.length < 2)
+
 const cancelForm = () => {
   newContent.value = ''
   newAuthorName.value = ''
@@ -146,7 +149,8 @@ const submitComment = async () => {
           </div>
 
           <!-- Error -->
-          <p v-if="errorMessage" class="text-red-400 text-xs mt-2">{{ errorMessage }}</p>
+          <p v-if="contentTooShort" class="text-amber-400 text-xs mt-2">2文字以上入力してください。</p>
+          <p v-else-if="errorMessage" class="text-red-400 text-xs mt-2">{{ errorMessage }}</p>
 
           <!-- Buttons + policy (same row) -->
           <div class="flex items-center gap-3 mt-3">
@@ -162,7 +166,7 @@ const submitComment = async () => {
             </button>
             <Button
               size="sm"
-              :disabled="!newContent.trim() || submitting"
+              :disabled="contentTrimmed.length < 2 || submitting"
               @click="submitComment"
             >
               {{ submitting ? '送信中...' : 'コメント' }}
