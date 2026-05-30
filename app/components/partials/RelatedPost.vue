@@ -95,7 +95,7 @@ onUnmounted(() => {
 
 <template>
   <div v-if="related?.length" class="mt-3 pt-8 space-y-6">
-    <h2 class="text-lg font-semibold tracking-tight">関連する投稿</h2>
+    <h2 class="text-lg font-semibold tracking-tight">関連記事</h2>
 
     <div class="relative group">
       <div
