@@ -106,7 +106,7 @@ useSeoMeta({
             </NuxtLink>
 
             <CardHeader>
-              <Button variant="secondary" size="sm" as-child class="w-22">
+              <Button variant="secondary" size="sm" as-child class="w-fit">
                 <NuxtLink :to="`/blog/archives?category=${post.category}`">
                   {{ post.category }}
                 </NuxtLink>

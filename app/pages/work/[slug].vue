@@ -74,7 +74,7 @@ onUnmounted(() => {
 
           <CardHeader class="pt-2 px-5 md:px-10">
             <span
-              class="inline-block px-2 py-2 text-sm font-semibold bg-muted text-center rounded-lg w-25"
+              class="inline-block justify-self-start px-3 py-2 text-sm font-semibold bg-muted rounded-lg"
             >
               {{ page.category }}
             </span>
