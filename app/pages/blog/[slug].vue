@@ -78,7 +78,7 @@ onUnmounted(() => {
             </div>
 
             <CardHeader class="pt-2 px-5 md:px-10">
-              <Button variant="secondary" class="mb-2 w-18">
+              <Button variant="secondary" class="mb-2 w-22">
                 <NuxtLink :to="`/blog/archives?category=${page.category}`">
                   {{ page.category }}
                 </NuxtLink>
