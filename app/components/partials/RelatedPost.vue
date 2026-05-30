@@ -1,21 +1,15 @@
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const props = defineProps({
-  category: String,
   currentPath: String,
 })
 
-const { data: related } = await useAsyncData(`related-${props.category}-${props.currentPath}`, () =>
-  queryCollection('blog')
-    .where('category', '=', props.category)
-    .where('path', '!=', props.currentPath)
-    .where('draft', '=', '0')
-    .select('title', 'path', 'date', 'category', 'coverImage')
-    .order('date', 'DESC')
-    .limit(5)
-    .all(),
+const { data: relatedMap } = await useAsyncData('related-map', () =>
+  $fetch<Record<string, { title: string; path: string; date: string; category: string; coverImage: string }[]>>('/api/related.json'),
 )
+
+const related = computed(() => relatedMap.value?.[props.currentPath ?? ''] ?? [])
 const scrollContainer = ref(null)
 const hasOverflow = ref(false)
 const thumbWidth = ref(0)

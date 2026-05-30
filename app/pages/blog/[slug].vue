@@ -2,6 +2,7 @@
 import { CalendarIcon, ClockIcon } from 'lucide-vue-next'
 import Toc from '~/components/partials/Toc.vue'
 import RelatedPost from '~/components/partials/RelatedPost.vue'
+import PostNavigation from '~/components/partials/PostNavigation.vue'
 import LikeButton from '~/components/partials/LikeButton.vue'
 import ArticleActions from '~/components/partials/ArticleActions.vue'
 import CommentSection from '~/components/partials/CommentSection.vue'
@@ -134,7 +135,8 @@ onUnmounted(() => {
 
       <div class="max-w-4xl mx-auto w-full">
         <div class="min-w-0">
-          <RelatedPost :category="page.category" :current-path="page.path" />
+          <PostNavigation :current-path="page.path" />
+          <RelatedPost :current-path="page.path" />
         </div>
       </div>
 
