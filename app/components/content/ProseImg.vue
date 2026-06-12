@@ -8,13 +8,17 @@
       @click="open(src)"
     />
 
-    <figcaption v-if="alt" class="text-md text-center text-muted-foreground mt-2">
-      {{ alt }}
-    </figcaption>
+    <figcaption
+      v-if="alt"
+      class="text-md text-center text-muted-foreground mt-2 break-words"
+      v-html="linkifyText(alt)"
+    />
   </figure>
 </template>
 
 <script setup lang="ts">
+import { linkifyText } from '~/composables/useLinkify'
+
 const props = defineProps({
   src: {
     type: String,

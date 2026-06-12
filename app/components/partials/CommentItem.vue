@@ -2,6 +2,7 @@
 import { MessageSquare, Pin } from 'lucide-vue-next'
 import CommentForm from './CommentForm.vue'
 import { parseTwemoji } from '~/composables/useTwemoji'
+import { linkifyText } from '~/composables/useLinkify'
 
 export interface Comment {
   commentId: string
@@ -66,6 +67,8 @@ const formatDate = (iso: string) => {
 }
 
 const isDeleted = computed(() => props.comment.status === 'deleted')
+
+const contentHtml = computed(() => props.comment.content ? linkifyText(props.comment.content) : '')
 
 const hashStr = (s: string) => {
   let h = 0
@@ -152,11 +155,10 @@ const avatarStyle = computed(() => {
         <div class="relative">
           <p
             ref="contentRef"
-            class="text-sm leading-relaxed whitespace-pre-wrap"
+            class="text-sm leading-relaxed whitespace-pre-wrap break-words"
             :class="!isContentExpanded ? 'line-clamp-5' : ''"
-          >
-            {{ comment.content }}
-          </p>
+            v-html="contentHtml"
+          />
 
           <!-- Gradient fade -->
           <div
