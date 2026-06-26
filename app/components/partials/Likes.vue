@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Heart } from 'lucide-vue-next'
-import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   articleId: {

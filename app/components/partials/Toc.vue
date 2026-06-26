@@ -159,7 +159,7 @@ onMounted(() => {
                             : 'text-muted-foreground/60'
                         "
                       >
-                        {{ i + 1 }}.{{ j + 1 }}.{{ k + 1 }}.
+                        {{ Number(i) + 1 }}.{{ Number(j) + 1 }}.{{ Number(k) + 1 }}.
                       </span>
                       <span class="leading-relaxed">{{ grandChildLink.text }}</span>
                     </a>

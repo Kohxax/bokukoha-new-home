@@ -1,6 +1,6 @@
 import twemoji from '@twemoji/api'
 
-const TWEMOJI_OPTIONS = {
+export const TWEMOJI_OPTIONS = {
   folder: 'svg',
   ext: '.svg',
   base: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/',

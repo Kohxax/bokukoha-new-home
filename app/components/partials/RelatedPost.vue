@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-
 const props = defineProps({
   currentPath: String,
 })
 
 const { data: relatedMap } = await useAsyncData('related-map', () =>
-  $fetch<Record<string, { title: string; path: string; date: string; category: string; coverImage: string }[]>>('/api/related.json'),
+  $fetch<
+    Record<
+      string,
+      { title: string; path: string; date: string; category: string; coverImage: string }[]
+    >
+  >('/api/related.json'),
 )
 
 const related = computed(() => relatedMap.value?.[props.currentPath ?? ''] ?? [])
-const scrollContainer = ref(null)
+const scrollContainer = ref<HTMLElement | null>(null)
 const hasOverflow = ref(false)
 const thumbWidth = ref(0)
 const thumbLeft = ref(0)
@@ -32,7 +35,7 @@ const updateScroll = () => {
   }
 }
 
-const onWheel = (e) => {
+const onWheel = (e: WheelEvent) => {
   if (scrollContainer.value) {
     if (e.deltaY !== 0) {
       scrollContainer.value.scrollBy({
@@ -43,19 +46,19 @@ const onWheel = (e) => {
   }
 }
 
-const onDragStart = (e) => {
+const onDragStart = (e: MouseEvent | TouchEvent) => {
   if (!scrollContainer.value || !hasOverflow.value) return
   isDragging.value = true
-  startX.value = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX
+  startX.value = e instanceof TouchEvent ? e.touches[0]!.clientX : e.clientX
   startScrollLeft.value = scrollContainer.value.scrollLeft
   document.body.style.userSelect = 'none' // Prevent text selection
 }
 
-const onDragMove = (e) => {
+const onDragMove = (e: MouseEvent | TouchEvent) => {
   if (!isDragging.value || !scrollContainer.value) return
   e.preventDefault()
 
-  const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX
+  const currentX = e instanceof TouchEvent ? e.touches[0]!.clientX : e.clientX
   const deltaX = currentX - startX.value
 
   const scrollRatio = scrollContainer.value.scrollWidth / scrollContainer.value.clientWidth
@@ -130,7 +133,7 @@ onUnmounted(() => {
 
       <div
         v-if="hasOverflow"
-        class="absolute bottom-0 left-4 right-4 h-5 group/scrollbar cursor-grab active:cursor-grabbing flex items-center justify-center -translate-y-[2px]"
+        class="absolute bottom-0 left-4 right-4 h-5 group/scrollbar cursor-grab active:cursor-grabbing flex items-center justify-center -translate-y-0.5"
         @mousedown="onDragStart"
         @touchstart.passive="onDragStart"
       >

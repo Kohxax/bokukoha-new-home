@@ -1,8 +1,23 @@
 {
+  "env": {
+    "export CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(grep -r \"coverImage\" D:/bokukoha-new-home/content/blog/*/index.md)",
-      "Bash(grep -r \"coverImage\" D:/bokukoha-new-home/content/work/*/index.md)"
+      "Bash(grep -r \"coverImage\" D:/bokukoha-new-home/content/work/*/index.md)",
+      "Bash(rtk pnpm *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk find *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk npm *)",
+      "Bash(rtk tail *)",
+      "Bash(rtk read *)",
+      "Bash(tasklist)",
+      "WebSearch"
+    ],
+    "additionalDirectories": [
+      "D:\\bokukoha-new-home\\app\\pages\\work"
     ]
   }
 }

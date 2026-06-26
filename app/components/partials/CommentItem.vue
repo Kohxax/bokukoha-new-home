@@ -54,7 +54,7 @@ const hasManyReplies = computed(() => props.comment.replies.length > REPLY_THRES
 const visibleReplies = computed(() =>
   hasManyReplies.value && !isRepliesExpanded.value
     ? props.comment.replies.slice(0, REPLY_THRESHOLD)
-    : props.comment.replies
+    : props.comment.replies,
 )
 const hiddenReplyCount = computed(() => props.comment.replies.length - REPLY_THRESHOLD)
 
@@ -68,11 +68,13 @@ const formatDate = (iso: string) => {
 
 const isDeleted = computed(() => props.comment.status === 'deleted')
 
-const contentHtml = computed(() => props.comment.content ? linkifyText(props.comment.content) : '')
+const contentHtml = computed(() =>
+  props.comment.content ? linkifyText(props.comment.content) : '',
+)
 
 const hashStr = (s: string) => {
   let h = 0
-  for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0
+  for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0
   return Math.abs(h)
 }
 
@@ -81,15 +83,18 @@ const avatarStyle = computed(() => {
   if (props.comment.isAdmin) return null
   const seed = props.comment.authorId ?? props.comment.authorName ?? '?'
   const hue = hashStr(seed) % 360
-  const sat = (60 + hashStr(seed + 's') % 20) / 100   // 0.60–0.79
-  const lit = (38 + hashStr(seed + 'l') % 20) / 100   // 0.38–0.57
+  const sat = (60 + (hashStr(seed + 's') % 20)) / 100 // 0.60–0.79
+  const lit = (38 + (hashStr(seed + 'l') % 20)) / 100 // 0.38–0.57
 
   const hslChannel = (n: number) => {
     const k = (n + hue / 30) % 12
     return lit - sat * Math.min(lit, 1 - lit) * Math.max(-1, Math.min(k - 3, 9 - k, 1))
   }
-  const toLinear = (c: number) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-  const lum = 0.2126 * toLinear(hslChannel(0)) + 0.7152 * toLinear(hslChannel(8)) + 0.0722 * toLinear(hslChannel(4))
+  const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
+  const lum =
+    0.2126 * toLinear(hslChannel(0)) +
+    0.7152 * toLinear(hslChannel(8)) +
+    0.0722 * toLinear(hslChannel(4))
 
   const onWhite = 1.05 / (lum + 0.05)
   const onBlack = (lum + 0.05) / 0.05
@@ -139,7 +144,8 @@ const avatarStyle = computed(() => {
         <span
           v-if="comment.isAdmin"
           class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium bg-primary/10 text-primary shrink-0"
-        >管理者</span>
+          >管理者</span
+        >
         <span
           v-else-if="comment.authorId"
           class="text-xs text-muted-foreground font-mono select-all shrink-0"
@@ -148,103 +154,108 @@ const avatarStyle = computed(() => {
         </span>
       </div>
       <Pin v-if="comment.pinned" class="w-3 h-3 shrink-0 text-amber-400/70" />
-      <span class="text-muted-foreground text-xs whitespace-nowrap shrink-0">{{ formatDate(comment.createdAt) }}</span>
+      <span class="text-muted-foreground text-xs whitespace-nowrap shrink-0">{{
+        formatDate(comment.createdAt)
+      }}</span>
     </div>
 
     <div class="pl-9">
-        <div class="relative">
-          <p
-            ref="contentRef"
-            class="text-sm leading-relaxed whitespace-pre-wrap break-words"
-            :class="!isContentExpanded ? 'line-clamp-5' : ''"
-            v-html="contentHtml"
-          />
+      <div class="relative">
+        <p
+          ref="contentRef"
+          class="text-sm leading-relaxed whitespace-pre-wrap wrap-break-word"
+          :class="!isContentExpanded ? 'line-clamp-5' : ''"
+          v-html="contentHtml"
+        />
 
-          <!-- Gradient fade -->
-          <div
-            v-if="isLongContent && !isContentExpanded"
-            class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent pointer-events-none"
-          />
-        </div>
-
-        <!-- Expand button (centered, overlaps gradient bottom edge) -->
-        <div v-if="isLongContent && !isContentExpanded" class="relative z-10 flex justify-center -mt-3">
-          <button
-            @click="isContentExpanded = true"
-            class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
-          >
-            もっと見る
-          </button>
-        </div>
-
-        <!-- Close button (centered) when expanded -->
-        <div v-if="isLongContent && isContentExpanded" class="flex justify-center mt-3">
-          <button
-            @click="isContentExpanded = false"
-            class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
-          >
-            閉じる
-          </button>
-        </div>
+        <!-- Gradient fade -->
+        <div
+          v-if="isLongContent && !isContentExpanded"
+          class="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent pointer-events-none"
+        />
       </div>
 
-      <!-- Reply button (top-level only) -->
-      <div v-if="!comment.parentId" class="mt-2 pl-9">
+      <!-- Expand button (centered, overlaps gradient bottom edge) -->
+      <div
+        v-if="isLongContent && !isContentExpanded"
+        class="relative z-10 flex justify-center -mt-3"
+      >
         <button
-          @click="showReplyForm = !showReplyForm"
-          class="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          @click="isContentExpanded = true"
+          class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
         >
-          <MessageSquare class="w-3 h-3" />
-          返信
+          もっと見る
         </button>
       </div>
 
-      <!-- Inline reply form -->
-      <div v-if="showReplyForm" class="mt-3 pl-9">
-        <CommentForm
-          :article-id="articleId"
-          :parent-id="comment.commentId"
-          :api-base="apiBase"
-          :api-key="apiKey"
-          @success="showReplyForm = false; emit('refresh')"
-          @cancel="showReplyForm = false"
-        />
+      <!-- Close button (centered) when expanded -->
+      <div v-if="isLongContent && isContentExpanded" class="flex justify-center mt-3">
+        <button
+          @click="isContentExpanded = false"
+          class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+        >
+          閉じる
+        </button>
       </div>
+    </div>
 
-      <!-- Nested replies -->
-      <div
-        v-if="comment.replies.length > 0"
-        class="mt-2 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20"
+    <!-- Reply button (top-level only) -->
+    <div v-if="!comment.parentId" class="mt-2 pl-9">
+      <button
+        @click="showReplyForm = !showReplyForm"
+        class="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
       >
-        <CommentItem
-          v-for="reply in visibleReplies"
-          :key="reply.commentId"
-          :comment="reply"
-          :article-id="articleId"
-          :api-base="apiBase"
-          :api-key="apiKey"
-          @refresh="emit('refresh')"
-        />
+        <MessageSquare class="w-3 h-3" />
+        返信
+      </button>
+    </div>
 
-        <!-- Show more replies -->
-        <div v-if="hasManyReplies && !isRepliesExpanded" class="py-3 flex justify-center">
-          <button
-            @click="isRepliesExpanded = true"
-            class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
-          >
-            他{{ hiddenReplyCount }}件の返信を表示
-          </button>
-        </div>
+    <!-- Inline reply form -->
+    <div v-if="showReplyForm" class="mt-3 pl-9">
+      <CommentForm
+        :article-id="articleId"
+        :parent-id="comment.commentId"
+        :api-base="apiBase"
+        :api-key="apiKey"
+        @success="((showReplyForm = false), emit('refresh'))"
+        @cancel="showReplyForm = false"
+      />
+    </div>
 
-        <!-- Collapse replies -->
-        <div v-if="hasManyReplies && isRepliesExpanded" class="py-3 flex justify-center">
-          <button
-            @click="isRepliesExpanded = false"
-            class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
-          >
-            返信を折りたたむ
-          </button>
-        </div>
+    <!-- Nested replies -->
+    <div
+      v-if="comment.replies.length > 0"
+      class="mt-2 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20"
+    >
+      <CommentItem
+        v-for="reply in visibleReplies"
+        :key="reply.commentId"
+        :comment="reply"
+        :article-id="articleId"
+        :api-base="apiBase"
+        :api-key="apiKey"
+        @refresh="emit('refresh')"
+      />
+
+      <!-- Show more replies -->
+      <div v-if="hasManyReplies && !isRepliesExpanded" class="py-3 flex justify-center">
+        <button
+          @click="isRepliesExpanded = true"
+          class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
+        >
+          他{{ hiddenReplyCount }}件の返信を表示
+        </button>
       </div>
+
+      <!-- Collapse replies -->
+      <div v-if="hasManyReplies && isRepliesExpanded" class="py-3 flex justify-center">
+        <button
+          @click="isRepliesExpanded = false"
+          class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+        >
+          返信を折りたたむ
+        </button>
+      </div>
+    </div>
   </div>
 </template>

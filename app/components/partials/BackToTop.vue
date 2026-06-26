@@ -1,6 +1,4 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-vue-next'
 
 const show = ref(false)

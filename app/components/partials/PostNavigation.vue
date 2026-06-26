@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -27,7 +26,9 @@ const prev = computed(() => surround.value?.[1] ?? null)
       :to="next.path"
       class="group flex items-center gap-2 py-2 transition-opacity hover:opacity-60"
     >
-      <ArrowLeft class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1" />
+      <ArrowLeft
+        class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1"
+      />
       <div class="min-w-0">
         <div class="text-xs text-muted-foreground">次の記事</div>
         <div class="truncate text-sm">{{ next.title }}</div>
@@ -44,7 +45,9 @@ const prev = computed(() => surround.value?.[1] ?? null)
         <div class="text-xs text-muted-foreground">前の記事</div>
         <div class="truncate text-sm">{{ prev.title }}</div>
       </div>
-      <ArrowRight class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+      <ArrowRight
+        class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1"
+      />
     </NuxtLink>
     <div v-else />
   </div>

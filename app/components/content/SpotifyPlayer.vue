@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, useTemplateRef } from 'vue'
+import { useTemplateRef } from 'vue'
 
 const props = defineProps<{
   src: string
@@ -15,7 +15,7 @@ onMounted(() => {
 
   observer = new IntersectionObserver(
     (entries) => {
-      if (entries.some(entry => entry.isIntersecting)) {
+      if (entries.some((entry) => entry.isIntersecting)) {
         isVisible.value = true
         observer?.disconnect()
         observer = null
@@ -79,10 +79,7 @@ const embedHeight = computed(() => {
       class="w-full rounded-xl bg-muted animate-pulse"
       :style="{ height: `${embedHeight}px` }"
     ></div>
-    <div
-      v-else
-      class="flex items-center justify-center w-full h-20 rounded-lg bg-black text-white"
-    >
+    <div v-else class="flex items-center justify-center w-full h-20 rounded-lg bg-black text-white">
       Invalid Spotify URL
     </div>
 

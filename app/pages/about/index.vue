@@ -10,7 +10,6 @@ useSeoMeta({
 
 const birthDate = '2004-08-27'
 
-
 const games = [
   {
     title: '崩壊スターレイル',
@@ -29,12 +28,8 @@ const profile = [
 ]
 
 // { siteName: string, image: string, href: string } のオブジェクト配置予定
-const mutualLinks = [
-]
-
-const isLinksAvail = computed(() => {
-  return mutualLinks.length > 0
-})
+const mutualLinks: { siteName: string; image: string; href: string }[] = []
+const isLinksAvail = mutualLinks.length > 0
 </script>
 
 <template>
@@ -86,7 +81,7 @@ const isLinksAvail = computed(() => {
         </p>
       </section>
 
-      <section class="about-section" :class="{'border-b-0! pb-0!' : !isLinksAvail}">
+      <section class="about-section" :class="{ 'border-b-0! pb-0!': !isLinksAvail }">
         <h2 class="section-heading">ABOUT THIS SITE</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           ぼくこは.devは、こはが0から作った個人サイトです。今ご覧になられているプロフィールに加えて、私がやったことや体験したことなんかを文章と写真でまとめたBlogセクション、制作物をまとめたWorkセクションがあります。

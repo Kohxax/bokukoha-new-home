@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 const props = defineProps<{
   src: string
   description?: string
@@ -57,14 +55,22 @@ const isNative = computed(() => {
         controls
         playsinline
         preload="metadata"
-        class="w-full h-auto !m-0 !p-0 block"
+        class="w-full h-auto m-0! p-0! block"
       ></video>
       <iframe
         v-else-if="embedUrl"
         :src="embedUrl"
         class="absolute top-0 left-0 w-full h-full"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+          web-share;
+        "
         allowfullscreen
       ></iframe>
       <div v-else class="flex items-center justify-center w-20 h-full text-white">

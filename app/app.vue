@@ -49,9 +49,4 @@ useSeoMeta({
   opacity: 0;
   transform: translateY(20px);
 }
-
-.page-leave-to {
-  opacity: 0;
-  transition: translateY(-10px);
-}
 </style>

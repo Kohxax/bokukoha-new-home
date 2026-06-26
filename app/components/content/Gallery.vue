@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { ChevronRight, ChevronLeft } from 'lucide-vue-next'
 
 const props = defineProps<{

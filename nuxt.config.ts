@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import taillwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite'
 import { cpSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -17,12 +17,13 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
-    enabled: false
+    enabled: false,
   },
 
   seo: {
     meta: {
-      description: 'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
+      description:
+        'ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。',
       themeColor: {
         content: '#18181b',
       },
@@ -37,7 +38,7 @@ export default defineNuxtConfig({
       ogUrl: 'https://www.bokukoha.dev',
 
       ogImage: 'https://www.bokukoha.dev/images/og/coverImage.png',
-      robots: 'index, follow'
+      robots: 'index, follow',
     },
   },
 
@@ -51,8 +52,8 @@ export default defineNuxtConfig({
     defaults: {
       nuxtLink: {
         trailingSlash: 'append',
-      }
-    }
+      },
+    },
   },
 
   watch: ['content/**'],
@@ -73,7 +74,7 @@ export default defineNuxtConfig({
       siteURL: 'https://www.bokukoha.dev',
       posthogPublicKey: 'phc_oQSYqHltZoWuFStVSNCP9GzO253LCZJXhDttSTR4ZuT',
       posthogHost: 'https://us.i.posthog.com',
-      posthogDefaults: '2025-05-24'
+      posthogDefaults: '2025-05-24',
     },
   },
 
@@ -85,37 +86,24 @@ export default defineNuxtConfig({
 
   content: {
     renderer: {
-      anchorLinks: false
+      anchorLinks: false,
     },
     build: {
       markdown: {
         toc: {
           depth: 4,
-          searchDepth: 4
+          searchDepth: 4,
         },
         highlight: {
           theme: 'github-dark',
-          langs: [
-            'java',
-            'kotlin',
-            'json',
-            'js',
-            'ts',
-            'html',
-            'css',
-            'vue',
-            'md',
-            'yaml'
-          ],
+          langs: ['java', 'kotlin', 'json', 'js', 'ts', 'html', 'css', 'vue', 'md', 'yaml'],
         },
       },
     },
   },
 
   vite: {
-    plugins: [
-      taillwindcss(),
-    ],
+    plugins: [tailwindcss()],
     server: {
       watch: {
         usePolling: true,
@@ -148,7 +136,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static',
     prerender: {
-      routes: ['/sitemap.xml', '/rss.xml', '/', '/api/related.json']
+      routes: ['/sitemap.xml', '/rss.xml', '/', '/api/related.json'],
     },
   },
 

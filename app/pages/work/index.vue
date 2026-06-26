@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { Rocket, BriefcaseBusiness } from 'lucide-vue-next'
-import { useRoute } from 'vue-router'
-import { watch } from 'vue'
 
 const route = useRoute()
 const { data: posts } = await useAsyncData('work-list', () => {
