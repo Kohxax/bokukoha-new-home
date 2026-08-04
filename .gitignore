@@ -26,3 +26,7 @@ logs
 # Claude
 .claude
 CLAUDE.md
+
+# for Codex
+.agents
+agent
