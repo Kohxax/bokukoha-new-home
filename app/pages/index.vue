@@ -48,34 +48,38 @@ useSeoMeta({
       class="relative flex flex-col items-center justify-center min-h-[calc(100vh-3.5rem)] p-4 text-center"
     >
       <div class="flex flex-col items-center justify-center">
-        <div class="relative mb-3">
-          <Avatar class="relative h-50 w-50 shadow-xl">
+        <div class="relative mb-4">
+          <Avatar class="relative h-50 w-50 shadow-[var(--elevation-1)] ring-1 ring-border/40">
             <img src="~/assets/img/icon_glass.webp" alt="Koha" />
             <AvatarFallback>KH</AvatarFallback>
           </Avatar>
         </div>
 
-        <h1 class="text-3xl font-bold tracking-tight text-foreground">Koha</h1>
-        <p class="text-md text-muted-foreground">@Kohxax / こは</p>
+        <div class="space-y-1">
+          <h1 class="text-3xl font-bold tracking-tight text-foreground">Koha</h1>
+          <p class="text-md text-muted-foreground">@Kohxax / こは</p>
+        </div>
 
-        <div class="flex flex-row items-center gap-3 mt-5">
-          <Button variant="outline" as-child>
-            <NuxtLink to="/about">
-              <UserRound class="h-4 w-4" />
-              こはについて
-            </NuxtLink>
-          </Button>
+        <nav aria-label="トップページの案内" class="mt-6 flex items-center gap-1">
+          <NuxtLink
+            to="/about"
+            class="m3-state-layer inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
+          >
+            <UserRound class="h-4 w-4" />
+            <span>こはについて</span>
+          </NuxtLink>
 
-          <Button
-            variant="outline"
+          <button
+            type="button"
+            class="m3-state-layer inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
             @click="scrollToContent"
           >
             <NotebookPenIcon class="h-4 w-4" />
-            最近の記事
-          </Button>
-        </div>
+            <span>最近の記事</span>
+          </button>
+        </nav>
 
-        <div class="mt-5">
+        <div class="mt-6">
           <SocialLinks size="lg" />
         </div>
       </div>
