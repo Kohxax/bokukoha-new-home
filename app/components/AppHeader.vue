@@ -7,7 +7,7 @@ const lastScrollY = ref(0)
 
 const handleScroll = () => {
   const currentScrollY = window.scrollY
-  isScrolled.value = currentScrollY > 8
+  isScrolled.value = currentScrollY > 8 && currentScrollY < lastScrollY.value
 
   if (currentScrollY < 100) {
     isVisible.value = true
@@ -45,36 +45,40 @@ const isActive = (match: string) => route.path.startsWith(match)
 
 <template>
   <header
-    class="sticky top-0 z-50 w-full border-b border-transparent bg-background/92 backdrop-blur-md transition-[transform,background-color,border-color,box-shadow] duration-300 ease-in-out"
+    class="sticky top-0 z-50 w-full border-b border-transparent bg-background/95 backdrop-blur-md transition-[transform,background-color,border-color,box-shadow] duration-300 ease-in-out"
+    :style="{
+      borderBottomColor: isScrolled
+        ? 'color-mix(in srgb, var(--border) 40%, transparent)'
+        : 'transparent',
+    }"
     :class="{
       '-translate-y-full': !isVisible,
-      'border-border/60 bg-surface-container-low/95 shadow-[var(--elevation-1)]': isScrolled,
+      'bg-surface-container-low/75 shadow-(--elevation-1)': isScrolled,
     }"
   >
-    <div class="flex h-16 items-center px-2 sm:px-3">
+    <div class="flex h-14 items-center">
       <NuxtLink
         to="/"
-        class="m3-state-layer flex h-12 items-center gap-3 rounded-full px-2 text-foreground"
-        alt="ホームに戻る"
+        class="m3-state-layer ml-1 flex items-center gap-3 rounded-full px-2 py-1 text-foreground"
+        aria-label="ホームに戻る"
       >
-        <Avatar class="h-9 w-9">
+        <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         </Avatar>
-        <span class="hidden font-bold text-lg sm:inline">ぼくこは.dev</span>
+        <span class="text-lg font-bold">ぼくこは.dev</span>
       </NuxtLink>
 
-      <nav class="ml-auto flex items-center gap-1">
+      <nav class="ml-auto flex items-center gap-4 pr-5" aria-label="メインナビゲーション">
         <NuxtLink
           v-for="link in navLinks"
           :key="link.to"
           :to="link.to"
-          class="m3-state-layer flex h-10 items-center rounded-full px-3 text-sm font-medium transition-colors sm:px-4"
+          class="m3-state-layer relative -mx-2 rounded-full px-2 py-2 text-sm font-medium transition-colors before:absolute before:inset-x-2 before:bottom-0 before:h-0.5 before:rounded-full before:transition-colors"
           :class="
             isActive(link.match)
-              ? 'bg-primary/15 text-primary'
-              : 'text-muted-foreground hover:text-foreground'
+              ? 'text-foreground before:bg-foreground'
+              : 'text-muted-foreground before:bg-transparent hover:text-foreground'
           "
-          :alt="link.label"
         >
           {{ link.label }}
         </NuxtLink>
