@@ -60,7 +60,7 @@ const isActive = (match: string) => route.path.startsWith(match)
         <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         </Avatar>
-        <span class="text-lg font-bold tracking-tight max-[390px]:hidden">ぼくこは.dev</span>
+        <span class="text-lg font-bold tracking-tight">ぼくこは.dev</span>
       </NuxtLink>
 
       <nav class="ml-auto flex items-center gap-1" aria-label="メインナビゲーション">
