@@ -35,7 +35,10 @@ const archivesByCategory = computed(() => {
 <template>
   <aside class="space-y-8 text-base">
     <div>
-      <NuxtLink to="/blog/archives" class="flex flex-row gap-2 mb-2 hover:opacity-80">
+      <NuxtLink
+        to="/blog/archives"
+        class="m3-state-layer -ml-2 mb-2 flex w-fit flex-row gap-2 rounded-full px-2 py-1"
+      >
         <Archive class="h-4 w-4 text-muted-foreground mt-1" />
         <h3 class="text-base font-semibold">アーカイブ</h3>
       </NuxtLink>
@@ -44,7 +47,7 @@ const archivesByCategory = computed(() => {
         <li
           v-for="item in archivesByYear"
           :key="item.year"
-          class="flex justify-between items-center rounded-md bg-muted/30 px-4 py-2 hover:bg-muted cursor-pointer transition"
+          class="m3-state-layer flex cursor-pointer items-center justify-between rounded-xl bg-surface-container px-4 py-2"
         >
           <NuxtLink :to="`/blog/archives?year=${item.year}`" class="flex justify-between w-full">
             <span class="font-medium">{{ item.year }}</span>
@@ -65,7 +68,7 @@ const archivesByCategory = computed(() => {
           v-for="(count, category) in archivesByCategory"
           :key="category"
           :to="`/blog/archives?category=${category}`"
-          class="rounded-md bg-muted/35 px-3 py-1 hover:bg-muted transition text-md"
+          class="m3-state-layer rounded-full bg-surface-container-high px-3 py-1 text-md"
         >
           {{ category }}
         </NuxtLink>

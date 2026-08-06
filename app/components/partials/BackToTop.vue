@@ -25,9 +25,9 @@ const scrollToTop = () => {
     <Button
       v-if="show"
       @click="scrollToTop"
-      size="icon"
+      size="icon-lg"
       variant="secondary"
-      class="fixed bottom-6 right-6 shadow-lg hover:scale-95 transition-all backdrop-blur-xl rounded-full z-50"
+      class="fixed bottom-6 right-6 z-50 shadow-[var(--elevation-3)] backdrop-blur-xl"
       style="view-transition-name: back-to-top"
     >
       <ArrowUp class="w-7 h-7" />

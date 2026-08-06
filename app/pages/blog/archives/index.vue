@@ -72,7 +72,7 @@ useSeoMeta({
             v-for="cat in categories"
             :key="cat.category"
             :to="`/blog/archives?category=${cat.category}`"
-            class="bg-muted/30 hover:bg-muted transition rounded-xl p-6 text-center shadow-sm border border-border"
+            class="m3-interactive-card rounded-3xl bg-surface-container p-6 text-center"
           >
             <div class="text-lg font-medium">{{ cat.category }}</div>
             <div class="text-sm text-muted-foreground">{{ cat.count }} 記事</div>
@@ -89,7 +89,7 @@ useSeoMeta({
             v-for="y in years"
             :key="y.year"
             :to="`/blog/archives?year=${y.year}`"
-            class="flex justify-between items-center p-5 bg-muted/30 hover:bg-muted transition rounded-xl border border-border"
+            class="m3-interactive-card flex items-center justify-between rounded-2xl bg-surface-container p-5"
           >
             <span class="text-lg font-medium">{{ y.year }}</span>
             <span class="text-muted-foreground">{{ y.count }} 記事</span>
@@ -117,7 +117,8 @@ useSeoMeta({
           <Card
             v-for="post in filteredPosts"
             :key="post.path"
-            class="overflow-hidden transition-all hover:shadow-lg max-h-26"
+            variant="filled"
+            class="m3-interactive-card max-h-26 overflow-hidden"
           >
             <NuxtLink :to="post.path">
               <div class="flex justify-between items-center">
@@ -129,7 +130,7 @@ useSeoMeta({
                     <Likes :article-id="post.path" />
                     <CalendarDays class="h-4 w-4" />
                     <span>{{ post.date }}</span>
-                    <span class="px-2 py-0.5 text-xs rounded-md bg-muted">
+                    <span class="rounded-full bg-brand/15 px-3 py-1 text-xs text-brand">
                       {{ post.category }}
                     </span>
                   </div>
@@ -138,7 +139,7 @@ useSeoMeta({
                   v-if="post.coverImage"
                   :src="post.coverImage"
                   alt=""
-                  class="w-24 h-24 object-cover rounded-xl m-1"
+                  class="m-1 h-24 w-24 rounded-2xl object-cover"
                 />
               </div>
             </NuxtLink>

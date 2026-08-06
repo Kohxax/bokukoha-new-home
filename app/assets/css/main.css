@@ -15,6 +15,12 @@ html {
   --radius-xl: calc(var(--radius) + 4px);
 
   --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -54,6 +60,7 @@ html {
 :root {
   --font-size: 16px;
   --brand: oklch(0.72 0.2 290);
+  --brand-foreground: #18181b;
   --background: #18181b;
   --foreground: #f4f4f5;
   --card: #27272a;
@@ -77,6 +84,13 @@ html {
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #71717a;
+  --surface-container-low: color-mix(in srgb, #27272a 58%, #18181b);
+  --surface-container: #27272a;
+  --surface-container-high: color-mix(in srgb, #27272a 64%, #3f3f46);
+  --surface-container-highest: #3f3f46;
+  --elevation-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --elevation-2: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --elevation-3: 0 1px 3px rgb(0 0 0 / 0.3), 0 4px 8px 3px rgb(0 0 0 / 0.15);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -99,6 +113,72 @@ html {
   }
   body {
     @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .m3-state-layer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .m3-state-layer::after {
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+
+  .m3-state-layer:hover::after {
+    opacity: 0.08;
+  }
+
+  .m3-state-layer:focus-visible::after {
+    opacity: 0.1;
+  }
+
+  .m3-state-layer:active::after {
+    opacity: 0.12;
+  }
+
+  .m3-interactive-card {
+    transition:
+      background-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
+  }
+
+  .m3-interactive-card:hover {
+    background-color: var(--surface-container-high);
+    box-shadow: var(--elevation-2);
+    transform: translateY(-1px);
+  }
+
+  .m3-interactive-card:focus-within {
+    outline: 3px solid color-mix(in srgb, var(--brand) 45%, transparent);
+    outline-offset: 2px;
+  }
+
+  .m3-text-field {
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid var(--border);
+    border-radius: 0.5rem 0.5rem 0 0;
+    background: var(--surface-container-highest);
+    padding: 0.75rem 1rem;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .m3-text-field:focus {
+    border-color: var(--brand);
+    background: var(--surface-container-high);
+    outline: none;
   }
 }
 

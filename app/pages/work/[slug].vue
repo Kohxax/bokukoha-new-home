@@ -61,12 +61,12 @@ onUnmounted(() => {
 
         <!-- Center: Main Article Content -->
         <div class="min-w-0">
-          <Card class="overflow-hidden rounded-lg shadow-xl border">
+          <Card variant="filled" class="overflow-hidden border-0 shadow-none">
             <div v-if="resolvedCoverImage" class="relative">
               <CoverImg
                 :src="page.coverImage"
                 :alt="page.title"
-                class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
+                class="w-full aspect-video object-cover rounded-t-3xl cursor-pointer transition-opacity hover:opacity-95"
                 style="view-transition-name: post-cover-image"
                 @click="open(resolvedCoverImage)"
               />
@@ -74,7 +74,7 @@ onUnmounted(() => {
 
             <CardHeader class="pt-2 px-5 md:px-10">
               <span
-                class="inline-block justify-self-start px-3 py-2 text-sm font-semibold bg-muted rounded-lg"
+                class="inline-flex h-8 items-center justify-self-start rounded-full bg-brand/15 px-4 text-sm font-medium text-brand"
               >
                 {{ page.category }}
               </span>
@@ -136,7 +136,7 @@ onUnmounted(() => {
 .prose :deep(h5),
 .prose :deep(h6) {
   margin-left: -1.2rem;
-  border-left: 4px solid var(--color-foreground);
+  border-left: 4px solid var(--brand);
   padding-left: 1rem;
   scroll-margin-top: 100px;
 }

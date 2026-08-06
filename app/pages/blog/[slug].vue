@@ -68,18 +68,18 @@ onUnmounted(() => {
 
         <!-- Center: Main Article Content -->
         <div class="min-w-0 max-w-4xl mx-auto w-full">
-          <Card class="overflow-hidden rounded-lg shadow-xl border">
+          <Card variant="filled" class="overflow-hidden border-0 shadow-none">
             <div v-if="resolvedCoverImage" class="relative">
               <CoverImg
                 :src="page.coverImage"
                 :alt="page.title"
-                class="w-full aspect-video object-cover rounded-t-lg cursor-pointer hover:opacity-95 transition-opacity"
+                class="w-full aspect-video object-cover rounded-t-3xl cursor-pointer transition-opacity hover:opacity-95"
                 @click="open(resolvedCoverImage)"
               />
             </div>
 
             <CardHeader class="pt-2 px-5 md:px-10">
-              <Button variant="secondary" class="mb-2 w-fit">
+              <Button variant="secondary" size="sm" as-child class="mb-2 w-fit">
                 <NuxtLink :to="`/blog/archives?category=${page.category}`">
                   {{ page.category }}
                 </NuxtLink>
@@ -156,7 +156,7 @@ onUnmounted(() => {
 .prose :deep(h5),
 .prose :deep(h6) {
   margin-left: -1.2rem;
-  border-left: 4px solid var(--color-foreground);
+  border-left: 4px solid var(--brand);
   padding-left: 1rem;
   scroll-margin-top: 100px;
 }

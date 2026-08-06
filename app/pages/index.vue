@@ -62,8 +62,7 @@ useSeoMeta({
         <div class="flex flex-row items-center gap-3 mt-5">
           <NuxtLink to="/about">
             <Button
-              variant="outline"
-              class="flex items-center gap-2 px-5 rounded-xl transition-all"
+              variant="secondary"
             >
               <UserRound class="h-4 w-4" />
               こはについて
@@ -72,7 +71,6 @@ useSeoMeta({
 
           <Button
             variant="outline"
-            class="flex items-center gap-2 px-5 rounded-xl transition-all"
             @click="scrollToContent"
           >
             <NotebookPenIcon class="h-4 w-4" />
@@ -107,7 +105,8 @@ useSeoMeta({
           <Card
             v-for="post in blogPosts"
             :key="post.path"
-            class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
+            variant="filled"
+            class="m3-interactive-card overflow-hidden"
           >
             <NuxtLink :to="post.path">
               <CoverImg
@@ -150,7 +149,8 @@ useSeoMeta({
           <Card
             v-for="work in works"
             :key="work.path"
-            class="overflow-hidden transition-all hover:opacity-80 hover:scale-99"
+            variant="filled"
+            class="m3-interactive-card overflow-hidden"
           >
             <NuxtLink :to="work.path">
               <CoverImg

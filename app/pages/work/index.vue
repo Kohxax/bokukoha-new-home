@@ -40,7 +40,8 @@ useHead({
         <Card
           v-for="post in posts"
           :key="post.path"
-          class="overflow-hidden transition-all hover:shadow-lg"
+          variant="elevated"
+          class="m3-interactive-card overflow-hidden"
         >
           <NuxtLink :to="post.path">
             <CoverImg
@@ -53,7 +54,7 @@ useHead({
 
           <CardHeader>
             <span
-              class="inline-block justify-self-start px-3 py-2 text-sm font-semibold bg-muted rounded-lg"
+              class="inline-flex h-8 items-center justify-self-start rounded-full bg-brand/15 px-4 text-sm font-medium text-brand"
             >
               {{ post.category }}
             </span>

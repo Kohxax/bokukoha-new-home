@@ -94,7 +94,8 @@ useSeoMeta({
           <Card
             v-for="post in paginatedPosts"
             :key="post.path"
-            class="overflow-hidden transition-all hover:shadow-lg"
+            variant="elevated"
+            class="m3-interactive-card overflow-hidden"
           >
             <NuxtLink :to="post.path">
               <CoverImg

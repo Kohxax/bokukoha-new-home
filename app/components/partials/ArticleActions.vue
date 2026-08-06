@@ -82,10 +82,10 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
     <button
       @click="handleLike"
       :disabled="liked"
-      class="rounded-xl p-2 transition-all select-none"
+      class="m3-state-layer min-h-12 min-w-12 rounded-full p-2 transition-colors select-none"
       :class="[
         isVertical ? 'flex flex-col items-center gap-1' : 'flex items-center gap-2',
-        liked ? 'text-muted-foreground cursor-not-allowed' : 'hover:bg-muted/30',
+        liked ? 'text-muted-foreground cursor-not-allowed' : '',
       ]"
       title="いいね"
     >
@@ -102,7 +102,7 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
     <!-- Comment scroll -->
     <button
       @click="scrollToComments"
-      class="p-2 rounded-xl text-muted-foreground transition-all hover:bg-muted/30 hover:text-blue-400"
+      class="m3-state-layer flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-blue-400"
       title="コメント欄へ"
     >
       <MessageCircle class="w-7 h-7" />
@@ -112,8 +112,8 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
     <div ref="shareRef" class="relative">
       <button
         @click="shareOpen = !shareOpen"
-        class="p-2 rounded-xl text-muted-foreground transition-all"
-        :class="shareOpen ? 'bg-muted/40 text-foreground' : 'hover:bg-muted/30 hover:text-foreground'"
+        class="m3-state-layer flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground transition-colors"
+        :class="shareOpen ? 'bg-brand/15 text-brand' : 'hover:text-foreground'"
         title="シェア"
       >
         <Share class="w-7 h-7" />
@@ -130,7 +130,7 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
       >
         <div
           v-if="shareOpen"
-          class="absolute z-10 flex gap-5 rounded-2xl border border-border/60 bg-background shadow-lg"
+          class="absolute z-10 flex gap-5 rounded-3xl border border-border/40 bg-surface-container-high shadow-[var(--elevation-2)]"
           :class="isVertical
             ? 'flex-col left-full top-1/2 -translate-y-1/2 ml-2 px-3.5 py-6'
             : 'items-center bottom-full left-1/2 -translate-x-1/2 mb-2 px-6 py-3.5'"
@@ -152,7 +152,7 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
     <button
       v-if="showRss"
       @click="openRSS"
-      class="p-2 rounded-xl text-muted-foreground transition-all hover:bg-muted/30 hover:text-orange-400"
+      class="m3-state-layer flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-orange-400"
       title="RSSフィードを開く"
     >
       <Rss class="w-7 h-7" />

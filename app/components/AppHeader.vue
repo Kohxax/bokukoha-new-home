@@ -2,10 +2,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const isVisible = ref(true)
+const isScrolled = ref(false)
 const lastScrollY = ref(0)
 
 const handleScroll = () => {
   const currentScrollY = window.scrollY
+  isScrolled.value = currentScrollY > 8
 
   if (currentScrollY < 100) {
     isVisible.value = true
@@ -43,24 +45,35 @@ const isActive = (match: string) => route.path.startsWith(match)
 
 <template>
   <header
-    class="sticky top-0 z-50 w-full shadow-lg bg-background/95 backdrop-blur-sm transition-transform duration-300 ease-in-out"
-    :class="{ '-translate-y-full': !isVisible }"
+    class="sticky top-0 z-50 w-full border-b border-transparent bg-background/92 backdrop-blur-md transition-[transform,background-color,border-color,box-shadow] duration-300 ease-in-out"
+    :class="{
+      '-translate-y-full': !isVisible,
+      'border-border/60 bg-surface-container-low/95 shadow-[var(--elevation-1)]': isScrolled,
+    }"
   >
-    <div class="flex h-14 items-center">
-      <NuxtLink to="/" class="flex items-center space-x-3 pl-3 hover:scale-99 hover:opacity-80 transition-all" alt="ホームに戻る">
-        <Avatar class="h-8 w-8">
+    <div class="flex h-16 items-center px-2 sm:px-3">
+      <NuxtLink
+        to="/"
+        class="m3-state-layer flex h-12 items-center gap-3 rounded-full px-2 text-foreground"
+        alt="ホームに戻る"
+      >
+        <Avatar class="h-9 w-9">
           <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         </Avatar>
-        <span class="font-bold text-lg">ぼくこは.dev</span>
+        <span class="hidden font-bold text-lg sm:inline">ぼくこは.dev</span>
       </NuxtLink>
 
-      <nav class="flex ml-auto space-x-4 pr-5">
+      <nav class="ml-auto flex items-center gap-1">
         <NuxtLink
           v-for="link in navLinks"
           :key="link.to"
           :to="link.to"
-          class="text-sm font-medium transition-colors hover:text-foreground"
-          :class="isActive(link.match) ? 'text-foreground' : 'text-muted-foreground'"
+          class="m3-state-layer flex h-10 items-center rounded-full px-3 text-sm font-medium transition-colors sm:px-4"
+          :class="
+            isActive(link.match)
+              ? 'bg-brand/15 text-brand'
+              : 'text-muted-foreground hover:text-foreground'
+          "
           :alt="link.label"
         >
           {{ link.label }}

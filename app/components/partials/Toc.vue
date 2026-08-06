@@ -59,10 +59,11 @@ onMounted(() => {
 
 <template>
   <Card
+    :variant="isInline ? 'filled' : 'elevated'"
     :class="[
-      'w-full bg-card/50 backdrop-blur custom-scrollbar',
+      'w-full custom-scrollbar',
       isInline
-        ? 'border-none bg-muted/30 shadow-none'
+        ? 'border-none bg-surface-container-high shadow-none'
         : 'top-24 sticky max-h-[calc(100vh-8rem)] overflow-y-auto',
     ]"
   >
@@ -71,7 +72,7 @@ onMounted(() => {
       :class="isInline ? 'pb-2 pt-4 px-4' : 'mt-4 -mb-2'"
     >
       <CardTitle class="text-foreground flex flex-row gap-2 items-center">
-        <Hash :class="isInline ? 'h-4 w-4 text-primary' : 'h-5 w-5 text-primary'" />
+        <Hash :class="isInline ? 'h-4 w-4 text-brand' : 'h-5 w-5 text-brand'" />
         <span
           :class="
             isInline
@@ -84,7 +85,7 @@ onMounted(() => {
       <Button
         variant="ghost"
         size="icon"
-        class="h-7 w-7 text-muted-foreground hover:text-foreground hover:bg-muted"
+        class="h-8 w-8 text-muted-foreground hover:text-foreground"
         @click="isOpen = !isOpen"
         title="目次の開閉"
       >
@@ -99,16 +100,16 @@ onMounted(() => {
             <a
               :href="`#${link.id}`"
               @click.prevent="scrollToHeading(link.id)"
-              class="group flex items-start gap-1 py-1 transition-colors hover:text-primary relative pl-2 border-l-2"
+              class="group relative flex items-start gap-1 border-l-2 py-1 pl-2 transition-colors hover:text-brand"
               :class="[
                 activeId === link.id
-                  ? 'border-primary text-primary'
+                  ? 'border-brand text-brand'
                   : 'border-transparent text-muted-foreground',
               ]"
             >
               <span
-                class="mt-0.5 min-w-6 text-sm font-mono group-hover:text-primary/70"
-                :class="activeId === link.id ? 'text-primary' : 'text-muted-foreground'"
+                class="mt-0.5 min-w-6 font-mono text-sm group-hover:text-brand/70"
+                :class="activeId === link.id ? 'text-brand' : 'text-muted-foreground'"
               >
                 {{ i + 1 }}.
               </span>
@@ -120,16 +121,16 @@ onMounted(() => {
                 <a
                   :href="`#${childLink.id}`"
                   @click.prevent="scrollToHeading(childLink.id)"
-                  class="group flex items-start gap-1 py-0.5 transition-colors hover:text-primary relative pl-2 border-l-2"
+                  class="group relative flex items-start gap-1 border-l-2 py-0.5 pl-2 transition-colors hover:text-brand"
                   :class="[
                     activeId === childLink.id
-                      ? 'border-primary text-primary'
+                      ? 'border-brand text-brand'
                       : 'border-transparent text-muted-foreground',
                   ]"
                 >
                   <span
-                    class="mt-0.5 min-w-8 text-xs font-mono group-hover:text-primary/70"
-                    :class="activeId === childLink.id ? 'text-primary' : 'text-muted-foreground/70'"
+                    class="mt-0.5 min-w-8 font-mono text-xs group-hover:text-brand/70"
+                    :class="activeId === childLink.id ? 'text-brand' : 'text-muted-foreground/70'"
                   >
                     {{ i + 1 }}.{{ j + 1 }}.
                   </span>
@@ -144,18 +145,18 @@ onMounted(() => {
                     <a
                       :href="`#${grandChildLink.id}`"
                       @click.prevent="scrollToHeading(grandChildLink.id)"
-                      class="group flex items-start gap-2 py-0.5 transition-colors hover:text-primary relative pl-2 border-l-2"
+                      class="group relative flex items-start gap-2 border-l-2 py-0.5 pl-2 transition-colors hover:text-brand"
                       :class="[
                         activeId === grandChildLink.id
-                          ? 'border-primary text-primary'
+                          ? 'border-brand text-brand'
                           : 'border-transparent text-muted-foreground/80',
                       ]"
                     >
                       <span
-                        class="mt-0.5 min-w-10 text-[10px] font-mono group-hover:text-primary/70"
+                        class="mt-0.5 min-w-10 font-mono text-[10px] group-hover:text-brand/70"
                         :class="
                           activeId === grandChildLink.id
-                            ? 'text-primary'
+                            ? 'text-brand'
                             : 'text-muted-foreground/60'
                         "
                       >

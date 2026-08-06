@@ -89,7 +89,7 @@ const submit = async () => {
           type="text"
           maxlength="100"
           placeholder="名無しさん"
-          class="w-full bg-muted/30 border border-border/50 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground/30 placeholder:text-muted-foreground/50 transition-colors"
+          class="m3-text-field text-sm placeholder:text-muted-foreground/50"
         />
       </div>
       <div>
@@ -99,7 +99,7 @@ const submit = async () => {
           type="email"
           maxlength="200"
           placeholder="example@email.com"
-          class="w-full bg-muted/30 border border-border/50 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground/30 placeholder:text-muted-foreground/50 transition-colors"
+          class="m3-text-field text-sm placeholder:text-muted-foreground/50"
         />
       </div>
     </div>
@@ -114,7 +114,7 @@ const submit = async () => {
         maxlength="5000"
         required
         placeholder="コメントを入力..."
-        class="w-full bg-muted/30 border border-border/50 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground/30 placeholder:text-muted-foreground/50 resize-y transition-colors"
+        class="m3-text-field resize-y text-sm placeholder:text-muted-foreground/50"
       />
       <div class="text-right text-xs text-muted-foreground mt-1">
         {{ content.length }} / 5000

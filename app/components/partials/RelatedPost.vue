@@ -111,7 +111,8 @@ onUnmounted(() => {
         <Card
           v-for="post in related"
           :key="post.path"
-          class="overflow-hidden transition-all hover:opacity-80 hover:scale-[0.99] shrink-0 w-[285px]"
+          variant="filled"
+          class="m3-interactive-card w-[285px] shrink-0 overflow-hidden"
           :class="[isDragging ? '' : 'snap-center']"
         >
           <NuxtLink :to="post.path">
