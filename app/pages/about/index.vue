@@ -35,7 +35,7 @@ const isLinksAvail = mutualLinks.length > 0
 <template>
   <div class="min-h-screen bg-background text-foreground">
     <section class="flex flex-col items-center px-4 pt-16 pb-14 text-center sm:pt-24">
-      <Avatar class="mb-3 h-28 w-28 shadow-xl" style="view-transition-name: main-avatar">
+      <Avatar class="mb-3 h-28 w-28 shadow-xl">
         <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         <AvatarFallback>KH</AvatarFallback>
       </Avatar>

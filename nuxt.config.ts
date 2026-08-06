@@ -48,7 +48,6 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    viewTransition: true,
     defaults: {
       nuxtLink: {
         trailingSlash: 'append',
