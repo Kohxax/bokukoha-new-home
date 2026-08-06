@@ -7,24 +7,27 @@ const lastScrollY = ref(0)
 
 const handleScroll = () => {
   const currentScrollY = window.scrollY
-  isScrolled.value = currentScrollY > 8
 
-  if (currentScrollY < 100) {
+  if (currentScrollY <= 0) {
     isVisible.value = true
-    lastScrollY.value = currentScrollY
+    isScrolled.value = false
+    lastScrollY.value = 0
     return
   }
 
   if (currentScrollY > lastScrollY.value) {
     isVisible.value = false
+    isScrolled.value = false
   } else {
     isVisible.value = true
+    isScrolled.value = true
   }
 
   lastScrollY.value = currentScrollY
 }
 
 onMounted(() => {
+  handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
