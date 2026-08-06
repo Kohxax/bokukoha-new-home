@@ -140,13 +140,13 @@ const submitComment = async () => {
     <!-- Inline comment form -->
     <div class="mb-8">
       <!-- Main input (always visible) -->
-      <div>
+      <div class="border-b border-border/40 pb-2">
         <textarea
           v-model="newContent"
           maxlength="5000"
           rows="1"
           placeholder="コメントする..."
-          class="m3-text-field min-h-12 resize-none overflow-hidden text-sm placeholder:text-muted-foreground/50"
+          class="w-full bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground/40 resize-none overflow-hidden"
           @focus="formExpanded = true"
           @input="(e) => { const el = e.target as HTMLTextAreaElement; el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px' }"
         />
@@ -162,14 +162,14 @@ const submitComment = async () => {
               type="text"
               maxlength="100"
               placeholder="名前（任意）"
-              class="m3-text-field text-sm placeholder:text-muted-foreground/50"
+              class="bg-transparent border-b border-border/40 pb-1.5 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
             />
             <input
               v-model="newAuthorEmail"
               type="email"
               maxlength="200"
               placeholder="メール（任意・非公開）"
-              class="m3-text-field text-sm placeholder:text-muted-foreground/50"
+              class="bg-transparent border-b border-border/40 pb-1.5 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
             />
           </div>
 
