@@ -41,7 +41,7 @@ useSeoMeta({
         </p>
       </section>
 
-      <section class="policy-section border-b-0! pb-0!">
+      <section class="policy-section">
         <h2 class="section-heading">お問い合わせ</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           コメントの削除依頼などは
@@ -57,9 +57,16 @@ useSeoMeta({
 
 <style scoped>
 .policy-section {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 1.5rem;
+  background: var(--surface-container-low);
+}
+
+@media (min-width: 640px) {
+  .policy-section {
+    padding: 2rem;
+  }
 }
 
 .section-heading {

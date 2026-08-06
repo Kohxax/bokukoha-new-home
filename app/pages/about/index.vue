@@ -46,7 +46,7 @@ const isLinksAvail = mutualLinks.length > 0
       <SocialLinks />
     </section>
 
-    <main class="mx-auto w-full max-w-2xl px-6 pb-16">
+    <main class="mx-auto w-full max-w-2xl space-y-6 px-6 pb-16">
       <section class="about-section">
         <h2 class="section-heading">PROFILE</h2>
         <div class="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -81,7 +81,7 @@ const isLinksAvail = mutualLinks.length > 0
         </p>
       </section>
 
-      <section class="about-section" :class="{ 'border-b-0! pb-0!': !isLinksAvail }">
+      <section class="about-section">
         <h2 class="section-heading">ABOUT THIS SITE</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           ぼくこは.devは、こはが0から作った個人サイトです。今ご覧になられているプロフィールに加えて、私がやったことや体験したことなんかを文章と写真でまとめたBlogセクション、制作物をまとめたWorkセクションがあります。
@@ -91,7 +91,7 @@ const isLinksAvail = mutualLinks.length > 0
         </p>
       </section>
 
-      <section v-if="isLinksAvail" class="about-section border-b-0! pb-0!">
+      <section v-if="isLinksAvail" class="about-section">
         <h2 class="section-heading">MUTUAL LINKS</h2>
       </section>
     </main>
@@ -100,9 +100,15 @@ const isLinksAvail = mutualLinks.length > 0
 
 <style scoped>
 .about-section {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--surface-container-low);
+}
+
+@media (min-width: 640px) {
+  .about-section {
+    padding: 2rem;
+  }
 }
 
 .section-heading {
