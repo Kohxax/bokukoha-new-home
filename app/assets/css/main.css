@@ -27,6 +27,8 @@ html {
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-container: var(--primary-container);
+  --color-primary-container-foreground: var(--primary-container-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -62,8 +64,10 @@ html {
   --card-foreground: #f4f4f5;
   --popover: #27272a;
   --popover-foreground: #f4f4f5;
-  --primary: #f4f4f5;
-  --primary-foreground: #18181b;
+  --primary: #c7c5ff;
+  --primary-foreground: #29265f;
+  --primary-container: #45436f;
+  --primary-container-foreground: #e4e1ff;
   --secondary: #3f3f46;
   --secondary-foreground: #f4f4f5;
   --muted: #3f3f46;
@@ -78,7 +82,7 @@ html {
   --switch-background: #3f3f46;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #71717a;
+  --ring: #c7c5ff;
   --surface-container-low: color-mix(in srgb, #27272a 58%, #18181b);
   --surface-container: #27272a;
   --surface-container-high: color-mix(in srgb, #27272a 64%, #3f3f46);
