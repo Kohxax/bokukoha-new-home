@@ -61,7 +61,7 @@ useSeoMeta({
         <div class="flex flex-row items-center gap-3 mt-5">
           <NuxtLink to="/about">
             <Button
-              variant="secondary"
+              variant="outline"
             >
               <UserRound class="h-4 w-4" />
               こはについて
