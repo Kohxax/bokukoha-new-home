@@ -143,7 +143,7 @@ const avatarStyle = computed(() => {
         <span class="font-semibold text-sm truncate">{{ comment.authorName }}</span>
         <span
           v-if="comment.isAdmin"
-          class="inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium bg-primary/10 text-primary shrink-0"
+          class="inline-flex shrink-0 items-center rounded-full bg-primary-container px-1.5 py-0.5 text-[10px] font-medium text-primary-container-foreground"
           >管理者</span
         >
         <span

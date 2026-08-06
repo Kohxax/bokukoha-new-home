@@ -113,7 +113,11 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
       <button
         @click="shareOpen = !shareOpen"
         class="m3-state-layer flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground transition-colors"
-        :class="shareOpen ? 'bg-primary/15 text-primary' : 'hover:text-foreground'"
+        :class="
+          shareOpen
+            ? 'bg-primary-container text-primary-container-foreground'
+            : 'hover:text-foreground'
+        "
         title="シェア"
       >
         <Share class="w-7 h-7" />

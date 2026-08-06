@@ -130,7 +130,9 @@ useSeoMeta({
                     <Likes :article-id="post.path" />
                     <CalendarDays class="h-4 w-4" />
                     <span>{{ post.date }}</span>
-                    <span class="rounded-full bg-primary/15 px-3 py-1 text-xs text-primary">
+                    <span
+                      class="rounded-full bg-primary-container px-3 py-1 text-xs text-primary-container-foreground"
+                    >
                       {{ post.category }}
                     </span>
                   </div>

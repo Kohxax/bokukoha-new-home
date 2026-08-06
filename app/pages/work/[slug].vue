@@ -74,7 +74,7 @@ onUnmounted(() => {
 
             <CardHeader class="pt-2 px-5 md:px-10">
               <span
-                class="inline-flex h-8 items-center justify-self-start rounded-full bg-primary/15 px-4 text-sm font-medium text-primary"
+                class="inline-flex h-8 items-center justify-self-start rounded-full bg-primary-container px-4 text-sm font-medium text-primary-container-foreground"
               >
                 {{ page.category }}
               </span>

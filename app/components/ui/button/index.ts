@@ -15,9 +15,9 @@ export const buttonVariants = cva(
         outline:
           "cursor-pointer border border-border bg-transparent text-foreground shadow-none",
         secondary:
-          "cursor-pointer bg-primary/15 text-primary shadow-none",
+          "cursor-pointer bg-primary-container text-primary-container-foreground shadow-none",
         tonal:
-          "cursor-pointer bg-primary/15 text-primary shadow-none",
+          "cursor-pointer bg-primary-container text-primary-container-foreground shadow-none",
         ghost:
           "cursor-pointer bg-transparent text-foreground",
         text:
