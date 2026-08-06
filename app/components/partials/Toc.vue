@@ -72,7 +72,7 @@ onMounted(() => {
       :class="isInline ? 'pb-2 pt-4 px-4' : 'mt-4 -mb-2'"
     >
       <CardTitle class="text-foreground flex flex-row gap-2 items-center">
-        <Hash :class="isInline ? 'h-4 w-4 text-brand' : 'h-5 w-5 text-brand'" />
+        <Hash :class="isInline ? 'h-4 w-4 text-primary' : 'h-5 w-5 text-primary'" />
         <span
           :class="
             isInline
@@ -100,16 +100,16 @@ onMounted(() => {
             <a
               :href="`#${link.id}`"
               @click.prevent="scrollToHeading(link.id)"
-              class="group relative flex items-start gap-1 border-l-2 py-1 pl-2 transition-colors hover:text-brand"
+              class="group relative flex items-start gap-1 border-l-2 py-1 pl-2 transition-colors hover:text-primary"
               :class="[
                 activeId === link.id
-                  ? 'border-brand text-brand'
+                  ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground',
               ]"
             >
               <span
-                class="mt-0.5 min-w-6 font-mono text-sm group-hover:text-brand/70"
-                :class="activeId === link.id ? 'text-brand' : 'text-muted-foreground'"
+                class="mt-0.5 min-w-6 font-mono text-sm group-hover:text-primary/70"
+                :class="activeId === link.id ? 'text-primary' : 'text-muted-foreground'"
               >
                 {{ i + 1 }}.
               </span>
@@ -121,16 +121,16 @@ onMounted(() => {
                 <a
                   :href="`#${childLink.id}`"
                   @click.prevent="scrollToHeading(childLink.id)"
-                  class="group relative flex items-start gap-1 border-l-2 py-0.5 pl-2 transition-colors hover:text-brand"
+                  class="group relative flex items-start gap-1 border-l-2 py-0.5 pl-2 transition-colors hover:text-primary"
                   :class="[
                     activeId === childLink.id
-                      ? 'border-brand text-brand'
+                      ? 'border-primary text-primary'
                       : 'border-transparent text-muted-foreground',
                   ]"
                 >
                   <span
-                    class="mt-0.5 min-w-8 font-mono text-xs group-hover:text-brand/70"
-                    :class="activeId === childLink.id ? 'text-brand' : 'text-muted-foreground/70'"
+                    class="mt-0.5 min-w-8 font-mono text-xs group-hover:text-primary/70"
+                    :class="activeId === childLink.id ? 'text-primary' : 'text-muted-foreground/70'"
                   >
                     {{ i + 1 }}.{{ j + 1 }}.
                   </span>
@@ -145,18 +145,18 @@ onMounted(() => {
                     <a
                       :href="`#${grandChildLink.id}`"
                       @click.prevent="scrollToHeading(grandChildLink.id)"
-                      class="group relative flex items-start gap-2 border-l-2 py-0.5 pl-2 transition-colors hover:text-brand"
+                      class="group relative flex items-start gap-2 border-l-2 py-0.5 pl-2 transition-colors hover:text-primary"
                       :class="[
                         activeId === grandChildLink.id
-                          ? 'border-brand text-brand'
+                          ? 'border-primary text-primary'
                           : 'border-transparent text-muted-foreground/80',
                       ]"
                     >
                       <span
-                        class="mt-0.5 min-w-10 font-mono text-[10px] group-hover:text-brand/70"
+                        class="mt-0.5 min-w-10 font-mono text-[10px] group-hover:text-primary/70"
                         :class="
                           activeId === grandChildLink.id
-                            ? 'text-brand'
+                            ? 'text-primary'
                             : 'text-muted-foreground/60'
                         "
                       >

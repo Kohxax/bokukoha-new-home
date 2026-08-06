@@ -156,7 +156,7 @@ onUnmounted(() => {
 .prose :deep(h5),
 .prose :deep(h6) {
   margin-left: -1.2rem;
-  border-left: 4px solid var(--brand);
+  border-left: 4px solid var(--foreground);
   padding-left: 1rem;
   scroll-margin-top: 100px;
 }

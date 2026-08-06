@@ -74,7 +74,7 @@ onUnmounted(() => {
 
             <CardHeader class="pt-2 px-5 md:px-10">
               <span
-                class="inline-flex h-8 items-center justify-self-start rounded-full bg-brand/15 px-4 text-sm font-medium text-brand"
+                class="inline-flex h-8 items-center justify-self-start rounded-full bg-primary/15 px-4 text-sm font-medium text-primary"
               >
                 {{ page.category }}
               </span>
@@ -136,7 +136,7 @@ onUnmounted(() => {
 .prose :deep(h5),
 .prose :deep(h6) {
   margin-left: -1.2rem;
-  border-left: 4px solid var(--brand);
+  border-left: 4px solid var(--foreground);
   padding-left: 1rem;
   scroll-margin-top: 100px;
 }

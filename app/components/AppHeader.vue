@@ -71,7 +71,7 @@ const isActive = (match: string) => route.path.startsWith(match)
           class="m3-state-layer flex h-10 items-center rounded-full px-3 text-sm font-medium transition-colors sm:px-4"
           :class="
             isActive(link.match)
-              ? 'bg-brand/15 text-brand'
+              ? 'bg-primary/15 text-primary'
               : 'text-muted-foreground hover:text-foreground'
           "
           :alt="link.label"

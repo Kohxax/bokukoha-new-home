@@ -14,9 +14,6 @@ html {
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
-
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container: var(--surface-container);
   --color-surface-container-high: var(--surface-container-high);
@@ -59,8 +56,6 @@ html {
 
 :root {
   --font-size: 16px;
-  --brand: oklch(0.72 0.2 290);
-  --brand-foreground: #18181b;
   --background: #18181b;
   --foreground: #f4f4f5;
   --card: #27272a;
@@ -159,7 +154,7 @@ html {
   }
 
   .m3-interactive-card:focus-within {
-    outline: 3px solid color-mix(in srgb, var(--brand) 45%, transparent);
+    outline: 3px solid var(--ring);
     outline-offset: 2px;
   }
 
@@ -176,7 +171,7 @@ html {
   }
 
   .m3-text-field:focus {
-    border-color: var(--brand);
+    border-color: var(--ring);
     background: var(--surface-container-high);
     outline: none;
   }
