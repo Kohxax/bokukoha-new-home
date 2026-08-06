@@ -24,10 +24,19 @@ const iconClass = computed(
       lg: 'h-6 w-6',
     })[props.size ?? 'md'],
 )
+
+const linkClass = computed(
+  () =>
+    ({
+      sm: 'size-7',
+      md: 'size-8',
+      lg: 'size-10',
+    })[props.size ?? 'md'],
+)
 </script>
 
 <template>
-  <div class="flex items-center gap-x-5">
+  <div class="flex items-center gap-x-1">
     <a
       v-for="link in links"
       :key="link.title"
@@ -35,8 +44,11 @@ const iconClass = computed(
       :title="link.title"
       target="_blank"
       rel="noopener noreferrer"
-      class="hover:scale-98 transition"
-      :class="isBrighter ? 'hover:text-foreground' : 'hover:opacity-75'"
+      class="m3-state-layer flex items-center justify-center rounded-full transition-colors"
+      :class="[
+        linkClass,
+        isBrighter ? 'text-muted-foreground hover:text-foreground' : 'text-foreground',
+      ]"
     >
       <component :is="link.icon" :class="iconClass" />
     </a>
