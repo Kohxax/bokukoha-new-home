@@ -22,7 +22,8 @@ interface PostRow {
 
 interface ScoredEntry {
   j: number
-  sim: number
+  score: number
+  hasContentSignal: boolean
 }
 
 let cached: Promise<RelatedMap> | null = null
@@ -60,14 +61,14 @@ function tokenize(text: string): string[] {
     if (w.length >= 2) tokens.push(w)
   }
 
-  // CJK characters: bigram
-  const cjkRe = /[　-鿿豈-﫿︰-﹏＀-￯]/g
-  const cjkChars = clean.match(cjkRe) ?? []
-  for (let i = 0; i < cjkChars.length - 1; i++) {
-    tokens.push(cjkChars[i] + cjkChars[i + 1])
-  }
-  for (const ch of cjkChars) {
-    tokens.push(ch)
+  // Japanese and Chinese text: use character bigrams within each word-like run.
+  // This avoids treating whitespace, punctuation, and frequent one-character words
+  // as a relevance signal.
+  const cjkRuns = clean.match(/[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}々ー]+/gu) ?? []
+  for (const run of cjkRuns) {
+    for (let i = 0; i < run.length - 1; i++) {
+      tokens.push(run.slice(i, i + 2))
+    }
   }
 
   return tokens
@@ -95,6 +96,38 @@ function cosineSim(a: Map<string, number>, b: Map<string, number>): number {
   return denom === 0 ? 0 : dot / denom
 }
 
+function normalizeLabel(value: string): string {
+  return value.trim().toLowerCase()
+}
+
+function jaccardSimilarity(a: Set<string>, b: Set<string>): number {
+  if (a.size === 0 || b.size === 0) return 0
+
+  let intersection = 0
+  for (const value of a) {
+    if (b.has(value)) intersection++
+  }
+
+  return intersection / (a.size + b.size - intersection)
+}
+
+function dateTimestamp(date: string): number {
+  const timestamp = Date.parse(date)
+  return Number.isFinite(timestamp) ? timestamp : 0
+}
+
+function recencyScore(date: string, newestTimestamp: number): number {
+  const timestamp = dateTimestamp(date)
+  if (!timestamp || !newestTimestamp) return 0
+
+  const ageInDays = Math.max(0, (newestTimestamp - timestamp) / 86_400_000)
+  return Math.exp(-ageInDays / 365)
+}
+
+function newestFirst(a: PostRow, b: PostRow): number {
+  return dateTimestamp(b.date) - dateTimestamp(a.date)
+}
+
 async function compute(event: H3Event): Promise<RelatedMap> {
   const posts = await queryCollection(event, 'blog')
     .where('draft', '=', '0')
@@ -105,11 +138,15 @@ async function compute(event: H3Event): Promise<RelatedMap> {
   const tokensList: string[][] = posts.map((p: PostRow) => {
     const titleTokens = tokenize(p.title)
     const bodyTokens = tokenize(extractText(p.body))
-    const catTokens = tokenize(p.category ?? '')
-    const tagTokens = (p.tags ?? []).flatMap((t: string) => tokenize(t))
-    // title × 3 for weight boost
-    return [...titleTokens, ...titleTokens, ...titleTokens, ...bodyTokens, ...catTokens, ...tagTokens]
+    // Give title matches a stronger influence than matches found only in the body.
+    return [...titleTokens, ...titleTokens, ...titleTokens, ...bodyTokens]
   })
+
+  const tagSets = posts.map((post) => new Set(
+    (post.tags ?? []).map(normalizeLabel).filter(Boolean),
+  ))
+  const categories = posts.map((post) => normalizeLabel(post.category ?? ''))
+  const newestTimestamp = Math.max(...posts.map((post) => dateTimestamp(post.date)), 0)
 
   const N = posts.length
   const df = new Map<string, number>()
@@ -132,27 +169,59 @@ async function compute(event: H3Event): Promise<RelatedMap> {
     const current = posts[i]
 
     const scored: ScoredEntry[] = posts
-      .map((_p: PostRow, j: number) => ({ j, sim: j === i ? -1 : cosineSim(vectors[i], vectors[j]) }))
-      .filter(({ j }: ScoredEntry) => j !== i)
+      .map((_p: PostRow, j: number) => {
+        const textSimilarity = cosineSim(vectors[i], vectors[j])
+        const tagSimilarity = jaccardSimilarity(tagSets[i], tagSets[j])
+        const categorySimilarity = categories[i] !== '' && categories[i] === categories[j] ? 1 : 0
+        const freshness = recencyScore(posts[j].date, newestTimestamp)
+
+        return {
+          j,
+          // Text, tags, and category identify topical relevance; recency only breaks
+          // close calls so that a newer, equally relevant post is preferred.
+          score: textSimilarity * 0.55 + tagSimilarity * 0.25 + categorySimilarity * 0.15 + freshness * 0.05,
+          hasContentSignal: textSimilarity > 0 || tagSimilarity > 0,
+        }
+      })
+      .filter(({ j }: ScoredEntry) => j !== i && j >= 0)
       .sort((a: ScoredEntry, b: ScoredEntry) => {
-        if (b.sim !== a.sim) return b.sim - a.sim
-        return posts[a.j].date < posts[b.j].date ? 1 : -1
+        if (b.score !== a.score) return b.score - a.score
+        return newestFirst(posts[a.j], posts[b.j])
       })
 
     const result: RelatedPost[] = []
     const used = new Set<number>([i])
 
-    for (const { j, sim } of scored) {
+    for (const { j, hasContentSignal } of scored) {
       if (result.length >= TOP_N) break
-      if (sim > 0) {
+      if (hasContentSignal) {
         result.push({ title: posts[j].title, path: posts[j].path, date: posts[j].date, category: posts[j].category, coverImage: posts[j].coverImage })
         used.add(j)
       }
     }
 
-    // Fill remaining with most recent posts
+    // If content and tags do not provide enough candidates, prefer the same category.
+    if (result.length < TOP_N && categories[i] !== '') {
+      const categoryFallback = posts
+        .map((post, j) => ({ post, j }))
+        .filter(({ j }) => !used.has(j) && categories[j] === categories[i])
+        .sort((a, b) => newestFirst(a.post, b.post))
+
+      for (const { j } of categoryFallback) {
+        if (result.length >= TOP_N) break
+        result.push({ title: posts[j].title, path: posts[j].path, date: posts[j].date, category: posts[j].category, coverImage: posts[j].coverImage })
+        used.add(j)
+      }
+    }
+
+    // Use the newest posts only as a final fallback.
     if (result.length < TOP_N) {
-      for (let j = 0; j < posts.length && result.length < TOP_N; j++) {
+      const recentPosts = posts
+        .map((post, j) => ({ post, j }))
+        .sort((a, b) => newestFirst(a.post, b.post))
+
+      for (const { j } of recentPosts) {
+        if (result.length >= TOP_N) break
         if (!used.has(j)) {
           result.push({ title: posts[j].title, path: posts[j].path, date: posts[j].date, category: posts[j].category, coverImage: posts[j].coverImage })
           used.add(j)
