@@ -105,7 +105,7 @@ useSeoMeta({
             {{ year ? `${year}` : category ? `${category}` : 'アーカイブ' }}
           </h1>
 
-          <Button v-if="year || category" variant="outline">
+          <Button v-if="year || category" variant="outline" as-child>
             <NuxtLink to="/blog/archives" class="text-sm flex flex-row gap-x-2 items-center">
               <Archive class="h-5 w-5" />
               <span>アーカイブ一覧に戻る</span>

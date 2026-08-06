@@ -82,7 +82,7 @@ useSeoMeta({
             <h1 class="text-3xl font-bold">Blog</h1>
           </div>
 
-          <Button variant="outline" class="xl:hidden">
+          <Button variant="outline" as-child class="xl:hidden">
             <NuxtLink to="/blog/archives" class="text-sm flex flex-row gap-x-2">
               <Archive class="h-6 w-6 mt-0.5" />
               <span>アーカイブ</span>

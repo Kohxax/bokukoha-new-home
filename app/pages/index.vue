@@ -59,14 +59,12 @@ useSeoMeta({
         <p class="text-md text-muted-foreground">@Kohxax / こは</p>
 
         <div class="flex flex-row items-center gap-3 mt-5">
-          <NuxtLink to="/about">
-            <Button
-              variant="outline"
-            >
+          <Button variant="outline" as-child>
+            <NuxtLink to="/about">
               <UserRound class="h-4 w-4" />
               こはについて
-            </Button>
-          </NuxtLink>
+            </NuxtLink>
+          </Button>
 
           <Button
             variant="outline"
