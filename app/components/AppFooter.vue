@@ -18,28 +18,31 @@ const brandYear = computed(() => {
 </script>
 
 <template>
-  <footer class="w-full bg-background border-t border-border mt-12">
-    <div class="container mx-auto max-w-5xl px-6 py-8">
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-8">
+  <footer class="mt-12 w-full border-t border-border/60 bg-surface-container-low">
+    <div class="container mx-auto max-w-5xl px-6 py-10">
+      <div class="mb-10 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
         <!-- Brand -->
-        <div class="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
-          <NuxtLink to="/" class="font-bold text-base hover:opacity-80 transition">
+        <div class="col-span-2 flex flex-col gap-2 sm:col-span-1">
+          <NuxtLink
+            to="/"
+            class="m3-state-layer -ml-2 w-fit rounded-full px-2 py-1 text-base font-bold text-foreground transition-colors"
+          >
             ぼくこは.dev
           </NuxtLink>
-          <p class="text-muted-foreground text-xs">
+          <p class="max-w-sm text-xs leading-relaxed text-muted-foreground">
             ぼくこは.devはこはのプロフィールやブログ記事、ポートフォリオをまとめた個人サイトです。
           </p>
         </div>
 
         <!-- Nav -->
-        <div class="flex flex-col gap-2">
-          <span class="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-1">Pages</span>
-          <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2">
+        <div class="flex flex-col gap-3">
+          <span class="mb-1 text-xs font-semibold tracking-widest text-muted-foreground uppercase">Pages</span>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-1">
             <NuxtLink
               v-for="link in navLinks"
               :key="link.to"
               :to="link.to"
-              class="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+              class="m3-state-layer -ml-2 w-fit rounded-full px-2 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               {{ link.label }}
             </NuxtLink>
@@ -47,16 +50,16 @@ const brandYear = computed(() => {
         </div>
 
         <!-- Social -->
-        <div class="flex flex-col gap-2">
-          <span class="text-xs font-semibold tracking-widest text-muted-foreground uppercase mb-1">Links</span>
-          <div class="flex items-center gap-4 text-muted-foreground">
+        <div class="flex flex-col gap-3">
+          <span class="mb-1 text-xs font-semibold tracking-widest text-muted-foreground uppercase">Links</span>
+          <div class="flex items-center gap-3 text-muted-foreground">
             <SocialLinks size="md" :isBrighter="true" />
             <a
               href="/rss.xml"
               title="RSS"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-orange-400 transition-colors"
+              class="m3-state-layer flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-orange-400"
             >
               <Rss class="h-5 w-5" />
             </a>
@@ -64,7 +67,7 @@ const brandYear = computed(() => {
         </div>
       </div>
 
-      <div class="border-t border-border pt-5 flex flex-col sm:flex-row justify-between items-center gap-1 text-xs text-muted-foreground">
+      <div class="flex flex-col items-center justify-between gap-2 rounded-2xl bg-surface-container px-4 py-3 text-xs text-muted-foreground sm:flex-row">
         <span>© {{ brandYear }} Koha. All rights reserved.</span>
         <span>引用している文章・画像の著作権は引用元に帰属します。</span>
       </div>
