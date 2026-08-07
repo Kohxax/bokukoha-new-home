@@ -93,9 +93,10 @@ const handleLike = async () => {
     :aria-label="interactive ? (liked ? 'いいね済み' : 'いいねする') : 'いいね数'"
     :class="[
       'inline-flex items-center justify-center tabular-nums transition-[background-color,color,transform] select-none',
-      interactive ? 'm3-state-layer focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring' : 'text-muted-foreground',
+      interactive ? 'focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring' : 'text-muted-foreground',
+      interactive && !liked ? 'm3-state-layer' : '',
       interactive && liked
-        ? 'cursor-not-allowed bg-destructive/15 text-destructive'
+        ? 'cursor-not-allowed text-destructive'
         : interactive
           ? 'text-muted-foreground hover:text-foreground'
           : '',
