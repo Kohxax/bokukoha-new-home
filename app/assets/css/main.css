@@ -186,6 +186,12 @@ html {
     box-shadow: var(--elevation-1);
   }
 
+  .profile-avatar {
+    box-shadow:
+      var(--elevation-1),
+      0 0 0 1px color-mix(in srgb, var(--border) 55%, transparent);
+  }
+
   .m3-text-field {
     width: 100%;
     border: 0;

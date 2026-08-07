@@ -49,7 +49,7 @@ useSeoMeta({
     >
       <div class="flex flex-col items-center justify-center">
         <div class="relative mb-4">
-          <Avatar class="relative h-50 w-50 shadow-[var(--elevation-1)] ring-1 ring-border/40">
+          <Avatar class="profile-avatar relative h-50 w-50">
             <img src="~/assets/img/icon_glass.webp" alt="Koha" />
             <AvatarFallback>KH</AvatarFallback>
           </Avatar>
