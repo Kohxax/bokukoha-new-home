@@ -88,18 +88,16 @@ useSeoMeta({
     <section id="content" class="container mx-auto max-w-5xl px-6 py-12 space-y-12">
       <div class="space-y-6">
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
+          <div class="flex items-center gap-2">
             <NotebookPenIcon />
-            <h2 class="ml-2 text-2xl font-bold tracking-tight">Blog</h2>
+            <h2 class="text-2xl font-bold tracking-tight">Blog</h2>
           </div>
-          <NuxtLink
-            to="/blog/page/1/"
-            class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            alt="すべて見る"
-          >
-            すべて見る
-            <ArrowRight class="h-4 w-4" />
-          </NuxtLink>
+          <Button variant="ghost" size="sm" as-child>
+            <NuxtLink to="/blog/page/1/" aria-label="すべて見る">
+              すべて見る
+              <ArrowRight class="h-4 w-4" />
+            </NuxtLink>
+          </Button>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -132,18 +130,16 @@ useSeoMeta({
 
       <div class="space-y-6">
         <div class="flex items-center justify-between">
-          <div class="flex text-center">
-            <BriefcaseBusinessIcon class="mt-1.5" />
-            <h2 class="ml-2 text-2xl font-bold tracking-tight">Work</h2>
+          <div class="flex items-center gap-2">
+            <BriefcaseBusinessIcon />
+            <h2 class="text-2xl font-bold tracking-tight">Work</h2>
           </div>
-          <NuxtLink
-            to="/work/"
-            class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            alt="すべて見る"
-          >
-            すべて見る
-            <ArrowRight class="h-4 w-4" />
-          </NuxtLink>
+          <Button variant="ghost" size="sm" as-child>
+            <NuxtLink to="/work/" aria-label="すべて見る">
+              すべて見る
+              <ArrowRight class="h-4 w-4" />
+            </NuxtLink>
+          </Button>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
