@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { Mail, MessageSquare, UserRound } from 'lucide-vue-next'
+
 const props = defineProps<{
   articleId: string
   parentId?: string
   apiBase: string
   apiKey: string
 }>()
+
+const fieldId = (field: string) => `comment-${props.parentId ?? 'new'}-${field}`
 
 const emit = defineEmits<{
   success: []
@@ -80,68 +84,88 @@ const submit = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="submit" class="space-y-3">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <form @submit.prevent="submit" class="space-y-4">
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
       <div>
-        <label class="text-xs text-muted-foreground mb-1 block">名前（任意）</label>
+        <label :for="fieldId('author-name')" class="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <UserRound class="size-3.5" aria-hidden="true" />
+          名前（任意）
+        </label>
         <input
+          :id="fieldId('author-name')"
           v-model="authorName"
           type="text"
           maxlength="100"
           placeholder="名無しさん"
-          class="w-full bg-transparent border-b border-border/40 px-0 py-2 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
+          autocomplete="name"
+          class="min-h-11 w-full rounded-xl border border-border/70 bg-transparent px-3 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
       </div>
       <div>
-        <label class="text-xs text-muted-foreground mb-1 block">メール（任意・非公開）</label>
+        <label :for="fieldId('author-email')" class="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <Mail class="size-3.5" aria-hidden="true" />
+          メール（任意・非公開）
+        </label>
         <input
+          :id="fieldId('author-email')"
           v-model="authorEmail"
           type="email"
           maxlength="200"
           placeholder="example@email.com"
-          class="w-full bg-transparent border-b border-border/40 px-0 py-2 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 transition-colors"
+          autocomplete="email"
+          class="min-h-11 w-full rounded-xl border border-border/70 bg-transparent px-3 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
       </div>
     </div>
 
     <div>
-      <label class="text-xs text-muted-foreground mb-1 block">
+      <label :for="fieldId('content')" class="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+        <MessageSquare class="size-3.5" aria-hidden="true" />
         コメント <span class="text-red-400">*</span>
       </label>
       <textarea
+        :id="fieldId('content')"
         v-model="content"
         rows="4"
         maxlength="5000"
         required
         placeholder="コメントを入力..."
-        class="w-full bg-transparent border-b border-border/40 px-0 py-2 text-sm focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/40 resize-y transition-colors"
+        class="min-h-28 w-full resize-y rounded-2xl border border-border/70 bg-transparent px-3 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
-      <div class="text-right text-xs text-muted-foreground mt-1">
+      <div class="mt-1.5 text-right text-xs text-muted-foreground">
         {{ content.length }} / 5000
       </div>
     </div>
 
-    <p v-if="contentTooShort" class="text-amber-400 text-sm">2文字以上入力してください。</p>
-    <p v-else-if="errorMessage" class="text-red-400 text-sm">{{ errorMessage }}</p>
+    <p
+      v-if="contentTooShort"
+      class="rounded-xl border border-amber-400/30 bg-amber-400/10 px-3 py-2 text-sm text-amber-300"
+    >2文字以上入力してください。</p>
+    <p
+      v-else-if="errorMessage"
+      class="rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-red-300"
+    >{{ errorMessage }}</p>
 
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center gap-2">
       <Button
         type="submit"
         size="sm"
+        class="min-h-10 px-5"
         :disabled="submitting || contentTrimmed.length < 2"
       >
-        {{ submitting ? '送信中...' : parentId ? '返信する' : '投稿する' }}
+        {{ submitting ? '送信中...' : parentId ? '返信する' : '投稿' }}
       </Button>
       <Button
         type="button"
         variant="ghost"
         size="sm"
+        class="min-h-10 px-4"
         @click="emit('cancel')"
       >
         キャンセル
       </Button>
     </div>
-    <p class="text-xs text-muted-foreground/60">
+    <p class="rounded-xl bg-surface-container-low px-3 py-2 text-xs leading-relaxed text-muted-foreground/75">
       投稿することで<NuxtLink to="/comment-policy" class="underline underline-offset-2 hover:text-muted-foreground transition-colors">コメントポリシー</NuxtLink>に同意したものとみなします。
     </p>
   </form>

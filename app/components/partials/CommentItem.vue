@@ -108,9 +108,12 @@ const avatarStyle = computed(() => {
 
 <template>
   <!-- Deleted comment with remaining replies -->
-  <div v-if="isDeleted && comment.replies.length > 0" class="py-5">
-    <p class="text-muted-foreground text-xs italic">このコメントは削除されました。</p>
-    <div class="mt-3 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20">
+  <div
+    v-if="isDeleted && comment.replies.length > 0"
+    :class="comment.parentId ? 'py-4 first:pt-0 last:pb-0' : 'rounded-2xl bg-surface-container-low p-4 sm:p-5'"
+  >
+    <p class="text-xs italic text-muted-foreground">このコメントは削除されました。</p>
+    <div class="mt-4 ml-3 rounded-r-2xl border-l-2 border-primary/30 bg-surface-container-low/60 pl-4 sm:ml-5 sm:pl-5">
       <CommentItem
         v-for="reply in comment.replies"
         :key="reply.commentId"
@@ -124,14 +127,17 @@ const avatarStyle = computed(() => {
   </div>
 
   <!-- Normal comment -->
-  <div v-else-if="!isDeleted" class="py-5">
-    <div class="flex items-center justify-between gap-2 mb-2">
-      <div class="flex items-center gap-2 min-w-0 flex-1">
+  <div
+    v-else-if="!isDeleted"
+    :class="comment.parentId ? 'py-4 first:pt-0 last:pb-0' : 'rounded-2xl bg-surface-container-low p-4 sm:p-5'"
+  >
+    <div class="mb-3 flex items-center justify-between gap-3">
+      <div class="flex min-w-0 flex-1 items-center gap-2">
         <!-- Avatar -->
         <div
           :style="comment.isAdmin ? undefined : (avatarStyle ?? undefined)"
-          class="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold shrink-0 select-none overflow-hidden"
-          :class="comment.isAdmin ? 'ring-1 ring-primary/40' : ''"
+          class="flex size-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full bg-muted text-xs font-bold"
+          :class="comment.isAdmin ? 'ring-2 ring-primary/40' : ''"
         >
           <template v-if="comment.isAdmin">
             <img src="~/assets/img/icon_glass.webp" alt="こは" class="w-full h-full object-cover" />
@@ -140,7 +146,7 @@ const avatarStyle = computed(() => {
             {{ comment.authorName?.charAt(0).toUpperCase() ?? '?' }}
           </template>
         </div>
-        <span class="font-semibold text-sm truncate">{{ comment.authorName }}</span>
+        <span class="min-w-0 truncate text-sm font-medium">{{ comment.authorName }}</span>
         <span
           v-if="comment.isAdmin"
           class="inline-flex shrink-0 items-center rounded-full bg-primary-container px-1.5 py-0.5 text-[10px] font-medium text-primary-container-foreground"
@@ -153,13 +159,13 @@ const avatarStyle = computed(() => {
           ID:{{ comment.authorId }}
         </span>
       </div>
-      <Pin v-if="comment.pinned" class="w-3 h-3 shrink-0 text-amber-400/70" />
-      <span class="text-muted-foreground text-xs whitespace-nowrap shrink-0">{{
+      <Pin v-if="comment.pinned" class="size-4 shrink-0 text-amber-300" />
+      <span class="shrink-0 whitespace-nowrap text-xs text-muted-foreground">{{
         formatDate(comment.createdAt)
       }}</span>
     </div>
 
-    <div class="pl-9">
+    <div class="pl-12">
       <div class="relative">
         <p
           ref="contentRef"
@@ -171,7 +177,7 @@ const avatarStyle = computed(() => {
         <!-- Gradient fade -->
         <div
           v-if="isLongContent && !isContentExpanded"
-          class="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent pointer-events-none"
+          class="pointer-events-none absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-surface-container-low to-transparent"
         />
       </div>
 
@@ -181,8 +187,10 @@ const avatarStyle = computed(() => {
         class="relative z-10 flex justify-center -mt-3"
       >
         <button
+          type="button"
+          aria-expanded="false"
           @click="isContentExpanded = true"
-          class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
+          class="m3-state-layer flex min-h-9 items-center gap-1.5 rounded-full border border-border/60 bg-surface-container-high px-4 py-2 text-xs text-foreground/80 shadow-sm transition-colors hover:border-border hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           もっと見る
         </button>
@@ -191,8 +199,9 @@ const avatarStyle = computed(() => {
       <!-- Close button (centered) when expanded -->
       <div v-if="isLongContent && isContentExpanded" class="flex justify-center mt-3">
         <button
+          type="button"
           @click="isContentExpanded = false"
-          class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+          class="m3-state-layer min-h-9 rounded-full px-4 py-2 text-xs text-muted-foreground/70 transition-colors hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           閉じる
         </button>
@@ -200,18 +209,20 @@ const avatarStyle = computed(() => {
     </div>
 
     <!-- Reply button (top-level only) -->
-    <div v-if="!comment.parentId" class="mt-2 pl-9">
+    <div v-if="!comment.parentId" class="mt-3 pl-12">
       <button
+        type="button"
+        :aria-expanded="showReplyForm"
         @click="showReplyForm = !showReplyForm"
-        class="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+        class="m3-state-layer flex min-h-10 items-center gap-1.5 rounded-full px-3 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        <MessageSquare class="w-3 h-3" />
+        <MessageSquare class="size-4" />
         返信
       </button>
     </div>
 
     <!-- Inline reply form -->
-    <div v-if="showReplyForm" class="mt-3 pl-9">
+    <div v-if="showReplyForm" class="mt-4 ml-12 border-t border-border/40 pt-4">
       <CommentForm
         :article-id="articleId"
         :parent-id="comment.commentId"
@@ -225,7 +236,7 @@ const avatarStyle = computed(() => {
     <!-- Nested replies -->
     <div
       v-if="comment.replies.length > 0"
-      class="mt-2 ml-4 pl-4 border-l-2 border-muted divide-y divide-border/20"
+      class="mt-4 ml-3 rounded-r-2xl border-l-2 border-primary/30 bg-surface-container-low/60 pl-4 sm:ml-5 sm:pl-5"
     >
       <CommentItem
         v-for="reply in visibleReplies"
@@ -238,20 +249,24 @@ const avatarStyle = computed(() => {
       />
 
       <!-- Show more replies -->
-      <div v-if="hasManyReplies && !isRepliesExpanded" class="py-3 flex justify-center">
+      <div v-if="hasManyReplies && !isRepliesExpanded" class="flex justify-center py-3">
         <button
+          type="button"
+          :aria-expanded="false"
           @click="isRepliesExpanded = true"
-          class="flex items-center gap-1.5 text-xs bg-background border border-border/60 rounded-full px-3 py-1 text-foreground/80 hover:text-foreground hover:border-border transition-colors shadow-sm"
+          class="m3-state-layer flex min-h-9 items-center gap-1.5 rounded-full border border-border/60 bg-surface-container-high px-4 py-2 text-xs text-foreground/80 shadow-sm transition-colors hover:border-border hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           他{{ hiddenReplyCount }}件の返信を表示
         </button>
       </div>
 
       <!-- Collapse replies -->
-      <div v-if="hasManyReplies && isRepliesExpanded" class="py-3 flex justify-center">
+      <div v-if="hasManyReplies && isRepliesExpanded" class="flex justify-center py-3">
         <button
+          type="button"
+          :aria-expanded="true"
           @click="isRepliesExpanded = false"
-          class="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+          class="m3-state-layer min-h-9 rounded-full px-4 py-2 text-xs text-muted-foreground/70 transition-colors hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           返信を折りたたむ
         </button>
