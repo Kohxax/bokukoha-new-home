@@ -1,45 +1,15 @@
 <script setup lang="ts">
-import { Heart, MessageCircle, Share, Rss, Link2 } from 'lucide-vue-next'
+import { MessageCircle, Share, Rss, Link2 } from 'lucide-vue-next'
 import { onClickOutside } from '@vueuse/core'
 import MisskeyIcon from '../svg/MisskeyIcon.vue'
 import XIcon from '../svg/XIcon.vue'
+import ArticleLike from './ArticleLike.vue'
 
 const props = defineProps<{
   articleId: string
   showRss?: boolean
   isVertical?: boolean
 }>()
-
-// ── Like ──────────────────────────────────────────────
-const config = useRuntimeConfig()
-const likeCount = ref<number | null>(null)
-const liked = ref(false)
-const LIMIT = 1
-const localKey = computed(() => `user_like_count_${props.articleId}`)
-
-onMounted(async () => {
-  liked.value = parseInt(localStorage.getItem(localKey.value) || '0') >= LIMIT
-  try {
-    const res = await fetch(
-      `${config.public.likeApi}/${encodeURIComponent(props.articleId)}`,
-      { headers: { 'x-api-key': config.public.likeApiKey } },
-    )
-    likeCount.value = (await res.json()).likes || 0
-  } catch {
-    likeCount.value = 0
-  }
-})
-
-const handleLike = async () => {
-  if (liked.value) return
-  liked.value = true
-  likeCount.value = (likeCount.value || 0) + 1
-  localStorage.setItem(localKey.value, '1')
-  await fetch(`${config.public.likeApi}/${encodeURIComponent(props.articleId)}`, {
-    method: 'POST',
-    headers: { 'x-api-key': config.public.likeApiKey },
-  })
-}
 
 // ── Comment scroll ─────────────────────────────────────
 const scrollToComments = () => {
@@ -79,25 +49,10 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
   <div :class="isVertical ? 'flex flex-col items-center gap-1' : 'flex items-center justify-center gap-3'">
 
     <!-- Like -->
-    <button
-      @click="handleLike"
-      :disabled="liked"
-      class="m3-state-layer min-h-12 min-w-12 rounded-full p-2 transition-colors select-none"
-      :class="[
-        isVertical ? 'flex flex-col items-center gap-1' : 'flex items-center gap-2',
-        liked ? 'text-muted-foreground cursor-not-allowed' : '',
-      ]"
-      title="いいね"
-    >
-      <Heart
-        class="w-7 h-7"
-        :class="liked ? 'fill-muted-foreground text-muted-foreground' : 'fill-red-400 text-red-400'"
-      />
-      <transition name="like-bump" mode="out-in">
-        <span v-if="likeCount === null" class="inline-block w-5 h-4 rounded bg-muted animate-pulse" />
-        <span v-else :key="likeCount" class="tabular-nums text-base">{{ likeCount }}</span>
-      </transition>
-    </button>
+    <ArticleLike
+      :article-id="articleId"
+      :layout="isVertical ? 'vertical' : 'regular'"
+    />
 
     <!-- Comment scroll -->
     <button
@@ -164,10 +119,3 @@ const openRSS = () => window.open('https://www.bokukoha.dev/rss.xml', '_blank')
 
   </div>
 </template>
-
-<style scoped>
-.like-bump-enter-active { transition: all 0.28s ease; }
-.like-bump-leave-active { transition: all 0.2s ease; }
-.like-bump-enter-from { transform: translateY(6px); opacity: 0; }
-.like-bump-leave-to { transform: translateY(-6px); opacity: 0; }
-</style>
