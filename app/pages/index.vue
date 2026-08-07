@@ -85,7 +85,7 @@ useSeoMeta({
       </div>
     </main>
 
-    <section id="content" class="container mx-auto max-w-5xl px-6 py-12 space-y-12">
+    <PageShell id="content" as="section" class="space-y-12 py-12">
       <div class="space-y-6">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -170,6 +170,6 @@ useSeoMeta({
           </Card>
         </div>
       </div>
-    </section>
+    </PageShell>
   </div>
 </template>

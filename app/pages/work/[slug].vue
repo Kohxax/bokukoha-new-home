@@ -51,10 +51,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-3 py-8 md:py-12 flex flex-col">
+  <PageShell variant="article" class="flex flex-col py-8 md:py-12">
     <template v-if="page">
       <div
-        class="grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,896px)_1fr] w-full max-w-[1440px] mx-auto gap-4 xl:gap-10"
+        class="grid w-full grid-cols-1 gap-4 xl:grid-cols-[1fr_minmax(auto,896px)_1fr] xl:gap-10"
       >
         <!-- Left Side: Empty for centering -->
         <div class="hidden xl:block"></div>
@@ -125,7 +125,7 @@ onUnmounted(() => {
       </div>
     </template>
     <NotFound v-else />
-  </div>
+  </PageShell>
 </template>
 
 <style scoped>

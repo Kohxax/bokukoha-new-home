@@ -30,7 +30,7 @@ useHead({
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl px-3 py-8 md:py-12 min-h-screen">
+  <PageShell variant="list" class="min-h-screen py-8 md:py-12">
     <div class="mx-auto max-w-4xl gap-6">
       <div class="flex flex-row text-center mb-5">
         <BriefcaseBusiness class="mt-2 mr-3" />
@@ -78,5 +78,5 @@ useHead({
     </div>
 
     <NotFound v-if="!posts || posts.length === 0" />
-  </div>
+  </PageShell>
 </template>

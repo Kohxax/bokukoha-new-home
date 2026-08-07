@@ -34,7 +34,7 @@ const isLinksAvail = mutualLinks.length > 0
 
 <template>
   <div class="min-h-screen bg-background text-foreground">
-    <section class="flex flex-col items-center px-4 pt-16 pb-14 text-center sm:pt-24">
+    <PageShell as="section" class="flex flex-col items-center pt-16 pb-14 text-center sm:pt-24">
       <Avatar class="mb-3 h-28 w-28 shadow-xl">
         <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         <AvatarFallback>KH</AvatarFallback>
@@ -44,20 +44,21 @@ const isLinksAvail = mutualLinks.length > 0
       <p class="mb-2 text-sm text-muted-foreground">@Kohxax / こは</p>
 
       <SocialLinks />
-    </section>
+    </PageShell>
 
-    <main class="mx-auto w-full max-w-2xl space-y-6 px-6 pb-16">
-      <section class="about-section">
-        <h2 class="section-heading">PROFILE</h2>
-        <div class="grid grid-cols-2 gap-x-8 gap-y-4">
-          <div v-for="item in profile" :key="item.label">
-            <dt class="text-xs text-muted-foreground">{{ item.label }}</dt>
-            <dd class="mt-0.5 text-sm font-medium">{{ item.value }}</dd>
+    <PageShell as="main" class="pb-16">
+      <div class="mx-auto max-w-2xl space-y-6">
+        <section class="about-section">
+          <h2 class="section-heading">PROFILE</h2>
+          <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+            <div v-for="item in profile" :key="item.label">
+              <dt class="text-xs text-muted-foreground">{{ item.label }}</dt>
+              <dd class="mt-0.5 text-sm font-medium">{{ item.value }}</dd>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="about-section">
+        <section class="about-section">
         <h2 class="section-heading">GAMES &amp; CP</h2>
         <dl class="space-y-3">
           <div
@@ -69,9 +70,9 @@ const isLinksAvail = mutualLinks.length > 0
             <dd class="text-sm text-muted-foreground">{{ game.characters }}</dd>
           </div>
         </dl>
-      </section>
+        </section>
 
-      <section class="about-section">
+        <section class="about-section">
         <h2 class="section-heading">ABOUT ME</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           インターネットではこはと名乗っています。簡単なプロフィールは上に書いてある通りです。わからんことを調べること、良い物語を見て最高に苦しい気分になることが大好きです。
@@ -79,9 +80,9 @@ const isLinksAvail = mutualLinks.length > 0
         <p class="text-sm leading-relaxed text-muted-foreground">
           色々知りたいと思ってくださった方はmisskeyの普段の投稿でも見ていただければと思います。よろしくお願いします。
         </p>
-      </section>
+        </section>
 
-      <section class="about-section">
+        <section class="about-section">
         <h2 class="section-heading">ABOUT THIS SITE</h2>
         <p class="text-sm leading-relaxed text-muted-foreground">
           ぼくこは.devは、こはが0から作った個人サイトです。今ご覧になられているプロフィールに加えて、私がやったことや体験したことなんかを文章と写真でまとめたBlogセクション、制作物をまとめたWorkセクションがあります。
@@ -89,12 +90,13 @@ const isLinksAvail = mutualLinks.length > 0
         <p class="text-sm leading-relaxed text-muted-foreground">
           まともなサイトを作るのは初めてのことなので、何かご意見等あれば積極的に共有してくださるとうれしいです！
         </p>
-      </section>
+        </section>
 
-      <section v-if="isLinksAvail" class="about-section">
-        <h2 class="section-heading">MUTUAL LINKS</h2>
-      </section>
-    </main>
+        <section v-if="isLinksAvail" class="about-section">
+          <h2 class="section-heading">MUTUAL LINKS</h2>
+        </section>
+      </div>
+    </PageShell>
   </div>
 </template>
 

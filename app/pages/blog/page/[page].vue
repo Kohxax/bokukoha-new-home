@@ -73,9 +73,10 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="container mx-auto px-3 py-8 md:py-12 min-h-screen max-w-7xl">
-    <div class="grid justify-center grid-cols-[minmax(0,800px)_0px]">
-      <div class="max-w-[800px] w-full">
+  <PageShell variant="list" class="min-h-screen py-8 md:py-12">
+    <div class="grid grid-cols-1 justify-center justify-items-center gap-8 2xl:grid-cols-[240px_minmax(0,896px)_240px]">
+      <div class="hidden 2xl:block" aria-hidden="true" />
+      <div class="w-full max-w-4xl">
         <div class="flex items-center justify-between mb-5">
           <div class="flex flex-row text-center">
             <NotebookPen class="mt-2 mr-3" />
@@ -161,11 +162,11 @@ useSeoMeta({
         </div>
       </div>
 
-      <aside class="hidden xl:block mx-12 w-60 shrink-0 self-start sticky top-42">
+      <aside class="sticky top-42 hidden w-60 shrink-0 self-start 2xl:block">
         <Archives />
       </aside>
     </div>
 
     <NotFound v-if="!posts || posts.length === 0" />
-  </div>
+  </PageShell>
 </template>
