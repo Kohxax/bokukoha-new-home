@@ -98,7 +98,7 @@ onUnmounted(() => {
               <Toc :toc="page.body?.toc" is-inline />
             </div>
 
-            <CardContent class="prose prose-invert max-w-none px-5 md:px-10 pb-4">
+            <CardContent class="prose article-prose max-w-none px-5 md:px-10 pb-4">
               <ContentRenderer :value="page" />
             </CardContent>
 
@@ -123,62 +123,3 @@ onUnmounted(() => {
     <NotFound v-else />
   </PageShell>
 </template>
-
-<style scoped>
-.prose :deep(h1),
-.prose :deep(h2),
-.prose :deep(h3),
-.prose :deep(h4),
-.prose :deep(h5),
-.prose :deep(h6) {
-  margin-left: -1.2rem;
-  border-left: 4px solid var(--foreground);
-  padding-left: 1rem;
-  scroll-margin-top: 100px;
-}
-
-@media (min-width: 768px) {
-  .prose :deep(h1),
-  .prose :deep(h2),
-  .prose :deep(h3),
-  .prose :deep(h4),
-  .prose :deep(h5),
-  .prose :deep(h6) {
-    margin-left: -2.5rem;
-    padding-left: 2rem;
-  }
-}
-
-.prose :deep(h1) {
-  font-size: 2rem;
-  display: flow-root;
-  margin-top: 2rem !important;
-}
-
-.prose :deep(h2) {
-  font-size: 1.7rem;
-  margin-top: 0;
-}
-
-.prose :deep(h3) {
-  font-size: 1.4rem;
-  margin-top: 0;
-}
-
-.prose :deep(h4) {
-  font-size: 1.1rem;
-  margin-top: 1rem;
-}
-
-.prose :deep(p) {
-  font-size: 1.13rem;
-  line-height: 1.7;
-}
-
-@media (min-width: 768px) {
-  .prose :deep(p) {
-    font-size: 1.15rem;
-    line-height: 1.8;
-  }
-}
-</style>
