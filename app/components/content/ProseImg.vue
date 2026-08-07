@@ -3,7 +3,7 @@
     <NuxtImg
       :src="src"
       :alt="alt"
-      class="rounded-lg shadow mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
+      class="content-media-frame mx-auto cursor-pointer transition-transform hover:scale-[1.005]"
       loading="lazy"
       @click="open(src)"
     />

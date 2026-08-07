@@ -70,16 +70,16 @@ const embedHeight = computed(() => {
       :src="embedUrl"
       :height="embedHeight"
       width="100%"
-      class="w-full rounded-xl shadow-xl"
+      class="content-media-frame w-full"
       frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     ></iframe>
     <div
       v-else-if="embedUrl"
-      class="w-full rounded-xl bg-muted animate-pulse"
+      class="content-media-frame w-full animate-pulse bg-surface-container-high"
       :style="{ height: `${embedHeight}px` }"
     ></div>
-    <div v-else class="flex items-center justify-center w-full h-20 rounded-lg bg-black text-white">
+    <div v-else class="content-media-frame flex h-20 w-full items-center justify-center bg-black text-white">
       Invalid Spotify URL
     </div>
 
