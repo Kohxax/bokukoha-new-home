@@ -137,39 +137,52 @@ const handleKeydown = (e: KeyboardEvent) => {
           </div>
 
           <!-- Close button -->
-          <button
-            class="absolute top-4 right-4 p-2 text-white/70 hover:text-white bg-black/20 hover:bg-black/50 rounded-full transition-colors z-20 backdrop-blur-md"
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            class="absolute top-4 right-4 z-20 bg-black/30 text-white/80 backdrop-blur-md hover:text-white focus-visible:ring-white"
+            aria-label="画像ビューアを閉じる"
             @click.stop="close"
           >
-            <X class="w-8 h-8" />
-          </button>
+            <X class="size-7" />
+          </Button>
 
           <!-- Zoom button -->
-          <button
-            class="absolute top-4 right-16 p-2 text-white/70 hover:text-white bg-black/20 hover:bg-black/50 rounded-full transition-colors z-20 backdrop-blur-md"
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            class="absolute top-4 right-18 z-20 bg-black/30 text-white/80 backdrop-blur-md hover:text-white focus-visible:ring-white"
+            :aria-label="isZoomed ? '画像を縮小' : '画像を拡大'"
+            :aria-pressed="isZoomed"
             @click.stop="toggleZoom"
           >
-            <ZoomIn v-if="!isZoomed" class="w-8 h-8" />
-            <ZoomOut v-else class="w-8 h-8" />
-          </button>
+            <ZoomIn v-if="!isZoomed" class="size-7" />
+            <ZoomOut v-else class="size-7" />
+          </Button>
 
           <!-- Prev button -->
-          <button
+          <Button
             v-if="hasPrev"
-            class="absolute left-2 md:left-4 p-3 text-white/90 hover:text-white bg-black/20 hover:bg-black/50 rounded-full transition-all z-20 backdrop-blur-md hover:scale-110"
+            variant="ghost"
+            size="icon-lg"
+            class="absolute left-2 z-20 bg-black/30 text-white/90 backdrop-blur-md hover:text-white focus-visible:ring-white md:left-4"
+            aria-label="前の画像"
             @click.stop="handlePrev"
           >
-            <ChevronLeft class="w-8 h-8 md:w-10 md:h-10" />
-          </button>
+            <ChevronLeft class="size-8 md:size-10" />
+          </Button>
 
           <!-- Next button -->
-          <button
+          <Button
             v-if="hasNext"
-            class="absolute right-2 md:right-4 p-3 text-white/90 hover:text-white bg-black/20 hover:bg-black/50 rounded-full transition-all z-20 backdrop-blur-md hover:scale-110"
+            variant="ghost"
+            size="icon-lg"
+            class="absolute right-2 z-20 bg-black/30 text-white/90 backdrop-blur-md hover:text-white focus-visible:ring-white md:right-4"
+            aria-label="次の画像"
             @click.stop="handleNext"
           >
-            <ChevronRight class="w-8 h-8 md:w-10 md:h-10" />
-          </button>
+            <ChevronRight class="size-8 md:size-10" />
+          </Button>
 
           <!-- Caption (optional) -->
           <div v-if="currentImage.alt" class="absolute bottom-8 left-0 right-0 text-center pointer-events-none z-20">
