@@ -53,11 +53,7 @@ useHead({
           </NuxtLink>
 
           <CardHeader>
-            <span
-              class="inline-flex h-8 items-center justify-self-start rounded-full bg-primary-container px-4 text-sm font-medium text-primary-container-foreground"
-            >
-              {{ post.category }}
-            </span>
+            <CategoryBadge :category="post.category" />
             <NuxtLink class="text-2xl mt-4" :to="post.path">
               <CardTitle>{{ post.title }}</CardTitle>
             </NuxtLink>

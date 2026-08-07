@@ -114,8 +114,8 @@ useSeoMeta({
                 class="aspect-video w-full object-cover"
               />
               <CardHeader>
-                <div class="flex items-center justify-between text-sm pt-4 text-muted-foreground">
-                  <span>{{ post.category }}</span>
+                <div class="flex items-center justify-between gap-3 pt-4 text-sm text-muted-foreground">
+                  <CategoryBadge :category="post.category" />
                   <span>{{ post.date }}</span>
                 </div>
                 <CardTitle class="pt-1 text-lg line-clamp-2">{{ post.title }}</CardTitle>
@@ -157,8 +157,8 @@ useSeoMeta({
               />
               <CardHeader>
                 <CardTitle class="text-lg pt-3">{{ work.title }}</CardTitle>
-                <div class="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>{{ work.category }}</span>
+                <div class="flex items-center justify-between gap-3 text-sm text-muted-foreground">
+                  <CategoryBadge :category="work.category" />
                   <div class="flex flex-wrap items-center gap-x-2">
                     <span v-for="tag in work.tags ?? []" :key="tag" class="line-clamp-1">
                       #{{ tag }}

@@ -73,11 +73,7 @@ onUnmounted(() => {
             </div>
 
             <CardHeader class="pt-2 px-5 md:px-10">
-              <span
-                class="inline-flex h-8 items-center justify-self-start rounded-full bg-primary-container px-4 text-sm font-medium text-primary-container-foreground"
-              >
-                {{ page.category }}
-              </span>
+              <CategoryBadge :category="page.category" />
               <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
                 {{ page.title }}
               </CardTitle>

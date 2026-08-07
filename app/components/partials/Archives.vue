@@ -64,14 +64,13 @@ const archivesByCategory = computed(() => {
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <NuxtLink
+        <CategoryBadge
           v-for="(count, category) in archivesByCategory"
           :key="category"
-          :to="`/blog/archives?category=${category}`"
-          class="m3-state-layer rounded-full bg-surface-container-high px-3 py-1 text-md"
-        >
-          {{ category }}
-        </NuxtLink>
+          :category="String(category)"
+          :count="Number(count)"
+          :to="`/blog/archives?category=${encodeURIComponent(String(category))}`"
+        />
       </div>
     </div>
   </aside>

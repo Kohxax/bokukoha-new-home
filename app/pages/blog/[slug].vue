@@ -79,11 +79,11 @@ onUnmounted(() => {
             </div>
 
             <CardHeader class="pt-2 px-5 md:px-10">
-              <Button variant="secondary" size="sm" as-child class="mb-2 w-fit">
-                <NuxtLink :to="`/blog/archives?category=${page.category}`">
-                  {{ page.category }}
-                </NuxtLink>
-              </Button>
+              <CategoryBadge
+                :category="page.category"
+                :to="`/blog/archives?category=${encodeURIComponent(page.category)}`"
+                class="mb-2"
+              />
               <CardTitle class="text-3xl md:text-4xl font-extrabold leading-tight mt-0">
                 {{ page.title }}
               </CardTitle>

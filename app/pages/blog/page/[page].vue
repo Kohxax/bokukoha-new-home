@@ -108,11 +108,10 @@ useSeoMeta({
             </NuxtLink>
 
             <CardHeader>
-              <Button variant="secondary" size="sm" as-child class="w-fit">
-                <NuxtLink :to="`/blog/archives?category=${post.category}`">
-                  {{ post.category }}
-                </NuxtLink>
-              </Button>
+              <CategoryBadge
+                :category="post.category"
+                :to="`/blog/archives?category=${encodeURIComponent(post.category)}`"
+              />
 
               <NuxtLink class="text-2xl mt-3" :to="post.path">
                 <CardTitle>{{ post.title }}</CardTitle>
