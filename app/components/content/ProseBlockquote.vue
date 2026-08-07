@@ -1,11 +1,5 @@
 <template>
-  <blockquote>
+  <blockquote class="border-primary/60">
     <slot />
   </blockquote>
 </template>
-
-<style>
-blockquote {
-  border-inline-start-color: #71717a;
-}
-</style>

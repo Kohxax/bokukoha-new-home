@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <code class="bg-background rounded-sm px-1 text-foreground font-medium">
+  <code class="rounded-md bg-surface-container-highest px-1.5 py-0.5 font-medium text-foreground">
     <slot />
   </code>
 </template>
