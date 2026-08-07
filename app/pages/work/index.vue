@@ -31,7 +31,7 @@ useHead({
 
 <template>
   <PageShell variant="list" class="min-h-screen py-8 md:py-12">
-    <div class="mx-auto max-w-4xl gap-6">
+    <div class="mx-auto max-w-[800px] gap-6">
       <div class="flex flex-row text-center mb-5">
         <BriefcaseBusiness class="mt-2 mr-3" />
         <h1 class="text-3xl font-bold tracking-tight">Work</h1>
@@ -53,11 +53,13 @@ useHead({
           </NuxtLink>
 
           <CardHeader>
-            <CategoryBadge :category="post.category" />
-            <NuxtLink class="text-2xl mt-4" :to="post.path">
+            <CategoryBadge :category="post.category" class="px-4" />
+            <NuxtLink class="mt-3 text-2xl" :to="post.path">
               <CardTitle>{{ post.title }}</CardTitle>
             </NuxtLink>
-            <div class="flex flex-row items-center gap-x-4 gap-y-2 mt-4 text-muted-foreground">
+            <div
+              class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
+            >
               <div class="flex items-center space-x-1">
                 <Rocket class="h-4 w-4" />
                 <span>{{ post.date }}</span>

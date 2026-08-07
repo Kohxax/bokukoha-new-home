@@ -22,7 +22,9 @@ const localKey = `user_like_count_${props.articleId}`
 
 const layoutClass = computed(() => {
   if (props.layout === 'compact') {
-    return 'min-h-8 gap-1.5 rounded-full px-2.5 py-1 text-sm'
+    return props.interactive
+      ? 'min-h-8 gap-1.5 rounded-full px-2.5 py-1 text-sm'
+      : 'w-9 gap-1.5 text-base'
   }
 
   if (props.layout === 'vertical') {

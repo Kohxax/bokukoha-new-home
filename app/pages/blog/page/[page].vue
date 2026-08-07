@@ -74,16 +74,15 @@ useSeoMeta({
 
 <template>
   <PageShell variant="list" class="min-h-screen py-8 md:py-12">
-    <div class="grid grid-cols-1 justify-center justify-items-center gap-8 2xl:grid-cols-[240px_minmax(0,896px)_240px]">
-      <div class="hidden 2xl:block" aria-hidden="true" />
-      <div class="w-full max-w-4xl">
+    <div class="grid grid-cols-[minmax(0,800px)_0px] justify-center">
+      <div class="w-full max-w-[800px]">
         <div class="flex items-center justify-between mb-5">
           <div class="flex flex-row text-center">
             <NotebookPen class="mt-2 mr-3" />
             <h1 class="text-3xl font-bold">Blog</h1>
           </div>
 
-          <Button variant="outline" as-child class="xl:hidden">
+          <Button variant="outline" as-child class="2xl:hidden">
             <NuxtLink to="/blog/archives" class="text-sm flex flex-row gap-x-2">
               <Archive class="h-6 w-6 mt-0.5" />
               <span>アーカイブ</span>
@@ -111,6 +110,7 @@ useSeoMeta({
               <CategoryBadge
                 :category="post.category"
                 :to="`/blog/archives?category=${encodeURIComponent(post.category)}`"
+                class="px-4"
               />
 
               <NuxtLink class="text-2xl mt-3" :to="post.path">
@@ -161,7 +161,7 @@ useSeoMeta({
         </div>
       </div>
 
-      <aside class="sticky top-42 hidden w-60 shrink-0 self-start 2xl:block">
+      <aside class="sticky top-42 mx-12 hidden w-60 shrink-0 self-start 2xl:block">
         <Archives />
       </aside>
     </div>
