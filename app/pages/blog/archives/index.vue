@@ -113,37 +113,33 @@ useSeoMeta({
           </Button>
         </div>
 
-        <div v-if="filteredPosts.length" class="space-y-5">
+        <div v-if="filteredPosts.length" class="space-y-3">
           <Card
             v-for="post in filteredPosts"
             :key="post.path"
             variant="filled"
-            class="m3-interactive-card max-h-26 overflow-hidden"
+            class="m3-interactive-card overflow-hidden"
           >
-            <NuxtLink :to="post.path">
-              <div class="flex justify-between items-center">
-                <div class="p-5 max-w-150">
-                  <CardTitle class="text-lg font-semibold mb-1 line-clamp-1"
-                    >{{ post.title }}
-                  </CardTitle>
-                  <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Likes :article-id="post.path" />
+            <NuxtLink :to="post.path" class="flex items-center gap-3 p-3 sm:gap-4 sm:p-4">
+              <div class="min-w-0 flex-1">
+                <CardTitle class="line-clamp-2 text-base font-semibold leading-snug sm:text-lg">
+                  {{ post.title }}
+                </CardTitle>
+                <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+                  <CategoryBadge :category="post.category" />
+                  <Likes :article-id="post.path" />
+                  <span class="inline-flex items-center gap-1 whitespace-nowrap">
                     <CalendarDays class="h-4 w-4" />
-                    <span>{{ post.date }}</span>
-                    <span
-                      class="rounded-full bg-primary-container px-3 py-1 text-xs text-primary-container-foreground"
-                    >
-                      {{ post.category }}
-                    </span>
-                  </div>
+                    {{ post.date }}
+                  </span>
                 </div>
-                <CoverImg
-                  v-if="post.coverImage"
-                  :src="post.coverImage"
-                  alt=""
-                  class="m-1 h-24 w-24 rounded-2xl object-cover"
-                />
               </div>
+              <CoverImg
+                v-if="post.coverImage"
+                :src="post.coverImage"
+                alt=""
+                class="size-20 shrink-0 rounded-xl object-cover sm:size-24 sm:rounded-2xl"
+              />
             </NuxtLink>
           </Card>
         </div>
