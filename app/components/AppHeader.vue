@@ -54,16 +54,16 @@ const isActive = (match: string) => route.path.startsWith(match)
       'bg-surface-container-low shadow-(--elevation-1)': isScrolled,
     }"
   >
-    <div class="mx-auto flex h-16 max-w-8xl items-center px-3 sm:px-6">
+    <div class="mx-auto flex h-16 max-w-8xl items-center gap-1 px-3 sm:px-6">
       <NuxtLink
         to="/"
-        class="m3-state-layer flex h-12 items-center gap-2.5 rounded-full px-2 text-foreground"
+        class="m3-state-layer flex h-12 shrink-0 items-center gap-2.5 rounded-full px-2 text-foreground"
         aria-label="ホームに戻る"
       >
         <Avatar class="h-8 w-8">
           <img src="~/assets/img/icon_glass.webp" alt="Koha" />
         </Avatar>
-        <span class="text-lg font-bold tracking-tight">ぼくこは.dev</span>
+        <span class="hidden text-lg font-bold tracking-tight sm:inline">ぼくこは.dev</span>
       </NuxtLink>
 
       <nav class="ml-auto flex items-center gap-1" aria-label="メインナビゲーション">
@@ -71,7 +71,7 @@ const isActive = (match: string) => route.path.startsWith(match)
           v-for="link in navLinks"
           :key="link.to"
           :to="link.to"
-          class="m3-state-layer flex h-10 items-center rounded-full px-3 text-sm font-medium transition-colors sm:px-4"
+          class="m3-state-layer flex h-10 items-center rounded-full px-2.5 text-sm font-medium transition-colors min-[360px]:px-3 sm:px-4"
           :aria-current="isActive(link.match) ? 'page' : undefined"
           :class="
             isActive(link.match)

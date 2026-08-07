@@ -20,9 +20,9 @@ const brandYear = computed(() => {
 <template>
   <footer class="mt-12 w-full border-t border-border/60 bg-surface-container-low">
     <div class="container mx-auto max-w-5xl px-6 py-10">
-      <div class="mb-10 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
+      <div class="mb-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3">
         <!-- Brand -->
-        <div class="col-span-2 flex flex-col gap-2 sm:col-span-1">
+        <div class="flex flex-col gap-2">
           <NuxtLink
             to="/"
             class="m3-state-layer -ml-2 w-fit rounded-full px-2 py-1 text-base font-bold text-foreground transition-colors"
