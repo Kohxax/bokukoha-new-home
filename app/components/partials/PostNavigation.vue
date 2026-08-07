@@ -20,35 +20,43 @@ const prev = computed(() => surround.value?.[1] ?? null)
 </script>
 
 <template>
-  <div v-if="next || prev" class="pt-6 grid grid-cols-2 gap-4">
+  <nav
+    v-if="next || prev"
+    aria-label="前後の記事"
+    class="grid grid-cols-2 gap-2 pt-6 sm:gap-4"
+  >
     <NuxtLink
       v-if="next"
       :to="next.path"
-      class="group flex items-center gap-2 py-2 transition-opacity hover:opacity-60"
+      class="m3-interactive-card m3-state-layer group flex min-h-20 items-center gap-2 rounded-2xl bg-surface-container p-3 text-left sm:min-h-24 sm:gap-3 sm:rounded-3xl sm:p-4"
     >
-      <ArrowLeft
-        class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1"
-      />
+      <span
+        class="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container-high text-muted-foreground transition-colors group-hover:text-foreground sm:size-10"
+        aria-hidden="true"
+      >
+        <ArrowLeft class="h-4 w-4 transition-transform group-hover:-translate-x-0.5 sm:h-5 sm:w-5" />
+      </span>
       <div class="min-w-0">
-        <div class="text-xs text-muted-foreground">次の記事</div>
-        <div class="truncate text-sm">{{ next.title }}</div>
+        <div class="mb-1 text-xs font-medium tracking-wide text-muted-foreground">次の記事</div>
+        <div class="line-clamp-2 text-sm font-medium leading-relaxed">{{ next.title }}</div>
       </div>
     </NuxtLink>
-    <div v-else />
 
     <NuxtLink
       v-if="prev"
       :to="prev.path"
-      class="group flex items-center justify-end gap-2 py-2 text-right transition-opacity hover:opacity-60"
+      class="m3-interactive-card m3-state-layer group col-start-2 flex min-h-20 items-center justify-end gap-2 rounded-2xl bg-surface-container p-3 text-right sm:min-h-24 sm:gap-3 sm:rounded-3xl sm:p-4"
     >
       <div class="min-w-0">
-        <div class="text-xs text-muted-foreground">前の記事</div>
-        <div class="truncate text-sm">{{ prev.title }}</div>
+        <div class="mb-1 text-xs font-medium tracking-wide text-muted-foreground">前の記事</div>
+        <div class="line-clamp-2 text-sm font-medium leading-relaxed">{{ prev.title }}</div>
       </div>
-      <ArrowRight
-        class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1"
-      />
+      <span
+        class="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container-high text-muted-foreground transition-colors group-hover:text-foreground sm:size-10"
+        aria-hidden="true"
+      >
+        <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5 sm:h-5 sm:w-5" />
+      </span>
     </NuxtLink>
-    <div v-else />
-  </div>
+  </nav>
 </template>
